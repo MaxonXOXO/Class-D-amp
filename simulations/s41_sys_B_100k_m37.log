@@ -1,0 +1,56 @@
+LTspice 26.1.1 for Windows
+Circuit: D:\Class D amplifier\s41_sys_B_100k_m37.cir
+Start Time: Wed Oct  7 22:28:57 2026
+Options:plotwinsize=0
+solver = Normal
+Maximum thread count: 8
+tnom = 27
+temp = 27
+method = trap
+Per .tran options, skipping operating point for transient analysis.
+Changing Tseed to 1e-11
+Changing Tseed to 1e-13
+Changing Tseed to 1e-10
+Changing Tseed to 1e-14
+Changing Tseed to 1e-09
+Changing Tseed to 1e-15
+Changing Tseed to 1e-08
+Changing Tseed to 1e-16
+Changing Tseed to 1e-07
+Changing Tseed to 1e-17
+Changing Tseed to 1e-06
+Changing Tseed to 1e-18
+Total elapsed time: 2.516 seconds.
+Total iterations: 247235
+
+Files loaded:
+D:\Class D amplifier\s41_sys_B_100k_m37.cir
+
+Fourier components of V(oA,oB)
+N-Period=2
+DC component:0.000838949
+
+Harmonic	Frequency	 Fourier 	Normalized	 Phase  	Normalized
+ Number 	  [Hz]   	Component	 Component	[degree]	Phase [deg]
+    1   	 2.000e+03	 8.081e+00	 1.000e+00	   96.46°	    0.00°
+    2   	 4.000e+03	 2.685e-03	 3.323e-04	  115.05°	   18.59°
+    3   	 6.000e+03	 2.995e-01	 3.707e-02	  112.29°	   15.84°
+    4   	 8.000e+03	 2.216e-03	 2.742e-04	  -98.24°	 -194.70°
+    5   	 1.000e+04	 3.811e-02	 4.716e-03	  154.50°	   58.04°
+    6   	 1.200e+04	 1.899e-03	 2.350e-04	   10.62°	  -85.84°
+    7   	 1.400e+04	 1.511e-01	 1.870e-02	  -34.59°	 -131.05°
+    8   	 1.600e+04	 2.452e-03	 3.034e-04	  164.01°	   67.55°
+    9   	 1.800e+04	 2.013e-02	 2.491e-03	  -54.53°	 -150.99°
+Partial Harmonic Distortion: 4.186126%
+Total Harmonic Distortion:   4.753932%
+
+ila_pp: PP(I(LA))=7.10268688202 FROM 0.001 TO 0.002
+ila_max: MAX(I(LA))=3.54238319397 FROM 0.001 TO 0.002
+ila_min: MIN(I(LA))=-3.56030368805 FROM 0.001 TO 0.002
+ila_avg: AVG(I(LA))=0.000205886226939 FROM 0.001 TO 0.002
+vdiff_pp: PP(V(oA,oB))=16.1455554962 FROM 0.001 TO 0.002
+vdiff_avg: AVG(V(oA,oB))=0.000838949402614 FROM 0.001 TO 0.002
+vleg_pp: PP(V(oA))=9.99241256714 FROM 0.001 TO 0.002
+pout: AVG(V(oA,oB)*I(Rload))=8.18204080259 FROM 0.001 TO 0.002
+pin: AVG(-V(bus)*I(Vbus))=8.43383123143 FROM 0.001 TO 0.002
+vrms: RMS(V(oA,oB))=5.7208533633 FROM 0.001 TO 0.002

@@ -1,0 +1,14 @@
+* Stage 20: Stage 16 filter AC sweep, 4-ohm load, 33uH/1uF candidate
+.param Lf=33u Cf=1u Rloadval=4
+Vmid mid 0 12
+Vsrc src mid AC 1
+Rser src n1 0.15
+Lout n1 out {Lf}
+Cout out mid {Cf}
+Rload out mid {Rloadval}
+.ac dec 300 10 1Meg
+.meas AC Gain1k FIND mag(V(out)) AT 1k
+.meas AC F3 WHEN mag(V(out))=Gain1k/sqrt(2) CROSS=1
+.meas AC Gain150k FIND mag(V(out)) AT 150k
+.meas AC PeakGain MAX mag(V(out)) FROM=1k TO=200k
+.end

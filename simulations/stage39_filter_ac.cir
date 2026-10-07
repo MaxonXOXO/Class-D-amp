@@ -1,0 +1,59 @@
+* Stage 39 Filter AC
+V1 in+ 0 AC 1
+V2 in- 0 AC -1
+
+.param Rload=4
+* Filter A (10uH / 1.5uF)
+LA1 in+ outA+ 10u
+CA1 outA+ 0 1.5u
+LA2 in- outA- 10u
+CA2 outA- 0 1.5u
+RA outA+ outA- {Rload}
+
+* Filter B (18uH / 2.2uF)
+LB1 in+ outB+ 18u
+CB1 outB+ 0 2.2u
+LB2 in- outB- 18u
+CB2 outB- 0 2.2u
+RB outB+ outB- {Rload}
+
+* Filter C (22uH / 2.2uF)
+LC1 in+ outC+ 22u
+CC1 outC+ 0 2.2u
+LC2 in- outC- 22u
+CC2 outC- 0 2.2u
+RC outC+ outC- {Rload}
+
+.step param Rload list 4 8
+.ac dec 100 10 200k
+
+.meas AC gainA_100 FIND mag(V(outA+,outA-)/V(in+,in-)) AT=100
+.meas AC gainA_1k FIND mag(V(outA+,outA-)/V(in+,in-)) AT=1k
+.meas AC gainA_5k FIND mag(V(outA+,outA-)/V(in+,in-)) AT=5k
+.meas AC gainA_10k FIND mag(V(outA+,outA-)/V(in+,in-)) AT=10k
+.meas AC gainA_20k FIND mag(V(outA+,outA-)/V(in+,in-)) AT=20k
+.meas AC gainA_50k FIND mag(V(outA+,outA-)/V(in+,in-)) AT=50k
+.meas AC gainA_75k FIND mag(V(outA+,outA-)/V(in+,in-)) AT=75k
+.meas AC gainA_100k FIND mag(V(outA+,outA-)/V(in+,in-)) AT=100k
+.meas AC freqA_3dB WHEN mag(V(outA+,outA-)/V(in+,in-))=0.707
+
+.meas AC gainB_100 FIND mag(V(outB+,outB-)/V(in+,in-)) AT=100
+.meas AC gainB_1k FIND mag(V(outB+,outB-)/V(in+,in-)) AT=1k
+.meas AC gainB_5k FIND mag(V(outB+,outB-)/V(in+,in-)) AT=5k
+.meas AC gainB_10k FIND mag(V(outB+,outB-)/V(in+,in-)) AT=10k
+.meas AC gainB_20k FIND mag(V(outB+,outB-)/V(in+,in-)) AT=20k
+.meas AC gainB_50k FIND mag(V(outB+,outB-)/V(in+,in-)) AT=50k
+.meas AC gainB_75k FIND mag(V(outB+,outB-)/V(in+,in-)) AT=75k
+.meas AC gainB_100k FIND mag(V(outB+,outB-)/V(in+,in-)) AT=100k
+.meas AC freqB_3dB WHEN mag(V(outB+,outB-)/V(in+,in-))=0.707
+
+.meas AC gainC_100 FIND mag(V(outC+,outC-)/V(in+,in-)) AT=100
+.meas AC gainC_1k FIND mag(V(outC+,outC-)/V(in+,in-)) AT=1k
+.meas AC gainC_5k FIND mag(V(outC+,outC-)/V(in+,in-)) AT=5k
+.meas AC gainC_10k FIND mag(V(outC+,outC-)/V(in+,in-)) AT=10k
+.meas AC gainC_20k FIND mag(V(outC+,outC-)/V(in+,in-)) AT=20k
+.meas AC gainC_50k FIND mag(V(outC+,outC-)/V(in+,in-)) AT=50k
+.meas AC gainC_75k FIND mag(V(outC+,outC-)/V(in+,in-)) AT=75k
+.meas AC gainC_100k FIND mag(V(outC+,outC-)/V(in+,in-)) AT=100k
+.meas AC freqC_3dB WHEN mag(V(outC+,outC-)/V(in+,in-))=0.707
+.end

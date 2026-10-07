@@ -1,0 +1,188 @@
+LTspice 26.1.1 for Windows
+Circuit: D:\Class D amplifier\stage33_ne5532_frontend_fullchain.cir
+Start Time: Tue Oct  6 00:01:04 2026
+
+.step vinpk=0.141421
+solver = Normal
+Maximum thread count: 8
+tnom = 27
+temp = 27
+method = trap
+Direct Newton iteration failed to find operating point.
+Starting Gmin stepping
+Gmin stepping succeeded in finding the operating point.
+
+
+.step vinpk=1.414214
+Direct Newton iteration failed to find operating point.
+Starting Gmin stepping
+Gmin stepping succeeded in finding the operating point.
+
+
+.step vinpk=2.828427
+Direct Newton iteration failed to find operating point.
+Starting Gmin stepping
+Gmin stepping succeeded in finding the operating point.
+
+
+.step vinpk=3.535534
+Direct Newton iteration failed to find operating point.
+Starting Gmin stepping
+Gmin stepping succeeded in finding the operating point.
+
+
+.step vinpk=4.242641
+Direct Newton iteration failed to find operating point.
+Starting Gmin stepping
+Gmin stepping succeeded in finding the operating point.
+
+Total elapsed time: 33.691 seconds.
+Total iterations: 1046442
+
+Files loaded:
+D:\Class D amplifier\stage33_ne5532_frontend_fullchain.cir
+
+
+Measurement: inputrms
+  step	RMS(V(src))	FROM	TO
+     1	0.0999997462763	0.005	0.006
+     2	1.00000029149	0.005	0.006
+     3	1.99999987409	0.005	0.006
+     4	2.50000001687	0.005	0.006
+     5	3.00000015938	0.005	0.006
+
+Measurement: bufferaudiorms
+  step	RMS(V(buf_audio))	FROM	TO
+     1	0.0997862234512	0.005	0.006
+     2	0.997863765658	0.005	0.006
+     3	1.99572669616	0.005	0.006
+     4	2.49465851481	0.005	0.006
+     5	2.99359033172	0.005	0.006
+
+Measurement: toneaudiorms
+  step	RMS(V(tone_audio))	FROM	TO
+     1	0.0997839784904	0.005	0.006
+     2	0.99784354113	0.005	0.006
+     3	1.99568649583	0.005	0.006
+     4	2.49460832601	0.005	0.006
+     5	2.99353015455	0.005	0.006
+
+Measurement: buffermin
+  step	MIN(V(bufout))	FROM	TO
+     1	5.85861587524	0.005	0.006
+     2	4.58669376373	0.005	0.006
+     3	3.17344880104	0.005	0.006
+     4	2.46682572365	0.005	0.006
+     5	1.76020252705	0.005	0.006
+
+Measurement: buffermax
+  step	MAX(V(bufout))	FROM	TO
+     1	6.14085292816	0.005	0.006
+     2	7.40907526016	0.005	0.006
+     3	8.81820964813	0.005	0.006
+     4	9.5227766037	0.005	0.006
+     5	10.2273445129	0.005	0.006
+
+Measurement: tonemin
+  step	MIN(V(toneout))	FROM	TO
+     1	5.8590297699	0.005	0.006
+     2	4.5908331871	0.005	0.006
+     3	3.18172693253	0.005	0.006
+     4	2.47717356682	0.005	0.006
+     5	1.7726200819	0.005	0.006
+
+Measurement: tonemax
+  step	MAX(V(toneout))	FROM	TO
+     1	6.14126157761	0.005	0.006
+     2	7.41315793991	0.005	0.006
+     3	8.82637500763	0.005	0.006
+     4	9.53298377991	0.005	0.006
+     5	10.2395925522	0.005	0.006
+
+Measurement: cmpmin
+  step	MIN(V(cmp))	FROM	TO
+     1	2.45806479454	0.005	0.006
+     2	2.08064556122	0.005	0.006
+     3	1.66129148006	0.005	0.006
+     4	1.45161426067	0.005	0.006
+     5	1.24193704128	0.005	0.006
+
+Measurement: cmpmax
+  step	MAX(V(cmp))	FROM	TO
+     1	2.54210686684	0.005	0.006
+     2	2.92106986046	0.005	0.006
+     3	3.3421394825	0.005	0.006
+     4	3.55267429352	0.005	0.006
+     5	3.76320934296	0.005	0.006
+
+Measurement: loadrms
+  step	RMS(V(spk))	FROM	TO
+     1	0.396841399961	0.005	0.006
+     2	1.43409886399	0.005	0.006
+     3	2.86969031865	0.005	0.006
+     4	3.70111283366	0.005	0.006
+     5	4.52627101296	0.005	0.006
+
+Measurement: loadpower
+  step	LoadRMS*LoadRMS/4
+     1	0.0393707741807
+     2	0.514159887927
+     3	2.05878063124
+     4	3.42455905187
+     5	5.12178232069
+
+Measurement: loadirms
+  step	RMS(I(Rload))	FROM	TO
+     1	0.0992103499902	0.005	0.006
+     2	0.358524715998	0.005	0.006
+     3	0.717422579662	0.005	0.006
+     4	0.925278208415	0.005	0.006
+     5	1.13156775324	0.005	0.006
+
+Measurement: loadipk
+  step	MAX(abs(I(Rload)))	FROM	TO
+     1	0.2108155936	0.005	0.006
+     2	0.6116284132	0.005	0.006
+     3	1.18292677402	0.005	0.006
+     4	1.48526585102	0.005	0.006
+     5	1.75786995888	0.005	0.006
+
+Measurement: inductoripk
+  step	MAX(abs(I(Lout)))	FROM	TO
+     1	0.706683635712	0.005	0.006
+     2	1.09282255173	0.005	0.006
+     3	1.59747326374	0.005	0.006
+     4	1.84656000137	0.005	0.006
+     5	2.06303310394	0.005	0.006
+
+Measurement: overlapmax
+  step	MAX(V(overlap21))	FROM	TO
+     1	0	0.005	0.006
+     2	0	0.005	0.006
+     3	0	0.005	0.006
+     4	0	0.005	0.006
+     5	0	0.005	0.006
+
+Measurement: bootstrapmin
+  step	MIN(V(vb,sw))	FROM	TO
+     1	12.1732139587	0.005	0.006
+     2	12.1648731232	0.005	0.006
+     3	12.1829242706	0.005	0.006
+     4	12.1899738312	0.005	0.006
+     5	12.1955947876	0.005	0.006
+
+Measurement: busvmin
+  step	MIN(V(bus))	FROM	TO
+     1	23.9823226929	0.005	0.006
+     2	23.9661407471	0.005	0.006
+     3	23.9138069153	0.005	0.006
+     4	23.8968505859	0.005	0.006
+     5	23.8799057007	0.005	0.006
+
+Measurement: busvmax
+  step	MAX(V(bus))	FROM	TO
+     1	24.0163631439	0.005	0.006
+     2	24.0280151367	0.005	0.006
+     3	24.0384960175	0.005	0.006
+     4	24.0420608521	0.005	0.006
+     5	24.0460453033	0.005	0.006

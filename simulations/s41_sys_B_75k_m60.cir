@@ -1,0 +1,51 @@
+* s41_sys_B_75k_m60  BTL ideal-switch Class D
+.param fs=75000 L=1.8E-05 Cf=2.2E-06 Rl=4 m=0.6 xdc=0 td=2E-07 Vb=24 fa=2000
+.param dl={2*fs*td}
+.param Gon={1/0.006}
+Vbus bus 0 {Vb}
+Vtri tri 0 PULSE(0 1 0 {0.5/fs-0.5e-9} {0.5/fs-0.5e-9} 1e-9 {1/fs})
+Bra refA 0 V=0.5+0.5*(m*sin(2*pi*fa*time)+xdc)
+Brb refB 0 V=0.5-0.5*(m*sin(2*pi*fa*time)+xdc)
+Vdir dir 0 PULSE(0 1 0 1e-9 1e-9 {0.5/fs-1e-9} {1/fs})
+Bgha rghA 0 V=if(V(tri)<V(refA)-dl*(1-V(dir)),1,0)
+Bgla rglA 0 V=if(V(tri)>V(refA)+dl*V(dir),1,0)
+Bghb rghB 0 V=if(V(tri)<V(refB)-dl*(1-V(dir)),1,0)
+Bglb rglB 0 V=if(V(tri)>V(refB)+dl*V(dir),1,0)
+Rgha rghA ghA 10
+Rgla rglA glA 10
+Rghb rghB ghB 10
+Rglb rglB glB 10
+Cgha ghA 0 100p
+Cgla glA 0 100p
+Cghb ghB 0 100p
+Cglb glB 0 100p
+BhA bus swA I=V(bus,swA)*(Gon*limit(V(ghA),0,1)+1e-7)
+BlA swA 0 I=V(swA)*(Gon*limit(V(glA),0,1)+1e-7)
+BhB bus swB I=V(bus,swB)*(Gon*limit(V(ghB),0,1)+1e-7)
+BlB swB 0 I=V(swB)*(Gon*limit(V(glB),0,1)+1e-7)
+DhA swA bus DBODY
+DlA 0 swA DBODY
+DhB swB bus DBODY
+DlB 0 swB DBODY
+LA swA oA {L} Rser=0.01 ic=0
+LB swB oB {L} Rser=0.01 ic=-0
+CA oA 0 {Cf} Rser=0.03 ic=12
+CB oB 0 {Cf} Rser=0.03 ic=12
+Rload oA oB {Rl}
+.model SWM SW(Ron=0.006 Roff=10Meg Vt=0.5 Vh=0.1)
+.model DBODY D(Is=1e-10 Rs=0.008 N=1.2)
+.options plotwinsize=0
+.save V(oA) V(oB) I(LA) I(LB) I(Rload) I(Vbus) V(bus)
+.tran 0 0.002 0 1E-07 uic
+.meas TRAN ila_pp  PP I(LA)  FROM=0.001 TO=0.002
+.meas TRAN ila_max MAX I(LA) FROM=0.001 TO=0.002
+.meas TRAN ila_min MIN I(LA) FROM=0.001 TO=0.002
+.meas TRAN ila_avg AVG I(LA) FROM=0.001 TO=0.002
+.meas TRAN vdiff_pp PP V(oA,oB) FROM=0.001 TO=0.002
+.meas TRAN vdiff_avg AVG V(oA,oB) FROM=0.001 TO=0.002
+.meas TRAN vleg_pp PP V(oA) FROM=0.001 TO=0.002
+.meas TRAN pout AVG V(oA,oB)*I(Rload) FROM=0.001 TO=0.002
+.meas TRAN pin  AVG -V(bus)*I(Vbus) FROM=0.001 TO=0.002
+.meas TRAN vrms RMS V(oA,oB) FROM=0.001 TO=0.002
+.four 2000 9 2 V(oA,oB)
+.end

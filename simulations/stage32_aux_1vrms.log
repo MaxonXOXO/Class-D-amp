@@ -1,0 +1,24 @@
+LTspice 26.1.1 for Windows
+Circuit: D:\Class D amplifier\stage32_aux_1vrms.cir
+Start Time: Mon Oct  5 23:51:34 2026
+solver = Normal
+Maximum thread count: 8
+tnom = 27
+temp = 27
+method = trap
+Direct Newton iteration succeeded in finding operating point.
+Total elapsed time: 5.571 seconds.
+Total iterations: 1051228
+
+Files loaded:
+D:\Class D amplifier\stage32_aux_1vrms.cir
+
+loadrms: RMS(V(spk))=1.47834349443 FROM 0.005 TO 0.006
+loadpower: LoadRMS*LoadRMS/4=0.546374871883
+loadirms: RMS(I(Rload))=0.369585873608 FROM 0.005 TO 0.006
+loadipk: MAX(abs(I(Rload)))=0.622698366642 FROM 0.005 TO 0.006
+inductoripk: MAX(abs(I(Lout)))=1.09600293636 FROM 0.005 TO 0.006
+busvmin: MIN(V(bus))=23.9656600952 FROM 0.005 TO 0.006
+busvmax: MAX(V(bus))=24.0291957855 FROM 0.005 TO 0.006
+overlapmax: MAX(V(overlap21))=0 FROM 0.005 TO 0.006
+bootstrapmin: MIN(V(vb,sw))=12.1641979218 FROM 0.005 TO 0.006

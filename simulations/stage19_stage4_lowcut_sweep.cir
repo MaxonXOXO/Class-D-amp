@@ -1,0 +1,16 @@
+* Stage 19: bass-response -3dB points for Stage 4 input network at each volume position
+.param Pvol=10k x=0.5 r={x**2.3}
+Vm mid 0 6
+V5 v5 0 5
+Vin in mid AC 1
+Rup in wip {Pvol*(1-r)+1}
+Rlo wip mid {Pvol*r+1}
+Cc wip c 1u
+Rh v5 c 200k
+Rl c 0 200k
+Cl c 0 10p
+.step param x list 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
+.ac dec 200 1 1Meg
+.meas AC Gain1k FIND mag(V(c)) AT 1k
+.meas AC F3Low WHEN mag(V(c))=Gain1k/sqrt(2) CROSS=1
+.end

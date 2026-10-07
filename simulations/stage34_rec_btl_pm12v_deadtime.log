@@ -1,0 +1,25 @@
+LTspice 26.1.1 for Windows
+Circuit: D:\Class D amplifier\stage34_rec_btl_pm12v_deadtime.cir
+Start Time: Tue Oct  6 10:35:00 2026
+Options:method=gear gmin=1e-10
+
+.step deadcap=1e-10
+solver = Normal
+Maximum thread count: 8
+tnom = 27
+temp = 27
+method = Gear
+gmin = 1e-10
+Direct Newton iteration failed to find operating point.
+Starting Gmin stepping
+Gmin stepping succeeded in finding the operating point.
+
+
+Simulation stopped by user.
+Total elapsed time: 429.619 seconds.
+Total iterations: 58927701
+
+Files loaded:
+D:\Class D amplifier\stage34_rec_btl_pm12v_deadtime.cir
+
+D:\Class D amplifier\stage34_rec_btl_pm12v_deadtime.raw: Unexpected file format.

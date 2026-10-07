@@ -1,0 +1,140 @@
+LTspice 26.1.1 for Windows
+Circuit: D:\Class D amplifier\stage13_irfb7546_80mod.cir
+Start Time: Mon Oct  5 01:16:16 2026
+
+.step deadcap=2.2e-10 cextra=0
+solver = Normal
+Maximum thread count: 8
+tnom = 27
+temp = 27
+method = trap
+Direct Newton iteration failed to find operating point.
+Starting Gmin stepping
+Gmin stepping succeeded in finding the operating point.
+
+
+.step deadcap=3.3e-10 cextra=0
+Direct Newton iteration failed to find operating point.
+Starting Gmin stepping
+Gmin stepping succeeded in finding the operating point.
+
+
+.step deadcap=4.7e-10 cextra=0
+Direct Newton iteration failed to find operating point.
+Starting Gmin stepping
+Gmin stepping succeeded in finding the operating point.
+
+
+.step deadcap=2.2e-10 cextra=2.9e-09
+Direct Newton iteration failed to find operating point.
+Starting Gmin stepping
+Gmin stepping succeeded in finding the operating point.
+
+
+.step deadcap=3.3e-10 cextra=2.9e-09
+Direct Newton iteration failed to find operating point.
+Starting Gmin stepping
+Gmin stepping succeeded in finding the operating point.
+
+
+.step deadcap=4.7e-10 cextra=2.9e-09
+Direct Newton iteration failed to find operating point.
+Starting Gmin stepping
+Gmin stepping succeeded in finding the operating point.
+
+Total elapsed time: 9.961 seconds.
+Total iterations: 269249
+
+Files loaded:
+D:\Class D amplifier\stage13_irfb7546_80mod.cir
+
+
+Measurement: overlapmax
+  step	MAX(V(overlap))	FROM	TO
+     1	0	0.0001	0.0008
+     2	0	0.0001	0.0008
+     3	0	0.0001	0.0008
+     4	0	0.0001	0.0008
+     5	0	0.0001	0.0008
+     6	0	0.0001	0.0008
+
+Measurement: overlap21max
+  step	MAX(V(overlap21))	FROM	TO
+     1	0	0.0001	0.0008
+     2	0	0.0001	0.0008
+     3	0	0.0001	0.0008
+     4	1	0.0001	0.0008
+     5	0	0.0001	0.0008
+     6	0	0.0001	0.0008
+
+Measurement: vbootmin
+  step	MIN(V(vb,sw))	FROM	TO
+     1	11.901222229	0.0001	0.0008
+     2	11.9717697501	0.0001	0.0008
+     3	12.0089855194	0.0001	0.0008
+     4	11.8229923248	0.0001	0.0008
+     5	11.9532814026	0.0001	0.0008
+     6	12.0001296997	0.0001	0.0008
+
+Measurement: gatehmax
+  step	MAX(V(gh,sw))	FROM	TO
+     1	12.0541286469	0.0001	0.0008
+     2	12.0967063904	0.0001	0.0008
+     3	12.1235256195	0.0001	0.0008
+     4	12.0145206451	0.0001	0.0008
+     5	12.0833415985	0.0001	0.0008
+     6	12.1164836884	0.0001	0.0008
+
+Measurement: gatelmax
+  step	MAX(V(gl))	FROM	TO
+     1	12.0001859665	0.0001	0.0008
+     2	12.0001726151	0.0001	0.0008
+     3	12.0001754761	0.0001	0.0008
+     4	12.0001411438	0.0001	0.0008
+     5	12.0001373291	0.0001	0.0008
+     6	12.0001354218	0.0001	0.0008
+
+Measurement: maxbusi
+  step	MAX(abs(I(Rbus)))	FROM	TO
+     1	4.61828231812	0.0001	0.0008
+     2	4.17018032074	0.0001	0.0008
+     3	3.9267771244	0.0001	0.0008
+     4	4.14035177231	0.0001	0.0008
+     5	3.68730330467	0.0001	0.0008
+     6	3.38396430016	0.0001	0.0008
+
+Measurement: maxihi
+  step	MAX(abs(Id(Mhi)))	FROM	TO
+     1	4.61828327179	0.0001	0.0008
+     2	4.17022275925	0.0001	0.0008
+     3	3.92679405212	0.0001	0.0008
+     4	4.14035177231	0.0001	0.0008
+     5	3.6873114109	0.0001	0.0008
+     6	3.38397979736	0.0001	0.0008
+
+Measurement: maxilo
+  step	MAX(abs(Id(Mlo)))	FROM	TO
+     1	4.50287818909	0.0001	0.0008
+     2	4.17205429077	0.0001	0.0008
+     3	3.83638739586	0.0001	0.0008
+     4	4.09082508087	0.0001	0.0008
+     5	3.62971830368	0.0001	0.0008
+     6	3.34437918663	0.0001	0.0008
+
+Measurement: vswmin
+  step	MIN(V(sw))	FROM	TO
+     1	-0.73774176836	0.0001	0.0008
+     2	-0.736834526062	0.0001	0.0008
+     3	-0.736061632633	0.0001	0.0008
+     4	-0.737254738808	0.0001	0.0008
+     5	-0.736566781998	0.0001	0.0008
+     6	-0.737350225449	0.0001	0.0008
+
+Measurement: vswmax
+  step	MAX(V(sw))	FROM	TO
+     1	24.8237895966	0.0001	0.0008
+     2	24.8238277435	0.0001	0.0008
+     3	24.8236179352	0.0001	0.0008
+     4	24.8129196167	0.0001	0.0008
+     5	24.8216152191	0.0001	0.0008
+     6	24.8244380951	0.0001	0.0008

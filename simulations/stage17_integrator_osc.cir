@@ -1,0 +1,24 @@
+* Stage 17: comparator plus op-amp-integrator equivalent triangle oscillator
+* High-gain behavioral op-amp with 0-5V output rails drives a physical RC integrator.
+.param Ri=10k Ci=208.333p Vlevel=2.5
+V5 v5 0 5
+Vref ref 0 2.5
+Rpull osc v5 1
+Bctrl ctrl 0 V=5-V(ramp)
+Ssch osc 0 ctrl 0 SCHMITT
+.model SCHMITT SW(Ron=1m Roff=1G Vt=2.5 Vh=2)
+Rintegrator osc sum {Ri}
+Cintegrator ramp sum {Ci}
+Bop ramp 0 V=limit(1e6*(V(ref)-V(sum)),0,5)
+Bpwmt pwm 0 V=if(V(test)>V(ramp),5,0)
+Vtest test 0 {Vlevel}
+.step param Vlevel list 0.7 1.5 2.5 3.5 4.3
+.ic V(ramp)=4.5 V(sum)=2.4999955 V(osc)=5
+.tran 0 200u 0 2n uic
+.meas TRAN OscPeriod TRIG V(osc)=2.5 RISE=3 TARG V(osc)=2.5 RISE=4
+.meas TRAN RampMin MIN V(ramp) FROM=50u TO=200u
+.meas TRAN RampMax MAX V(ramp) FROM=50u TO=200u
+.meas TRAN PwmAvg AVG V(pwm) FROM=50u TO=200u
+.meas TRAN Duty PARAM PwmAvg/5
+.save V(osc) V(ramp) V(sum) V(ctrl) V(pwm)
+.end

@@ -1,0 +1,42 @@
+* Stage 8: Stage 4 volume/bias into two PWM comparators; ideal 150 kHz triangle carrier
+* Comparator choice: TLV3502 for L/R PWM; TLV3501 oscillator is modeled here by ideal triangle
+* This tests control-chain levels and modulation, not a vendor macromodel or oscillator startup stability.
+.param Pvol=10k x=0.5 Fsw=150k Fleft=1k Fright=1300
+.param r={x**2.3}
+Vm mid 0 6
+V5 v5 0 5
+VinL inL mid SINE(0 4.5 {Fleft})
+VinR inR mid SINE(0 4.5 {Fright})
+RupL inL wipL {Pvol*(1-r)+1}
+RloL wipL mid {Pvol*r+1}
+CcL wipL cL 1u
+RattL cL aL 150k
+RhL v5 aL 200k
+RlL aL 0 200k
+Cl aL 0 10p
+RupR inR wipR {Pvol*(1-r)+1}
+RloR wipR mid {Pvol*r+1}
+CcR wipR cR 1u
+RattR cR aR 150k
+RhR v5 aR 200k
+RlR aR 0 200k
+Cr aR 0 10p
+* Symmetric 0.5 V to 4.5 V triangular carrier, 150 kHz (6.667 us period)
+Vtri tri 0 PULSE(0.5 4.5 0 3.333333u 3.333333u 0 6.666667u)
+* Ideal comparator transfer; TLV350x output delay, drive, offset and overdrive dependence omitted.
+BpwmL pwmL 0 V=if(V(aL)>V(tri),5,0)
+BpwmR pwmR 0 V=if(V(aR)>V(tri),5,0)
+.step param x list 0.2 0.5 0.8 1.0
+.tran 0 2m 0 20n
+.meas TRAN CarrierPeriod TRIG V(tri)=2.5 RISE=1 TARG V(tri)=2.5 RISE=2
+.meas TRAN LcmpMin MIN V(aL) FROM=100u TO=2m
+.meas TRAN LcmpMax MAX V(aL) FROM=100u TO=2m
+.meas TRAN RcmpMin MIN V(aR) FROM=100u TO=2m
+.meas TRAN RcmpMax MAX V(aR) FROM=100u TO=2m
+.meas TRAN LpwmAvg AVG V(pwmL) FROM=100u TO=2m
+.meas TRAN RpwmAvg AVG V(pwmR) FROM=100u TO=2m
+.meas TRAN CarrierMin MIN V(tri) FROM=100u TO=2m
+.meas TRAN CarrierMax MAX V(tri) FROM=100u TO=2m
+.save V(aL) V(aR) V(tri) V(pwmL) V(pwmR) V(wipL) V(wipR)
+.end
+

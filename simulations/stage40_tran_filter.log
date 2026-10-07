@@ -1,0 +1,96 @@
+LTspice 26.1.1 for Windows
+Circuit: D:\Class D amplifier\stage40_tran_filter.cir
+Start Time: Wed Oct  7 11:42:32 2026
+
+.step fs=50000
+solver = Normal
+Maximum thread count: 8
+tnom = 27
+temp = 27
+method = trap
+Direct Newton iteration succeeded in finding operating point.
+
+.step fs=75000
+Direct Newton iteration succeeded in finding operating point.
+
+.step fs=100000
+Direct Newton iteration succeeded in finding operating point.
+
+.step fs=150000
+Direct Newton iteration succeeded in finding operating point.
+Total elapsed time: 0.452 seconds.
+Total iterations: 20277
+
+Files loaded:
+D:\Class D amplifier\stage40_tran_filter.cir
+
+
+Measurement: iripa
+  step	PP(I(LA1))	FROM	TO
+     1	37.0297889709	0.0001	0.0002
+     2	14.6526780128	0.0001	0.0002
+     3	9.91747951508	0.0001	0.0002
+     4	7.50417017937	0.0001	0.0002
+
+Measurement: vripa_leg
+  step	PP(V(outA+))	FROM	TO
+     1	77.6870727539	0.0001	0.0002
+     2	20.1053512096	0.0001	0.0002
+     3	14.414077282	0.0001	0.0002
+     4	9.55885696411	0.0001	0.0002
+
+Measurement: iripb
+  step	PP(I(LB1))	FROM	TO
+     1	12.7399339676	0.0001	0.0002
+     2	9.78607749939	0.0001	0.0002
+     3	7.74430775642	0.0001	0.0002
+     4	6.48994088173	0.0001	0.0002
+
+Measurement: vripb_leg
+  step	PP(V(outB+))	FROM	TO
+     1	21.5505285263	0.0001	0.0002
+     2	14.3062572479	0.0001	0.0002
+     3	13.912293911	0.0001	0.0002
+     4	13.0356664658	0.0001	0.0002
+
+Measurement: iripc
+  step	PP(I(LC1))	FROM	TO
+     1	10.4393935204	0.0001	0.0002
+     2	8.33134651184	0.0001	0.0002
+     3	6.76112747192	0.0001	0.0002
+     4	5.90259003639	0.0001	0.0002
+
+Measurement: vripc_leg
+  step	PP(V(outC+))	FROM	TO
+     1	22.6175324321	0.0001	0.0002
+     2	17.335723877	0.0001	0.0002
+     3	15.8086128235	0.0001	0.0002
+     4	14.6206173897	0.0001	0.0002
+
+Measurement: iripd
+  step	PP(I(LD1))	FROM	TO
+     1	8.64970207214	0.0001	0.0002
+     2	6.08560609818	0.0001	0.0002
+     3	4.97854280472	0.0001	0.0002
+     4	4.2082734108	0.0001	0.0002
+
+Measurement: vripd_leg
+  step	PP(V(outD+))	FROM	TO
+     1	37.0406036377	0.0001	0.0002
+     2	21.2594189644	0.0001	0.0002
+     3	19.0436508656	0.0001	0.0002
+     4	18.3707072735	0.0001	0.0002
+
+Measurement: iripe
+  step	PP(I(LE1))	FROM	TO
+     1	5.96354794502	0.0001	0.0002
+     2	4.53762221336	0.0001	0.0002
+     3	3.9539989233	0.0001	0.0002
+     4	3.44839656353	0.0001	0.0002
+
+Measurement: vripe_leg
+  step	PP(V(outE+))	FROM	TO
+     1	28.5059695244	0.0001	0.0002
+     2	23.7704180479	0.0001	0.0002
+     3	20.289399147	0.0001	0.0002
+     4	19.8561172485	0.0001	0.0002

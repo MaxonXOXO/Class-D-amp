@@ -1,0 +1,93 @@
+* Stage 40 Filter AC
+V1 in+ 0 AC 1
+V2 in- 0 AC -1
+
+.param Rload=4
+* Filter A (10uH / 1.5uF)
+LA1 in+ outA+ 10u
+CA1 outA+ 0 1.5u
+LA2 in- outA- 10u
+CA2 outA- 0 1.5u
+RA outA+ outA- {Rload}
+
+* Filter B (18uH / 2.2uF)
+LB1 in+ outB+ 18u
+CB1 outB+ 0 2.2u
+LB2 in- outB- 18u
+CB2 outB- 0 2.2u
+RB outB+ outB- {Rload}
+
+* Filter C (22uH / 2.2uF)
+LC1 in+ outC+ 22u
+CC1 outC+ 0 2.2u
+LC2 in- outC- 22u
+CC2 outC- 0 2.2u
+RC outC+ outC- {Rload}
+
+* Filter D (33uH / 1.0uF)
+LD1 in+ outD+ 33u
+CD1 outD+ 0 1.0u
+LD2 in- outD- 33u
+CD2 outD- 0 1.0u
+RD outD+ outD- {Rload}
+
+* Filter E (47uH / 1.0uF)
+LE1 in+ outE+ 47u
+CE1 outE+ 0 1.0u
+LE2 in- outE- 47u
+CE2 outE- 0 1.0u
+RE outE+ outE- {Rload}
+
+.step param Rload list 4 8
+.ac dec 100 10 200k
+
+.meas AC gainA_1k FIND mag(V(outA+,outA-)/V(in+,in-)) AT=1k
+.meas AC gainA_10k FIND mag(V(outA+,outA-)/V(in+,in-)) AT=10k
+.meas AC gainA_20k FIND mag(V(outA+,outA-)/V(in+,in-)) AT=20k
+.meas AC freqA_3dB WHEN mag(V(outA+,outA-)/V(in+,in-))=0.707
+.meas AC attenA_50k FIND mag(V(outA+,outA-)/V(in+,in-)) AT=50k
+.meas AC attenA_75k FIND mag(V(outA+,outA-)/V(in+,in-)) AT=75k
+.meas AC attenA_100k FIND mag(V(outA+,outA-)/V(in+,in-)) AT=100k
+.meas AC attenA_150k FIND mag(V(outA+,outA-)/V(in+,in-)) AT=150k
+.meas AC peakA MAX mag(V(outA+,outA-)/V(in+,in-))
+
+.meas AC gainB_1k FIND mag(V(outB+,outB-)/V(in+,in-)) AT=1k
+.meas AC gainB_10k FIND mag(V(outB+,outB-)/V(in+,in-)) AT=10k
+.meas AC gainB_20k FIND mag(V(outB+,outB-)/V(in+,in-)) AT=20k
+.meas AC freqB_3dB WHEN mag(V(outB+,outB-)/V(in+,in-))=0.707
+.meas AC attenB_50k FIND mag(V(outB+,outB-)/V(in+,in-)) AT=50k
+.meas AC attenB_75k FIND mag(V(outB+,outB-)/V(in+,in-)) AT=75k
+.meas AC attenB_100k FIND mag(V(outB+,outB-)/V(in+,in-)) AT=100k
+.meas AC attenB_150k FIND mag(V(outB+,outB-)/V(in+,in-)) AT=150k
+.meas AC peakB MAX mag(V(outB+,outB-)/V(in+,in-))
+
+.meas AC gainC_1k FIND mag(V(outC+,outC-)/V(in+,in-)) AT=1k
+.meas AC gainC_10k FIND mag(V(outC+,outC-)/V(in+,in-)) AT=10k
+.meas AC gainC_20k FIND mag(V(outC+,outC-)/V(in+,in-)) AT=20k
+.meas AC freqC_3dB WHEN mag(V(outC+,outC-)/V(in+,in-))=0.707
+.meas AC attenC_50k FIND mag(V(outC+,outC-)/V(in+,in-)) AT=50k
+.meas AC attenC_75k FIND mag(V(outC+,outC-)/V(in+,in-)) AT=75k
+.meas AC attenC_100k FIND mag(V(outC+,outC-)/V(in+,in-)) AT=100k
+.meas AC attenC_150k FIND mag(V(outC+,outC-)/V(in+,in-)) AT=150k
+.meas AC peakC MAX mag(V(outC+,outC-)/V(in+,in-))
+
+.meas AC gainD_1k FIND mag(V(outD+,outD-)/V(in+,in-)) AT=1k
+.meas AC gainD_10k FIND mag(V(outD+,outD-)/V(in+,in-)) AT=10k
+.meas AC gainD_20k FIND mag(V(outD+,outD-)/V(in+,in-)) AT=20k
+.meas AC freqD_3dB WHEN mag(V(outD+,outD-)/V(in+,in-))=0.707
+.meas AC attenD_50k FIND mag(V(outD+,outD-)/V(in+,in-)) AT=50k
+.meas AC attenD_75k FIND mag(V(outD+,outD-)/V(in+,in-)) AT=75k
+.meas AC attenD_100k FIND mag(V(outD+,outD-)/V(in+,in-)) AT=100k
+.meas AC attenD_150k FIND mag(V(outD+,outD-)/V(in+,in-)) AT=150k
+.meas AC peakD MAX mag(V(outD+,outD-)/V(in+,in-))
+
+.meas AC gainE_1k FIND mag(V(outE+,outE-)/V(in+,in-)) AT=1k
+.meas AC gainE_10k FIND mag(V(outE+,outE-)/V(in+,in-)) AT=10k
+.meas AC gainE_20k FIND mag(V(outE+,outE-)/V(in+,in-)) AT=20k
+.meas AC freqE_3dB WHEN mag(V(outE+,outE-)/V(in+,in-))=0.707
+.meas AC attenE_50k FIND mag(V(outE+,outE-)/V(in+,in-)) AT=50k
+.meas AC attenE_75k FIND mag(V(outE+,outE-)/V(in+,in-)) AT=75k
+.meas AC attenE_100k FIND mag(V(outE+,outE-)/V(in+,in-)) AT=100k
+.meas AC attenE_150k FIND mag(V(outE+,outE-)/V(in+,in-)) AT=150k
+.meas AC peakE MAX mag(V(outE+,outE-)/V(in+,in-))
+.end

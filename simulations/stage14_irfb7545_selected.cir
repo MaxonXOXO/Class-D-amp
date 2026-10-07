@@ -1,0 +1,53 @@
+* Stage 14 IRFB7545: selected worst-gate-charge pass, one IR2110 half-bridge
+* Simplified datasheet-anchored VDMOS + behavioral IR2110 timing model; not vendor macromodels.
+.param Fsw=150k Fsig=1k deadcap=470p Vth=3.2 Tdon=120n Tdoff=94n Cextra=3.5n
+Vbusraw braw 0 24
+Rbus braw bus 50m
+Vcc vcc 0 12
+Vmid mid 0 12
+* 80% modulation target: 10-90% ideal-triangle PWM duty
+Baudio audio 0 V=2.5+1.6*sin(2*pi*Fsig*time)
+Vtri tri 0 PULSE(0.5 4.5 0 3.333333u 3.333333u 0 6.666667u)
+Bcmp pwm 0 V=if(V(audio)>V(tri),5,0)
+Binv inv 0 V=if(delay(V(pwm),10n)>2.5,0,5)
+Rhin pwm hin 1k
+Chin hin 0 {deadcap}
+Dhin hin pwm Dfast
+Rlin inv lin 1k
+Clin lin 0 {deadcap}
+Dlin lin inv Dfast
+.model Dfast D(Is=2.52n Rs=0.568 N=1.9 Cjo=4p M=0.03 Tt=4n)
+* IR2110 typical delay model (120 ns turn-on, 94 ns turn-off) with bootstrap-limited high-side supply
+BdrvH drvH sw V=V(vb,sw)*if(V(hin)>2.5,if(delay(V(hin),{Tdon})>2.5,1,0),if(delay(V(hin),{Tdoff})>2.5,1,0))
+BdrvL drvL 0 V=12*if(V(lin)>2.5,if(delay(V(lin),{Tdon})>2.5,1,0),if(delay(V(lin),{Tdoff})>2.5,1,0))
+Rgh drvH gh 10
+Rgl drvL gl 10
+CextraH gh sw {Cextra}
+CextraL gl 0 {Cextra}
+Dboot vcc vb Dfast
+Cboot vb sw 220n Rser=0.1
+Mhi bus gh sw IRFB7545Model
+Mlo sw gl 0 IRFB7545Model
+.model IRFB7545Model VDMOS(Vto=2.9 Kp=100 Rd=2m Rs=2m Rg=2.3 Cgs=6.3n Cgdmin=200p Cgdmax=1.8n Cjo=1n Is=1e-12 BV=60)
+Lout sw out 22u Rser=0.15
+Cout out mid 470n
+Rload out mid 8
+Bdiff diff 0 V=V(out,mid)
+Boverlap overlap 0 V=if(V(gh,sw)>3.7 & V(gl)>3.7,1,0)
+Boverlap21 overlap21 0 V=if(V(gh,sw)>2.1 & V(gl)>2.1,1,0)
+.tran 0 1.1m 0 10n
+.meas TRAN OverlapMax MAX V(overlap) FROM=100u TO=1.1m
+.meas TRAN Overlap21Max MAX V(overlap21) FROM=100u TO=1.1m
+.meas TRAN VbootMin MIN V(vb,sw) FROM=100u TO=1.1m
+.meas TRAN GateHmax MAX V(gh,sw) FROM=100u TO=1.1m
+.meas TRAN GateLmax MAX V(gl) FROM=100u TO=1.1m
+.meas TRAN MaxILout MAX abs(I(Lout)) FROM=100u TO=1.1m
+.meas TRAN MaxIRload MAX abs(I(Rload)) FROM=100u TO=1.1m
+.meas TRAN MaxBusI MAX abs(I(Rbus)) FROM=100u TO=1.1m
+.meas TRAN MaxIhi MAX abs(Id(Mhi)) FROM=100u TO=1.1m
+.meas TRAN MaxIlo MAX abs(Id(Mlo)) FROM=100u TO=1.1m
+.meas TRAN VswMin MIN V(sw) FROM=100u TO=1.1m
+.meas TRAN VswMax MAX V(sw) FROM=100u TO=1.1m
+.meas TRAN LoadRMS RMS V(diff) FROM=100u TO=1.1m
+.save V(audio) V(tri) V(pwm) V(hin) V(lin) V(gh,sw) V(gl) V(vb,sw) V(sw) V(out) V(diff) V(overlap) V(overlap21) Id(Mhi) Id(Mlo) I(Rbus) I(Lout) I(Rload)
+.end

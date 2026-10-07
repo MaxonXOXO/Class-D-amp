@@ -1,0 +1,15 @@
+* Stage 16: LC output filter frequency-response comparison
+* This is an AC small-signal filter-only check, not a PWM transient.
+.param Lf=22u
+Vmid mid 0 12
+Vsrc src mid AC 1
+Rser src n1 0.15
+Lout n1 out {Lf}
+Cout out mid 470n
+Rload out mid 8
+.step param Lf list 22u 56u 68u
+.ac dec 200 100 1Meg
+.meas AC Gain100 FIND mag(V(out)) AT 100
+.meas AC Gain150k FIND mag(V(out)) AT 150k
+.meas AC PeakGain MAX mag(V(out)) FROM=1k TO=200k
+.end

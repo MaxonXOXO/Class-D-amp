@@ -1,0 +1,23 @@
+* Stage 9: TLV3501-style single-comparator relaxation oscillator candidate
+* Behavioral comparator, not TI PSpice macromodel. RC-ramp duty linearity evaluated vs ideal triangle.
+.param Rtim=15.2k Ctim=100p Vref=2.5 Vtest=2.5
+Vref1 ref 0 {Vref}
+* Schmitt feedback: Vth = 0.2*Vref + 0.8*Vosc => 0.5 V and 4.5 V thresholds
+Rfb osc threshold 25k
+Rbias ref threshold 100k
+Rtim osc ramp {Rtim}
+Ctim ramp 0 {Ctim}
+Bcomp oscraw 0 V=if(V(ramp)<V(threshold),5,0)
+Rout oscraw osc 50
+* Static input levels correspond to the Stage 8 full-volume range
+Bpwm pwm 0 V=if(Vtest>V(ramp),5,0)
+.ic V(ramp)=0.1
+.step param Vtest list 0.7 1.5 2.5 3.5 4.3
+.tran 0 200u 0 5n uic
+.meas TRAN OscPeriod TRIG V(osc)=2.5 RISE=3 TARG V(osc)=2.5 RISE=4
+.meas TRAN RampMin MIN V(ramp) FROM=50u TO=200u
+.meas TRAN RampMax MAX V(ramp) FROM=50u TO=200u
+.meas TRAN PwmAvg AVG V(pwm) FROM=50u TO=200u
+.meas TRAN Duty PARAM PwmAvg/5
+.save V(osc) V(threshold) V(ramp) V(pwm)
+.end

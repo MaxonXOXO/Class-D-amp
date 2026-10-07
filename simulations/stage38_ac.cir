@@ -1,0 +1,50 @@
+* Stage 38 AC Filter Test
+V1 in+ 0 AC 1
+V2 in- 0 AC -1
+
+* Existing Filter (68uH, 470nF)
+L1 in+ out+ 68u
+C1 out+ 0 470n
+L2 in- out- 68u
+C2 out- 0 470n
+Rload1 out+ out- 4
+
+* New Filter (10uH, 1.5uF)
+L3 in+ out_n+ 10u
+C3 out_n+ 0 1.5u
+L4 in- out_n- 10u
+C4 out_n- 0 1.5u
+Rload2 out_n+ out_n- 4
+
+* Existing Filter 8 ohm
+L5 in+ out8+ 68u
+C5 out8+ 0 470n
+L6 in- out8- 68u
+C6 out8- 0 470n
+Rload3 out8+ out8- 8
+
+* New Filter 8 ohm
+L7 in+ out8_n+ 10u
+C7 out8_n+ 0 1.5u
+L8 in- out8_n- 10u
+C8 out8_n- 0 1.5u
+Rload4 out8_n+ out8_n- 8
+
+.ac dec 100 10 100k
+.meas AC g_old_4_100 FIND mag(V(out+,out-)/V(in+,in-)) AT=100
+.meas AC g_old_4_1k FIND mag(V(out+,out-)/V(in+,in-)) AT=1k
+.meas AC g_old_4_5k FIND mag(V(out+,out-)/V(in+,in-)) AT=5k
+.meas AC g_old_4_10k FIND mag(V(out+,out-)/V(in+,in-)) AT=10k
+.meas AC g_old_4_20k FIND mag(V(out+,out-)/V(in+,in-)) AT=20k
+.meas AC freq_old_4_3dB WHEN mag(V(out+,out-)/V(in+,in-))=0.707
+
+.meas AC g_new_4_100 FIND mag(V(out_n+,out_n-)/V(in+,in-)) AT=100
+.meas AC g_new_4_1k FIND mag(V(out_n+,out_n-)/V(in+,in-)) AT=1k
+.meas AC g_new_4_5k FIND mag(V(out_n+,out_n-)/V(in+,in-)) AT=5k
+.meas AC g_new_4_10k FIND mag(V(out_n+,out_n-)/V(in+,in-)) AT=10k
+.meas AC g_new_4_20k FIND mag(V(out_n+,out_n-)/V(in+,in-)) AT=20k
+.meas AC freq_new_4_3dB WHEN mag(V(out_n+,out_n-)/V(in+,in-))=0.707
+
+.meas AC g_old_8_20k FIND mag(V(out8+,out8-)/V(in+,in-)) AT=20k
+.meas AC g_new_8_20k FIND mag(V(out8_n+,out8_n-)/V(in+,in-)) AT=20k
+.end

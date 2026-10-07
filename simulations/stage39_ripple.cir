@@ -1,0 +1,9 @@
+* Inductor ripple test
+Vbus bus 0 24
+Vsw1 sw1 0 PULSE(0 24 0 10n 10n 10u 20u)
+L1 sw1 out 10u
+C1 out 0 1.5u
+R1 out 0 2
+.tran 0 2m 1m
+.meas TRAN IripPP PP I(L1)
+.end

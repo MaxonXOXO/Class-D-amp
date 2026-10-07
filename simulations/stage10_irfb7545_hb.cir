@@ -1,0 +1,57 @@
+* Stage 10 IRFB7545: one IR2110 half-bridge with datasheet-anchored simplified LTspice VDMOS model
+* Not a manufacturer MOSFET or IR2110 macromodel: screening estimate using typical Qg/Rds/Vto and explicit gate RC.
+.param Fsw=150k Fsig=1k deadcap=220p Vth=3.2 Tdon=120n Tdoff=94n Cextra=0
+Vbusraw braw 0 24
+Rbus braw bus 50m
+Vcc vcc 0 12
+Vmid mid 0 12
+* Audio-side signal already attenuated/bias-centered from Stage 8; 90% modulation peak
+Baudio audio 0 V=2.5+1.8*sin(2*pi*Fsig*time)
+Vtri tri 0 PULSE(0.5 4.5 0 3.333333u 3.333333u 0 6.666667u)
+Bcmp pwm 0 V=if(V(audio)>V(tri),5,0)
+* RC+diode non-overlap input conditioning used in earlier timing tests
+Binv inv 0 V=if(delay(V(pwm),10n)>2.5,0,5)
+Rhin pwm hin 1k
+Chin hin 0 {deadcap}
+Dhin hin pwm Dfast
+Rlin inv lin 1k
+Clin lin 0 {deadcap}
+Dlin lin inv Dfast
+.model Dfast D(Is=2.52n Rs=0.568 N=1.9 Cjo=4p M=0.03 Tt=4n)
+* IR2110 behavioral driver: typical propagation delays and ideal 12-V push-pull levels;
+* high-side supply is limited by the bootstrap capacitor.
+BdrvH drvH sw V=V(vb,sw)*if(V(hin)>2.5,if(delay(V(hin),{Tdon})>2.5,1,0),if(delay(V(hin),{Tdoff})>2.5,1,0))
+BdrvL drvL 0 V=12*if(V(lin)>2.5,if(delay(V(lin),{Tdon})>2.5,1,0),if(delay(V(lin),{Tdoff})>2.5,1,0))
+Rgh drvH gh 10
+Rgl drvL gl 10
+CextraH gh sw {Cextra}
+CextraL gl 0 {Cextra}
+* Bootstrap
+Dboot vcc vb Dfast
+Cboot vb sw 220n Rser=0.1
+* Intrinsic LTspice VDMOS parameterized from published typical values; capacitance tuned to datasheet Qg.
+Mhi bus gh sw IRFB7545Model
+Mlo sw gl 0 IRFB7545Model
+.model IRFB7545Model VDMOS(Vto=2.9 Kp=100 Rd=2m Rs=2m Rg=2.3 Cgs=6.3n Cgdmin=200p Cgdmax=1.8n Cjo=1n Is=1e-12 BV=60)
+* One-leg LC output and 8-ohm load referred to the 12-V half-bus.
+Lout sw out 22u Rser=0.15
+Cout out mid 470n
+Rload out mid 8
+Boverlap overlap 0 V=if(V(gh,sw)>3.7 & V(gl)>3.7,1,0)
+Boverlap21 overlap21 0 V=if(V(gh,sw)>2.1 & V(gl)>2.1,1,0)
+.step param deadcap list 220p 330p 470p
+.step param Cextra list 0 3.5n
+.tran 0 800u 0 10n
+.meas TRAN OverlapMax MAX V(overlap) FROM=100u TO=800u
+.meas TRAN Overlap21Max MAX V(overlap21) FROM=100u TO=800u
+.meas TRAN VbootMin MIN V(vb,sw) FROM=100u TO=800u
+.meas TRAN GateHmax MAX V(gh,sw) FROM=100u TO=800u
+.meas TRAN GateLmax MAX V(gl) FROM=100u TO=800u
+.meas TRAN MaxBusI MAX abs(I(Rbus)) FROM=100u TO=800u
+.meas TRAN MaxIhi MAX abs(Id(Mhi)) FROM=100u TO=800u
+.meas TRAN MaxIlo MAX abs(Id(Mlo)) FROM=100u TO=800u
+.meas TRAN VswMin MIN V(sw) FROM=100u TO=800u
+.meas TRAN VswMax MAX V(sw) FROM=100u TO=800u
+.save V(audio) V(tri) V(pwm) V(hin) V(lin) V(gh,sw) V(gl) V(vb,sw) V(sw) V(out) V(overlap) V(overlap21) I(Mhi) I(Mlo) I(Rbus)
+.end
+

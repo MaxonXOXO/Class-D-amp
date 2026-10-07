@@ -1,0 +1,48 @@
+LTspice 26.1.1 for Windows
+Circuit: D:\Class D amplifier\stage37_ciss.cir
+Start Time: Tue Oct  6 18:18:12 2026
+Options:method=gear
+
+.step cx=0
+solver = Normal
+Maximum thread count: 8
+tnom = 27
+temp = 27
+method = Gear
+WARNING: Node g is floating.
+
+Direct Newton iteration succeeded in finding operating point.
+
+.step cx=3.5e-09
+Direct Newton iteration succeeded in finding operating point.
+Total elapsed time: 0.231 seconds.
+Total iterations: 6065
+
+Files loaded:
+D:\Class D amplifier\stage37_ciss.cir
+
+
+Measurement: t1
+  step	V(g)=1.0
+     1	6.37609978222e-07
+     2	9.92843073954e-07
+
+Measurement: t2
+  step	V(g)=2.0
+     1	1.28979135887e-06
+     2	1.99502459092e-06
+
+Measurement: t10
+  step	V(g)=10
+     1	8.80105714506e-06
+     2	1.23066779988e-05
+
+Measurement: cisspf
+  step	10m*(t2-t1)/1.0*1e12
+     1	6521.81380648
+     2	10021.8151696
+
+Measurement: qgnc
+  step	10m*t10*1e9
+     1	88.0105714506
+     2	123.066779988

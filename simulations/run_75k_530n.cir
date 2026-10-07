@@ -1,0 +1,119 @@
+* ============================================================
+* CLASS-D FINAL VALIDATION - IR2104 DEAD TIME
+* BTL / 24V / 4R
+* ============================================================
+
+.param VBUS=24
+.param FS=75k
+.param F_AUDIO=2k
+.param M=0.37
+
+* IR2104 effective dead-time cases
+.param TD=530n
+
+* ------------------------------------------------------------
+* SUPPLY
+* ------------------------------------------------------------
+
+VBUS_SRC BUS 0 {VBUS}
+Cbulk BUS 0 4700u Rser=50m
+
+* ------------------------------------------------------------
+* AUDIO REFERENCE
+* 0.37 modulation = approximately 10W BTL at 24V / 4R
+* ------------------------------------------------------------
+
+Baudio AUDIO 0 V=0.5+0.5*M*sin(2*pi*F_AUDIO*time)
+BaudioB AUDIOB 0 V=0.5-0.5*M*sin(2*pi*F_AUDIO*time)
+
+* ------------------------------------------------------------
+* TRIANGLE
+* 0...1 V
+* ------------------------------------------------------------
+
+VTRI TRI 0 PULSE(0 1 0 {0.5/FS-1n} {0.5/FS-1n} 1n {1/FS})
+
+* ------------------------------------------------------------
+* DEAD-TIME PWM
+* ------------------------------------------------------------
+
+.param DL={2*FS*TD}
+
+BGA GH_A 0 V=if(V(TRI)<V(AUDIO)-DL,1,0)
+BLA GL_A 0 V=if(V(TRI)>V(AUDIO)+DL,1,0)
+BGB GH_B 0 V=if(V(TRI)<V(AUDIOB)-DL,1,0)
+BLB GL_B 0 V=if(V(TRI)>V(AUDIOB)+DL,1,0)
+
+* ------------------------------------------------------------
+* GATE RESISTORS
+* ------------------------------------------------------------
+
+RGA GH_A GATE_HA 10
+RLA GL_A GATE_LA 10
+
+RGB GH_B GATE_HB 10
+RLB GL_B GATE_LB 10
+
+* ------------------------------------------------------------
+* IDEALIZED MOSFET STAGE
+* RDS = 6mR
+* ------------------------------------------------------------
+
+S_HA BUS SW_A GATE_HA 0 SWMOD
+S_LA SW_A 0 GATE_LA 0 SWMOD
+
+S_HB BUS SW_B GATE_HB 0 SWMOD
+S_LB SW_B 0 GATE_LB 0 SWMOD
+
+.model SWMOD SW(Ron=6m Roff=10Meg Vt=0.5 Vh=0.1)
+
+* ------------------------------------------------------------
+* BODY DIODES
+* ------------------------------------------------------------
+
+DHA SW_A BUS DBODY
+DLA 0 SW_A DBODY
+
+DHB SW_B BUS DBODY
+DLB 0 SW_B DBODY
+
+.model DBODY D(Is=1e-10 Rs=8m N=1.2)
+
+* ------------------------------------------------------------
+* OUTPUT FILTER B
+* 18uH / 2.2uF
+* ------------------------------------------------------------
+
+LA SW_A OUT_A 18u Rser=10m
+LB SW_B OUT_B 18u Rser=10m
+
+CA OUT_A 0 2.2u Rser=30m
+CB OUT_B 0 2.2u Rser=30m
+
+* ------------------------------------------------------------
+* SPEAKER
+* ------------------------------------------------------------
+
+RLOAD OUT_A OUT_B 4
+
+* ------------------------------------------------------------
+* MEASUREMENTS
+* ------------------------------------------------------------
+
+.tran 0 4m 2m 50n
+
+.meas TRAN VOUT_RMS RMS V(OUT_A,OUT_B) FROM=2m TO=4m
+.meas TRAN POUT AVG (V(OUT_A,OUT_B)*I(RLOAD)) FROM=2m TO=4m
+.meas TRAN ILOAD_RMS RMS I(RLOAD) FROM=2m TO=4m
+.meas TRAN IL_A_PP PP I(LA) FROM=2m TO=4m
+.meas TRAN IL_A_MAX MAX I(LA) FROM=2m TO=4m
+.meas TRAN VOUT_PP PP V(OUT_A,OUT_B) FROM=2m TO=4m
+
+.four 2k 15 V(OUT_A,OUT_B)
+
+.save V(OUT_A) V(OUT_B) V(OUT_A,OUT_B) I(LA) I(LB) I(RLOAD) V(SW_A) V(SW_B) V(GATE_HA) V(GATE_LA)
+
+.options plotwinsize=0
+
+.end
+

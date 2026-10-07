@@ -1,0 +1,221 @@
+LTspice 26.1.1 for Windows
+Circuit: D:\Class D amplifier\stage6_rc_deadtime.cir
+Start Time: Mon Oct  5 00:19:18 2026
+
+.step deadcap=2.2e-10 vth=2 audio=-1.8
+solver = Normal
+Maximum thread count: 8
+tnom = 27
+temp = 27
+method = trap
+Direct Newton iteration succeeded in finding operating point.
+
+.step deadcap=3.3e-10 vth=2 audio=-1.8
+Direct Newton iteration succeeded in finding operating point.
+
+.step deadcap=4.7e-10 vth=2 audio=-1.8
+Direct Newton iteration succeeded in finding operating point.
+
+.step deadcap=2.2e-10 vth=2.5 audio=-1.8
+Direct Newton iteration succeeded in finding operating point.
+
+.step deadcap=3.3e-10 vth=2.5 audio=-1.8
+Direct Newton iteration succeeded in finding operating point.
+
+.step deadcap=4.7e-10 vth=2.5 audio=-1.8
+Direct Newton iteration succeeded in finding operating point.
+
+.step deadcap=2.2e-10 vth=3 audio=-1.8
+Direct Newton iteration succeeded in finding operating point.
+
+.step deadcap=3.3e-10 vth=3 audio=-1.8
+Direct Newton iteration succeeded in finding operating point.
+
+.step deadcap=4.7e-10 vth=3 audio=-1.8
+Direct Newton iteration succeeded in finding operating point.
+
+.step deadcap=2.2e-10 vth=3.2 audio=-1.8
+Direct Newton iteration succeeded in finding operating point.
+
+.step deadcap=3.3e-10 vth=3.2 audio=-1.8
+Direct Newton iteration succeeded in finding operating point.
+
+.step deadcap=4.7e-10 vth=3.2 audio=-1.8
+Direct Newton iteration succeeded in finding operating point.
+
+.step deadcap=2.2e-10 vth=2 audio=1.8
+Direct Newton iteration succeeded in finding operating point.
+
+.step deadcap=3.3e-10 vth=2 audio=1.8
+Direct Newton iteration succeeded in finding operating point.
+
+.step deadcap=4.7e-10 vth=2 audio=1.8
+Direct Newton iteration succeeded in finding operating point.
+
+.step deadcap=2.2e-10 vth=2.5 audio=1.8
+Direct Newton iteration succeeded in finding operating point.
+
+.step deadcap=3.3e-10 vth=2.5 audio=1.8
+Direct Newton iteration succeeded in finding operating point.
+
+.step deadcap=4.7e-10 vth=2.5 audio=1.8
+Direct Newton iteration succeeded in finding operating point.
+
+.step deadcap=2.2e-10 vth=3 audio=1.8
+Direct Newton iteration succeeded in finding operating point.
+
+.step deadcap=3.3e-10 vth=3 audio=1.8
+Direct Newton iteration succeeded in finding operating point.
+
+.step deadcap=4.7e-10 vth=3 audio=1.8
+Direct Newton iteration succeeded in finding operating point.
+
+.step deadcap=2.2e-10 vth=3.2 audio=1.8
+Direct Newton iteration succeeded in finding operating point.
+
+.step deadcap=3.3e-10 vth=3.2 audio=1.8
+Direct Newton iteration succeeded in finding operating point.
+
+.step deadcap=4.7e-10 vth=3.2 audio=1.8
+Direct Newton iteration succeeded in finding operating point.
+Total elapsed time: 3.790 seconds.
+Total iterations: 17775
+
+Files loaded:
+D:\Class D amplifier\stage6_rc_deadtime.cir
+
+
+Measurement: overlapmax
+  step	MAX(V(overlap))	FROM	TO
+     1	0	1e-05	4e-05
+     2	0	1e-05	4e-05
+     3	0	1e-05	4e-05
+     4	0	1e-05	4e-05
+     5	0	1e-05	4e-05
+     6	0	1e-05	4e-05
+     7	0	1e-05	4e-05
+     8	0	1e-05	4e-05
+     9	0	1e-05	4e-05
+    10	0	1e-05	4e-05
+    11	0	1e-05	4e-05
+    12	0	1e-05	4e-05
+    13	0	1e-05	4e-05
+    14	0	1e-05	4e-05
+    15	0	1e-05	4e-05
+    16	0	1e-05	4e-05
+    17	0	1e-05	4e-05
+    18	0	1e-05	4e-05
+    19	0	1e-05	4e-05
+    20	0	1e-05	4e-05
+    21	0	1e-05	4e-05
+    22	0	1e-05	4e-05
+    23	0	1e-05	4e-05
+    24	0	1e-05	4e-05
+
+Measurement: hgateavg
+  step	AVG(V(vgsH))	FROM	TO
+     1	0.313533002989	1e-05	4e-05
+     2	0.228394839456	1e-05	4e-05
+     3	0.151252939184	1e-05	4e-05
+     4	0.249532976039	1e-05	4e-05
+     5	0.145961514263	1e-05	4e-05
+     6	0.0122033671544	1e-05	4e-05
+     7	0.173515207	1e-05	4e-05
+     8	0.044225317116	1e-05	4e-05
+     9	0	1e-05	4e-05
+    10	0.151128189983	1e-05	4e-05
+    11	0	1e-05	4e-05
+    12	0	1e-05	4e-05
+    13	11.08844073	1e-05	4e-05
+    14	10.9934492324	1e-05	4e-05
+    15	10.8848954003	1e-05	4e-05
+    16	11.0091494795	1e-05	4e-05
+    17	10.8750614616	1e-05	4e-05
+    18	10.7121928362	1e-05	4e-05
+    19	10.9090215623	1e-05	4e-05
+    20	10.7266637547	1e-05	4e-05
+    21	10.5006781031	1e-05	4e-05
+    22	10.8616075016	1e-05	4e-05
+    23	10.6556907998	1e-05	4e-05
+    24	10.3922362175	1e-05	4e-05
+
+Measurement: lgateavg
+  step	AVG(V(vgsL))	FROM	TO
+     1	11.2519036625	1e-05	4e-05
+     2	11.1736454821	1e-05	4e-05
+     3	11.0792150926	1e-05	4e-05
+     4	11.1869352674	1e-05	4e-05
+     5	11.0814989134	1e-05	4e-05
+     6	10.9472247254	1e-05	4e-05
+     7	11.1002378021	1e-05	4e-05
+     8	10.9586197384	1e-05	4e-05
+     9	10.7775429731	1e-05	4e-05
+    10	11.0622558359	1e-05	4e-05
+    11	10.9024904822	1e-05	4e-05
+    12	10.6975429746	1e-05	4e-05
+    13	0.394270383941	1e-05	4e-05
+    14	0.284410988228	1e-05	4e-05
+    15	0.186181655591	1e-05	4e-05
+    16	0.311143250732	1e-05	4e-05
+    17	0.187049154743	1e-05	4e-05
+    18	0.019941793282	1e-05	4e-05
+    19	0.211271089833	1e-05	4e-05
+    20	0.0672894415555	1e-05	4e-05
+    21	0	1e-05	4e-05
+    22	0.186633666976	1e-05	4e-05
+    23	0	1e-05	4e-05
+    24	0	1e-05	4e-05
+
+Measurement: htol_gap
+  step	htol_gap	FROM	TO
+     1	1.16395455127e-07	1.36392811495e-05	1.37556766046e-05
+     2	1.63091411109e-07	1.36408917185e-05	1.38039831296e-05
+     3	2.25400170486e-07	1.36340960834e-05	1.38594962539e-05
+     4	1.58083169742e-07	1.36381979188e-05	1.37962810886e-05
+     5	2.31780484488e-07	1.36302211277e-05	1.38620016121e-05
+     6	failed
+     7	2.09309271161e-07	1.36371957511e-05	1.38465050223e-05
+     8	3.38961437099e-07	1.35981762817e-05	1.39371377188e-05
+     9	failed
+    10	2.36225717821e-07	1.36340036602e-05	1.3870229378e-05
+    11	failed
+    12	failed
+    13	-6.54676473967e-06	1.6642891973e-05	1.00961272333e-05
+    14	-6.48915146958e-06	1.66415486738e-05	1.01523972042e-05
+    15	-6.44296382591e-06	1.66418610915e-05	1.01988972656e-05
+    16	-6.50556177631e-06	1.66428947872e-05	1.01373330108e-05
+    17	-6.44223804609e-06	1.66415468141e-05	1.0199308768e-05
+    18	failed
+    19	-6.45559476672e-06	1.66428945772e-05	1.01872998105e-05
+    20	-6.3797744612e-06	1.66415488162e-05	1.0261774355e-05
+    21	failed
+    22	-6.44043015125e-06	1.66394035069e-05	1.01989733556e-05
+    23	failed
+    24	failed
+
+Measurement: ltoh_gap
+  step	ltoh_gap	FROM	TO
+     1	1.00026137198e-07	1.33194341323e-05	1.34194602695e-05
+     2	1.56394591538e-07	1.33192718304e-05	1.3475666422e-05
+     3	2.06162336863e-07	1.33159925833e-05	1.35221549202e-05
+     4	1.40026488483e-07	1.33194337811e-05	1.34594602695e-05
+     5	2.02887004903e-07	1.33192687582e-05	1.35221557631e-05
+     6	failed
+     7	1.93347105837e-07	1.33160672956e-05	1.35094144015e-05
+     8	2.68066713222e-07	1.33178599045e-05	1.35859266177e-05
+     9	failed
+    10	2.06088818368e-07	1.33160550023e-05	1.35221438206e-05
+    11	failed
+    12	failed
+    13	9.69778527298e-08	1.03171444776e-05	1.04141223303e-05
+    14	1.43740664102e-07	1.03167227096e-05	1.04604633737e-05
+    15	2.06416365105e-07	1.03094049881e-05	1.05158213532e-05
+    16	1.38098771265e-07	1.03156733247e-05	1.0453772096e-05
+    17	2.11648996562e-07	1.03082410526e-05	1.05198900492e-05
+    18	failed
+    19	1.91905186048e-07	1.03119319112e-05	1.05038370973e-05
+    20	3.07120583876e-07	1.02868965338e-05	1.05940171177e-05
+    21	failed
+    22	2.16415060108e-07	1.03095007455e-05	1.05259158056e-05
+    23	failed
+    24	failed

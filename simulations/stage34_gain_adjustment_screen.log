@@ -1,0 +1,164 @@
+LTspice 26.1.1 for Windows
+Circuit: D:\Class D amplifier\stage34_gain_adjustment_screen.cir
+Start Time: Tue Oct  6 00:15:51 2026
+
+.step vinpk=0.707107
+solver = Normal
+Maximum thread count: 8
+tnom = 27
+temp = 27
+method = trap
+Direct Newton iteration failed to find operating point.
+Starting Gmin stepping
+Gmin stepping succeeded in finding the operating point.
+
+
+.step vinpk=1.414214
+Direct Newton iteration failed to find operating point.
+Starting Gmin stepping
+Gmin stepping succeeded in finding the operating point.
+
+
+.step vinpk=2.828427
+Direct Newton iteration failed to find operating point.
+Starting Gmin stepping
+Gmin stepping succeeded in finding the operating point.
+
+
+.step vinpk=3.535534
+Direct Newton iteration failed to find operating point.
+Starting Gmin stepping
+Gmin stepping succeeded in finding the operating point.
+
+Total elapsed time: 21.605 seconds.
+Total iterations: 961046
+
+Files loaded:
+D:\Class D amplifier\stage34_gain_adjustment_screen.cir
+
+
+Measurement: inputrms
+  step	RMS(V(src))	FROM	TO
+     1	0.500000145702	0.005	0.006
+     2	1.00000028989	0.005	0.006
+     3	1.99999986703	0.005	0.006
+     4	2.5000000052	0.005	0.006
+
+Measurement: bufferaudiorms
+  step	RMS(V(buf_audio))	FROM	TO
+     1	0.498931947157	0.005	0.006
+     2	0.997863764486	0.005	0.006
+     3	1.99572669106	0.005	0.006
+     4	2.49465850391	0.005	0.006
+
+Measurement: toneaudiorms
+  step	RMS(V(tone_audio))	FROM	TO
+     1	0.498921711686	0.005	0.006
+     2	0.997843539864	0.005	0.006
+     3	1.99568649017	0.005	0.006
+     4	2.49460831539	0.005	0.006
+
+Measurement: buffermin
+  step	MIN(V(bufout))	FROM	TO
+     1	5.29331684113	0.005	0.006
+     2	4.58669376373	0.005	0.006
+     3	3.17344880104	0.005	0.006
+     4	2.46682572365	0.005	0.006
+
+Measurement: buffermax
+  step	MAX(V(bufout))	FROM	TO
+     1	6.70450782776	0.005	0.006
+     2	7.40907526016	0.005	0.006
+     3	8.81820964813	0.005	0.006
+     4	9.5227766037	0.005	0.006
+
+Measurement: tonemin
+  step	MIN(V(toneout))	FROM	TO
+     1	5.29538631439	0.005	0.006
+     2	4.5908331871	0.005	0.006
+     3	3.18172693253	0.005	0.006
+     4	2.47717356682	0.005	0.006
+
+Measurement: tonemax
+  step	MAX(V(toneout))	FROM	TO
+     1	6.70654916763	0.005	0.006
+     2	7.41315793991	0.005	0.006
+     3	8.82637500763	0.005	0.006
+     4	9.53298377991	0.005	0.006
+
+Measurement: cmpmin
+  step	MIN(V(cmp))	FROM	TO
+     1	2.12116503716	0.005	0.006
+     2	1.74233031273	0.005	0.006
+     3	0.984661102295	0.005	0.006
+     4	0.605826258659	0.005	0.006
+
+Measurement: cmpmax
+  step	MAX(V(cmp))	FROM	TO
+     1	2.88059735298	0.005	0.006
+     2	3.26119470596	0.005	0.006
+     3	4.02238845825	0.005	0.006
+     4	4.40298604965	0.005	0.006
+
+Measurement: loadrms
+  step	RMS(V(spk))	FROM	TO
+     1	1.33393908796	0.005	0.006
+     2	2.55702222347	0.005	0.006
+     3	5.53808286475	0.005	0.006
+     4	7.08699778496	0.005	0.006
+
+Measurement: loadpower
+  step	LoadRMS*LoadRMS/4
+     1	0.444848372599
+     2	1.63459066283
+     3	7.66759045422
+     4	12.556384401
+
+Measurement: loadirms
+  step	RMS(I(Rload))	FROM	TO
+     1	0.333484771991	0.005	0.006
+     2	0.639255555868	0.005	0.006
+     3	1.38452071619	0.005	0.006
+     4	1.77174944624	0.005	0.006
+
+Measurement: loadipk
+  step	MAX(abs(I(Rload)))	FROM	TO
+     1	0.580743312836	0.005	0.006
+     2	1.06780815125	0.005	0.006
+     3	2.10862088203	0.005	0.006
+     4	2.74729132652	0.005	0.006
+
+Measurement: inductoripk
+  step	MAX(abs(I(Lout)))	FROM	TO
+     1	1.05772304535	0.005	0.006
+     2	1.49277615547	0.005	0.006
+     3	2.33397245407	0.005	0.006
+     4	2.81993198395	0.005	0.006
+
+Measurement: overlapmax
+  step	MAX(V(overlap21))	FROM	TO
+     1	0	0.005	0.006
+     2	0	0.005	0.006
+     3	0	0.005	0.006
+     4	0	0.005	0.006
+
+Measurement: bootstrapmin
+  step	MIN(V(vb,sw))	FROM	TO
+     1	12.1654281616	0.005	0.006
+     2	12.1796684265	0.005	0.006
+     3	12.200958252	0.005	0.006
+     4	12.2070713043	0.005	0.006
+
+Measurement: busvmin
+  step	MIN(V(bus))	FROM	TO
+     1	23.9722499847	0.005	0.006
+     2	23.9179477692	0.005	0.006
+     3	23.8690032959	0.005	0.006
+     4	23.8412570953	0.005	0.006
+
+Measurement: busvmax
+  step	MAX(V(bus))	FROM	TO
+     1	24.0269699097	0.005	0.006
+     2	24.0373725891	0.005	0.006
+     3	24.0499248505	0.005	0.006
+     4	24.0543937683	0.005	0.006

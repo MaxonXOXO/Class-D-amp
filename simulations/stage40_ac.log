@@ -1,0 +1,247 @@
+LTspice 26.1.1 for Windows
+Circuit: D:\Class D amplifier\stage40_ac.cir
+Start Time: Wed Oct  7 11:41:04 2026
+
+.step rload=4
+solver = Normal
+Maximum thread count: 8
+tnom = 27
+temp = 27
+method = trap
+.OP point found by inspection.
+.OP point found by inspection.
+
+.step rload=8
+.OP point found by inspection.
+.OP point found by inspection.
+Total elapsed time: 0.078 seconds.
+Total iterations: 0
+
+Files loaded:
+D:\Class D amplifier\stage40_ac.cir
+
+
+Measurement: gaina_1k
+  step	mag(V(outA+,outA-)/V(in+,in-))	at
+     1	(-0.00348689078425dB,0°)	1000
+     2	(0.00189914699481dB,0°)	1000
+
+Measurement: gaina_10k
+  step	mag(V(outA+,outA-)/V(in+,in-))	at
+     1	(0.0666617041863dB,0°)	10000
+     2	(0.408414322956dB,0°)	10000
+
+Measurement: gaina_20k
+  step	mag(V(outA+,outA-)/V(in+,in-))	at
+     1	(0.0957475525949dB,0°)	20000
+     2	(1.66497744046dB,0°)	20000
+
+Measurement: freqa_3db
+  step	mag(V(outA+,outA-)/V(in+,in-))=0.707
+     1	44643.6082479
+     2	59088.4737091
+
+Measurement: attena_50k
+  step	mag(V(outA+,outA-)/V(in+,in-))	at
+     1	(-4.31253902086dB,0°)	50000
+     2	(0.714829418598dB,0°)	50000
+
+Measurement: attena_75k
+  step	mag(V(outA+,outA-)/V(in+,in-))	at
+     1	(-10.4060343616dB,0°)	75000
+     2	(-8.33395141281dB,0°)	75000
+
+Measurement: attena_100k
+  step	mag(V(outA+,outA-)/V(in+,in-))	at
+     1	(-15.3268245375dB,0°)	100000
+     2	(-14.2637541398dB,0°)	100000
+
+Measurement: attena_150k
+  step	mag(V(outA+,outA-)/V(in+,in-))	at
+     1	(-22.4044216557dB,0°)	150000
+     2	(-21.9671810519dB,0°)	150000
+
+Measurement: peaka
+  step	MAX(mag(V(outA+,outA-)/V(in+,in-)))	FROM	TO
+     1	(0.117821803937dB,0°)	10	200000
+     2	(4.27261205229dB,0°)	10	200000
+
+Measurement: gainb_1k
+  step	mag(V(outB+,outB-)/V(in+,in-))	at
+     1	(-0.00466075860424dB,0°)	1000
+     2	(0.0079320102463dB,0°)	1000
+
+Measurement: gainb_10k
+  step	mag(V(outB+,outB-)/V(in+,in-))	at
+     1	(-0.139097748347dB,0°)	10000
+     2	(1.01156776401dB,0°)	10000
+
+Measurement: gainb_20k
+  step	mag(V(outB+,outB-)/V(in+,in-))	at
+     1	(-1.52482794209dB,0°)	20000
+     2	(3.36481938556dB,0°)	20000
+
+Measurement: freqb_3db
+  step	mag(V(outB+,outB-)/V(in+,in-))=0.707
+     1	25000.8439511
+     2	35690.753386
+
+Measurement: attenb_50k
+  step	mag(V(outB+,outB-)/V(in+,in-))	at
+     1	(-12.1618166988dB,0°)	50000
+     2	(-10.1925924136dB,0°)	50000
+
+Measurement: attenb_75k
+  step	mag(V(outB+,outB-)/V(in+,in-))	at
+     1	(-18.9583672466dB,0°)	75000
+     2	(-18.1411065546dB,0°)	75000
+
+Measurement: attenb_100k
+  step	mag(V(outB+,outB-)/V(in+,in-))	at
+     1	(-23.9114069156dB,0°)	100000
+     2	(-23.4661276742dB,0°)	100000
+
+Measurement: attenb_150k
+  step	mag(V(outB+,outB-)/V(in+,in-))	at
+     1	(-30.9306093664dB,0°)	150000
+     2	(-30.7371570521dB,0°)	150000
+
+Measurement: peakb
+  step	MAX(mag(V(outB+,outB-)/V(in+,in-)))	FROM	TO
+     1	(-0.00434189027542dB,0°)	10	200000
+     2	(3.50172536821dB,0°)	10	200000
+
+Measurement: gainc_1k
+  step	mag(V(outC+,outC-)/V(in+,in-))	at
+     1	(-0.00850071515632dB,0°)	1000
+     2	(0.00923237540002dB,0°)	1000
+
+Measurement: gainc_10k
+  step	mag(V(outC+,outC-)/V(in+,in-))	at
+     1	(-0.542482710308dB,0°)	10000
+     2	(1.11101355702dB,0°)	10000
+
+Measurement: gainc_20k
+  step	mag(V(outC+,outC-)/V(in+,in-))	at
+     1	(-2.93906742827dB,0°)	20000
+     2	(2.724598471dB,0°)	20000
+
+Measurement: freqc_3db
+  step	mag(V(outC+,outC-)/V(in+,in-))=0.707
+     1	20209.2170956
+     2	31543.8429842
+
+Measurement: attenc_50k
+  step	mag(V(outC+,outC-)/V(in+,in-))	at
+     1	(-14.1834655028dB,0°)	50000
+     2	(-12.3665079739dB,0°)	50000
+
+Measurement: attenc_75k
+  step	mag(V(outC+,outC-)/V(in+,in-))	at
+     1	(-20.8567872457dB,0°)	75000
+     2	(-20.0710680619dB,0°)	75000
+
+Measurement: attenc_100k
+  step	mag(V(outC+,outC-)/V(in+,in-))	at
+     1	(-25.7478732821dB,0°)	100000
+     2	(-25.3125690968dB,0°)	100000
+
+Measurement: attenc_150k
+  step	mag(V(outC+,outC-)/V(in+,in-))	at
+     1	(-32.7170740144dB,0°)	150000
+     2	(-32.5255937535dB,0°)	150000
+
+Measurement: peakc
+  step	MAX(mag(V(outC+,outC-)/V(in+,in-)))	FROM	TO
+     1	(-0.00434227394549dB,0°)	10	200000
+     2	(2.77462335058dB,0°)	10	200000
+
+Measurement: gaind_1k
+  step	mag(V(outD+,outD-)/V(in+,in-))	at
+     1	(-0.0395330202629dB,0°)	1000
+     2	(-0.00253199783079dB,0°)	1000
+
+Measurement: gaind_10k
+  step	mag(V(outD+,outD-)/V(in+,in-))	at
+     1	(-2.62976476276dB,0°)	10000
+     2	(-0.109843851541dB,0°)	10000
+
+Measurement: gaind_20k
+  step	mag(V(outD+,outD-)/V(in+,in-))	at
+     1	(-6.56041293528dB,0°)	20000
+     2	(-1.15533245659dB,0°)	20000
+
+Measurement: freqd_3db
+  step	mag(V(outD+,outD-)/V(in+,in-))=0.707
+     1	10944.0639744
+     2	27272.9739759
+
+Measurement: attend_50k
+  step	mag(V(outD+,outD-)/V(in+,in-))	at
+     1	(-15.0463159973dB,0°)	50000
+     2	(-10.7224437641dB,0°)	50000
+
+Measurement: attend_75k
+  step	mag(V(outD+,outD-)/V(in+,in-))	at
+     1	(-20.020183859dB,0°)	75000
+     2	(-17.4132646311dB,0°)	75000
+
+Measurement: attend_100k
+  step	mag(V(outD+,outD-)/V(in+,in-))	at
+     1	(-24.0166041441dB,0°)	100000
+     2	(-22.3436627422dB,0°)	100000
+
+Measurement: attend_150k
+  step	mag(V(outD+,outD-)/V(in+,in-))	at
+     1	(-30.1821278356dB,0°)	150000
+     2	(-29.3521760127dB,0°)	150000
+
+Measurement: peakd
+  step	MAX(mag(V(outD+,outD-)/V(in+,in-)))	FROM	TO
+     1	(-0.00434539211935dB,0°)	10	200000
+     2	(-0.00217123636521dB,0°)	10	200000
+
+Measurement: gaine_1k
+  step	mag(V(outE+,outE-)/V(in+,in-))	at
+     1	(-0.0821453347374dB,0°)	1000
+     2	(-0.00973041703362dB,0°)	1000
+
+Measurement: gaine_10k
+  step	mag(V(outE+,outE-)/V(in+,in-))	at
+     1	(-4.54010061905dB,0°)	10000
+     2	(-0.823832332196dB,0°)	10000
+
+Measurement: gaine_20k
+  step	mag(V(outE+,outE-)/V(in+,in-))	at
+     1	(-9.4387753659dB,0°)	20000
+     2	(-3.51657971237dB,0°)	20000
+
+Measurement: freqe_3db
+  step	mag(V(outE+,outE-)/V(in+,in-))=0.707
+     1	7394.89189039
+     2	18507.9849928
+
+Measurement: attene_50k
+  step	mag(V(outE+,outE-)/V(in+,in-))	at
+     1	(-18.3083881244dB,0°)	50000
+     2	(-14.2913841709dB,0°)	50000
+
+Measurement: attene_75k
+  step	mag(V(outE+,outE-)/V(in+,in-))	at
+     1	(-23.2554497476dB,0°)	75000
+     2	(-20.7787187995dB,0°)	75000
+
+Measurement: attene_100k
+  step	mag(V(outE+,outE-)/V(in+,in-))	at
+     1	(-27.2114551256dB,0°)	100000
+     2	(-25.5952165467dB,0°)	100000
+
+Measurement: attene_150k
+  step	mag(V(outE+,outE-)/V(in+,in-))	at
+     1	(-33.3238438941dB,0°)	150000
+     2	(-32.5085121009dB,0°)	150000
+
+Measurement: peake
+  step	MAX(mag(V(outE+,outE-)/V(in+,in-)))	FROM	TO
+     1	(-0.00434970840165dB,0°)	10	200000
+     2	(-0.00217195610618dB,0°)	10	200000

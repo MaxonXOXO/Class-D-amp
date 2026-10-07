@@ -1,0 +1,129 @@
+* Stage 34 (stage34_btl_23k_13k_vol1v): NE5532 buffer -> Baxandall (centred) -> NE5532 non-inv gain (1+Rf/10k) -> Rlimit -> volume (x^2.3) -> comparator -> BTL power stage
+* Opamp supply: Vcc=12 V, Vee=-12 V, mid=0 V, clamp headroom 1.75 V per rail. Screening models only.
+.param Pvol=10k x=1 r={x**2.3} Ppot=100k bp=0.5 tp=0.5 deadcap=470p Fsig=1k Rs=13000 Rf=23000 Vbus=24 Vin=1 Hd=1.75
+.param Vinpk={Vin*sqrt(2)}
+Vmid mid 0 0
+V5 v5 0 5
+Vcc opvcc 0 12
+Vee opvee 0 -12
+Vbusraw braw 0 {Vbus}
+Rbus braw bus 50m
+Cbus bus 0 4700u Rser=0.05 IC=24
+VccDrv vcc 0 12
+Vsrc src 0 SINE(0 {Vinpk} {Fsig})
+Rsource src s2 100
+Cin s2 inp 2.2u IC=-0
+Rb inp mid 47k
+XBUF inp bufout bufout opvcc opvee NE5532_CLAMP
+R1 bufout a 33k
+R2 b toneout 33k
+Rpa a w {Ppot*bp}
+Rpb w b {Ppot*(1-bp)}
+C1 a w 47n IC=0
+C2 b w 47n IC=0
+C3 bufout t1 3.3n
+C4 t2 toneout 3.3n
+Rta t1 tw {Ppot*tp}
+Rtb tw t2 {Ppot*(1-tp)}
+R5 tw w 8.2k
+XTON mid w toneout opvcc opvee NE5532_CLAMP
+* NEW Stage 34 gain stage: AC-coupled non-inverting, DC gain = 1 (Cgx) so mid-rail bias is preserved
+Cg1 toneout gin 2.2u IC=0
+Rgb gin mid 100k
+XGAIN gin gfb gout opvcc opvee NE5532_CLAMP
+Rfb gout gfb {Rf}
+Rg gfb gx 10k
+Cgx gx mid 47u IC=0
+* Series limit resistor + volume pot (last)
+Rlimit gout psrc {Rs}
+Rup psrc wip {Pvol*(1-r)+1}
+Rlo wip mid {Pvol*r+1}
+Cc wip c 1u IC=-2.5
+Ratt c cmp 150k
+Rh v5 cmp 200k
+Rl cmp 0 200k
+Ccmp cmp 0 10p
+Rpull osc v5 1
+Bctrl ctrl 0 V=5-V(tri)
+Ssch osc 0 ctrl 0 SCHMITT
+.model SCHMITT SW(Ron=1m Roff=1G Vt=2.5 Vh=2)
+Rintegrator osc sum 10k
+Cintegrator tri sum 208.333p
+Bop tri 0 V=limit(1e6*(2.5-V(sum)),0,5)
+.model Dfast D(Is=2.52n Rs=0.568 N=1.9 Cjo=4p M=0.03 Tt=4n)
+.model IRFB7545Model VDMOS(Vto=2.9 Kp=100 Rd=2m Rs=2m Rg=2.3 Cgs=6.3n Cgdmin=200p Cgdmax=1.8n Cjo=1n Is=1e-12 BV=60)
+.subckt NE5532_CLAMP inp inn out vcc vee
+E1 n1 0 inp inn 100k
+R1 n1 n2 1k
+C1 n2 0 1.59u
+B1 out 0 V=min(max(V(n2),V(vee)+{Hd}),V(vcc)-{Hd})
+.ends NE5532_CLAMP
+* ---- half-bridge A ----
+BcmpA pwmA 0 V=if(V(cmp)>V(tri),5,0)
+BinvA invA 0 V=if(delay(V(pwmA),10n)>2.5,0,5)
+RhinA pwmA hinA 1k
+ChinA hinA 0 {deadcap}
+DhinA hinA pwmA Dfast
+RlinA invA linA 1k
+ClinA linA 0 {deadcap}
+DlinA linA invA Dfast
+BdrvHA drvHA swA V=V(vbA,swA)*if(V(hinA)>2.5,if(delay(V(hinA),120n)>2.5,1,0),if(delay(V(hinA),94n)>2.5,1,0))
+BdrvLA drvLA 0 V=12*if(V(linA)>2.5,if(delay(V(linA),120n)>2.5,1,0),if(delay(V(linA),94n)>2.5,1,0))
+RghA drvHA ghA 10
+RglA drvLA glA 10
+CextraHA ghA swA 3.5n
+CextraLA glA 0 3.5n
+DbootA vcc vbA Dfast
+CbootA vbA swA 220n Rser=0.1 IC=11
+MhiA bus ghA swA IRFB7545Model
+MloA swA glA 0 IRFB7545Model
+LoutA swA outA 68u Rser=0.15
+CoutA outA 0 470n Rser=0.05
+BovA ovA 0 V=if(V(ghA,swA)>2.1 & V(glA)>2.1,1,0)
+* ---- half-bridge B ----
+BcmpB pwmB 0 V=if((5-V(cmp))>V(tri),5,0)
+BinvB invB 0 V=if(delay(V(pwmB),10n)>2.5,0,5)
+RhinB pwmB hinB 1k
+ChinB hinB 0 {deadcap}
+DhinB hinB pwmB Dfast
+RlinB invB linB 1k
+ClinB linB 0 {deadcap}
+DlinB linB invB Dfast
+BdrvHB drvHB swB V=V(vbB,swB)*if(V(hinB)>2.5,if(delay(V(hinB),120n)>2.5,1,0),if(delay(V(hinB),94n)>2.5,1,0))
+BdrvLB drvLB 0 V=12*if(V(linB)>2.5,if(delay(V(linB),120n)>2.5,1,0),if(delay(V(linB),94n)>2.5,1,0))
+RghB drvHB ghB 10
+RglB drvLB glB 10
+CextraHB ghB swB 3.5n
+CextraLB glB 0 3.5n
+DbootB vcc vbB Dfast
+CbootB vbB swB 220n Rser=0.1 IC=11
+MhiB bus ghB swB IRFB7545Model
+MloB swB glB 0 IRFB7545Model
+LoutB swB outB 68u Rser=0.15
+CoutB outB 0 470n Rser=0.05
+BovB ovB 0 V=if(V(ghB,swB)>2.1 & V(glB)>2.1,1,0)
+Rload outA outB 4
+Bspk vspk 0 V=V(outA,outB)
+Bovl overlap 0 V=max(V(ovA),V(ovB))
+.ic V(tri)=4.5 V(sum)=2.4999955 V(osc)=5 V(outA)=12 V(outB)=12 V(inp)=0 V(bufout)=0 V(toneout)=0 V(w)=0 V(gin)=0 V(gout)=0 V(gfb)=0 V(wip)=0 V(cmp)=2.5 V(bus)=24
+.step param x list 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
+.tran 0 6m 5m 100n
+.options method=gear gmin=1e-10
+.four 1k 9 1 V(vspk)
+.meas TRAN InputRMS RMS V(src) FROM=5m TO=6m
+.meas TRAN BufMax MAX V(bufout) FROM=5m TO=6m
+.meas TRAN BufMin MIN V(bufout) FROM=5m TO=6m
+.meas TRAN ToneMax MAX V(toneout) FROM=5m TO=6m
+.meas TRAN ToneMin MIN V(toneout) FROM=5m TO=6m
+.meas TRAN GainMax MAX V(gout) FROM=5m TO=6m
+.meas TRAN GainMin MIN V(gout) FROM=5m TO=6m
+.meas TRAN GainRMS RMS V(gout)-0 FROM=5m TO=6m
+.meas TRAN CmpMax MAX V(cmp) FROM=5m TO=6m
+.meas TRAN CmpMin MIN V(cmp) FROM=5m TO=6m
+.meas TRAN ModIdx PARAM (CmpMax-CmpMin)/4
+.meas TRAN SpkRMS RMS V(vspk) FROM=5m TO=6m
+.meas TRAN SpkPower PARAM SpkRMS*SpkRMS/4
+.meas TRAN OverlapMax MAX V(overlap) FROM=5m TO=6m
+.meas TRAN BusVmin MIN V(bus) FROM=5m TO=6m
+.save V(src) V(bufout) V(toneout) V(gout) V(wip) V(cmp) V(tri) V(vspk) V(overlap) V(bus)
+.end

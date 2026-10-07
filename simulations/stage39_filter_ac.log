@@ -1,0 +1,157 @@
+LTspice 26.1.1 for Windows
+Circuit: D:\Class D amplifier\stage39_filter_ac.cir
+Start Time: Wed Oct  7 00:29:46 2026
+
+.step rload=4
+solver = Normal
+Maximum thread count: 8
+tnom = 27
+temp = 27
+method = trap
+.OP point found by inspection.
+.OP point found by inspection.
+
+.step rload=8
+.OP point found by inspection.
+.OP point found by inspection.
+Total elapsed time: 0.189 seconds.
+Total iterations: 0
+
+Files loaded:
+D:\Class D amplifier\stage39_filter_ac.cir
+
+
+Measurement: gaina_100
+  step	mag(V(outA+,outA-)/V(in+,in-))	at
+     1	(-0.0043332955289dB,0°)	100
+     2	(-0.00213050134849dB,0°)	100
+
+Measurement: gaina_1k
+  step	mag(V(outA+,outA-)/V(in+,in-))	at
+     1	(-0.00348689078425dB,0°)	1000
+     2	(0.00189914699481dB,0°)	1000
+
+Measurement: gaina_5k
+  step	mag(V(outA+,outA-)/V(in+,in-))	at
+     1	(0.0161611187524dB,0°)	5000
+     2	(0.0998183860426dB,0°)	5000
+
+Measurement: gaina_10k
+  step	mag(V(outA+,outA-)/V(in+,in-))	at
+     1	(0.0666617041863dB,0°)	10000
+     2	(0.408414322956dB,0°)	10000
+
+Measurement: gaina_20k
+  step	mag(V(outA+,outA-)/V(in+,in-))	at
+     1	(0.0957475525949dB,0°)	20000
+     2	(1.66497744046dB,0°)	20000
+
+Measurement: gaina_50k
+  step	mag(V(outA+,outA-)/V(in+,in-))	at
+     1	(-4.31253902086dB,0°)	50000
+     2	(0.714829418598dB,0°)	50000
+
+Measurement: gaina_75k
+  step	mag(V(outA+,outA-)/V(in+,in-))	at
+     1	(-10.4060343616dB,0°)	75000
+     2	(-8.33395141281dB,0°)	75000
+
+Measurement: gaina_100k
+  step	mag(V(outA+,outA-)/V(in+,in-))	at
+     1	(-15.3268245375dB,0°)	100000
+     2	(-14.2637541398dB,0°)	100000
+
+Measurement: freqa_3db
+  step	mag(V(outA+,outA-)/V(in+,in-))=0.707
+     1	44643.6082479
+     2	59088.4737091
+
+Measurement: gainb_100
+  step	mag(V(outB+,outB-)/V(in+,in-))	at
+     1	(-0.00434494357495dB,0°)	100
+     2	(-0.00207018013036dB,0°)	100
+
+Measurement: gainb_1k
+  step	mag(V(outB+,outB-)/V(in+,in-))	at
+     1	(-0.00466075860424dB,0°)	1000
+     2	(0.0079320102463dB,0°)	1000
+
+Measurement: gainb_5k
+  step	mag(V(outB+,outB-)/V(in+,in-))	at
+     1	(-0.0186735880161dB,0°)	5000
+     2	(0.250995316916dB,0°)	5000
+
+Measurement: gainb_10k
+  step	mag(V(outB+,outB-)/V(in+,in-))	at
+     1	(-0.139097748347dB,0°)	10000
+     2	(1.01156776401dB,0°)	10000
+
+Measurement: gainb_20k
+  step	mag(V(outB+,outB-)/V(in+,in-))	at
+     1	(-1.52482794209dB,0°)	20000
+     2	(3.36481938556dB,0°)	20000
+
+Measurement: gainb_50k
+  step	mag(V(outB+,outB-)/V(in+,in-))	at
+     1	(-12.1618166988dB,0°)	50000
+     2	(-10.1925924136dB,0°)	50000
+
+Measurement: gainb_75k
+  step	mag(V(outB+,outB-)/V(in+,in-))	at
+     1	(-18.9583672466dB,0°)	75000
+     2	(-18.1411065546dB,0°)	75000
+
+Measurement: gainb_100k
+  step	mag(V(outB+,outB-)/V(in+,in-))	at
+     1	(-23.9114069156dB,0°)	100000
+     2	(-23.4661276742dB,0°)	100000
+
+Measurement: freqb_3db
+  step	mag(V(outB+,outB-)/V(in+,in-))=0.707
+     1	25000.8439511
+     2	35690.753386
+
+Measurement: gainc_100
+  step	mag(V(outC+,outC-)/V(in+,in-))	at
+     1	(-0.00438331090525dB,0°)	100
+     2	(-0.00205715644777dB,0°)	100
+
+Measurement: gainc_1k
+  step	mag(V(outC+,outC-)/V(in+,in-))	at
+     1	(-0.00850071515632dB,0°)	1000
+     2	(0.00923237540002dB,0°)	1000
+
+Measurement: gainc_5k
+  step	mag(V(outC+,outC-)/V(in+,in-))	at
+     1	(-0.116442168965dB,0°)	5000
+     2	(0.28214847416dB,0°)	5000
+
+Measurement: gainc_10k
+  step	mag(V(outC+,outC-)/V(in+,in-))	at
+     1	(-0.542482710308dB,0°)	10000
+     2	(1.11101355702dB,0°)	10000
+
+Measurement: gainc_20k
+  step	mag(V(outC+,outC-)/V(in+,in-))	at
+     1	(-2.93906742827dB,0°)	20000
+     2	(2.724598471dB,0°)	20000
+
+Measurement: gainc_50k
+  step	mag(V(outC+,outC-)/V(in+,in-))	at
+     1	(-14.1834655028dB,0°)	50000
+     2	(-12.3665079739dB,0°)	50000
+
+Measurement: gainc_75k
+  step	mag(V(outC+,outC-)/V(in+,in-))	at
+     1	(-20.8567872457dB,0°)	75000
+     2	(-20.0710680619dB,0°)	75000
+
+Measurement: gainc_100k
+  step	mag(V(outC+,outC-)/V(in+,in-))	at
+     1	(-25.7478732821dB,0°)	100000
+     2	(-25.3125690968dB,0°)	100000
+
+Measurement: freqc_3db
+  step	mag(V(outC+,outC-)/V(in+,in-))=0.707
+     1	20209.2170956
+     2	31543.8429842

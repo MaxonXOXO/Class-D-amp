@@ -1,0 +1,60 @@
+* Stage 40 Filter TRAN
+Vbus bus 0 24
+.param Rload=4 fs=50k
+
+VswA swA 0 PULSE(0 24 0 10n 10n {0.5/fs - 10n} {1/fs})
+VswB swB 0 PULSE(0 24 0 10n 10n {0.5/fs - 10n} {1/fs})
+
+* Filter A (10uH / 1.5uF)
+LA1 swA outA+ 10u Rser=0.15
+CA1 outA+ 0 1.5u Rser=0.05
+LA2 swB outA- 10u Rser=0.15
+CA2 outA- 0 1.5u Rser=0.05
+RA outA+ outA- {Rload}
+
+* Filter B (18uH / 2.2uF)
+LB1 swA outB+ 18u Rser=0.15
+CB1 outB+ 0 2.2u Rser=0.05
+LB2 swB outB- 18u Rser=0.15
+CB2 outB- 0 2.2u Rser=0.05
+RB outB+ outB- {Rload}
+
+* Filter C (22uH / 2.2uF)
+LC1 swA outC+ 22u Rser=0.15
+CC1 outC+ 0 2.2u Rser=0.05
+LC2 swB outC- 22u Rser=0.15
+CC2 outC- 0 2.2u Rser=0.05
+RC outC+ outC- {Rload}
+
+* Filter D (33uH / 1.0uF)
+LD1 swA outD+ 33u Rser=0.15
+CD1 outD+ 0 1.0u Rser=0.05
+LD2 swB outD- 33u Rser=0.15
+CD2 outD- 0 1.0u Rser=0.05
+RD outD+ outD- {Rload}
+
+* Filter E (47uH / 1.0uF)
+LE1 swA outE+ 47u Rser=0.15
+CE1 outE+ 0 1.0u Rser=0.05
+LE2 swB outE- 47u Rser=0.15
+CE2 outE- 0 1.0u Rser=0.05
+RE outE+ outE- {Rload}
+
+.step param fs list 50k 75k 100k 150k
+.tran 0 200u 0 20n
+
+.meas TRAN IripA PP I(LA1) FROM=100u TO=200u
+.meas TRAN VripA_leg PP V(outA+) FROM=100u TO=200u
+
+.meas TRAN IripB PP I(LB1) FROM=100u TO=200u
+.meas TRAN VripB_leg PP V(outB+) FROM=100u TO=200u
+
+.meas TRAN IripC PP I(LC1) FROM=100u TO=200u
+.meas TRAN VripC_leg PP V(outC+) FROM=100u TO=200u
+
+.meas TRAN IripD PP I(LD1) FROM=100u TO=200u
+.meas TRAN VripD_leg PP V(outD+) FROM=100u TO=200u
+
+.meas TRAN IripE PP I(LE1) FROM=100u TO=200u
+.meas TRAN VripE_leg PP V(outE+) FROM=100u TO=200u
+.end

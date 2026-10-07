@@ -1,0 +1,46 @@
+LTspice 26.1.1 for Windows
+Circuit: D:\Class D amplifier\final_ir2104_test.cir
+Start Time: Wed Oct  7 23:44:07 2026
+Options:plotwinsize=0
+solver = Normal
+Maximum thread count: 8
+tnom = 27
+temp = 27
+method = trap
+Direct Newton iteration succeeded in finding operating point.
+Total elapsed time: 10.132 seconds.
+Total iterations: 727048
+
+Files loaded:
+D:\Class D amplifier\final_ir2104_test.cir
+
+Fourier components of V(OUT_A,OUT_B)
+N-Period=1
+DC component:0.000210919
+
+Harmonic	Frequency	 Fourier 	Normalized	 Phase  	Normalized
+ Number 	  [Hz]   	Component	 Component	[degree]	Phase [deg]
+    1   	 2.000e+03	 8.107e+00	 1.000e+00	   96.32°	    0.00°
+    2   	 4.000e+03	 4.568e-04	 5.635e-05	  114.91°	   18.59°
+    3   	 6.000e+03	 4.690e-01	 5.786e-02	  114.51°	   18.19°
+    4   	 8.000e+03	 5.175e-04	 6.384e-05	 -109.34°	 -205.66°
+    5   	 1.000e+04	 1.781e-01	 2.197e-02	  -49.70°	 -146.02°
+    6   	 1.200e+04	 3.462e-04	 4.270e-05	   -1.70°	  -98.02°
+    7   	 1.400e+04	 1.517e-02	 1.871e-03	   -6.80°	 -103.12°
+    8   	 1.600e+04	 6.326e-04	 7.803e-05	  125.16°	   28.84°
+    9   	 1.800e+04	 5.220e-02	 6.439e-03	  169.73°	   73.41°
+   10   	 2.000e+04	 3.498e-04	 4.315e-05	  -89.92°	 -186.24°
+   11   	 2.200e+04	 1.187e-02	 1.464e-03	  -15.28°	 -111.60°
+   12   	 2.400e+04	 5.854e-04	 7.221e-05	   -4.25°	 -100.57°
+   13   	 2.600e+04	 1.821e-02	 2.246e-03	   35.48°	  -60.84°
+   14   	 2.800e+04	 5.637e-04	 6.953e-05	  159.91°	   63.59°
+   15   	 3.000e+04	 1.221e-02	 1.507e-03	 -147.51°	 -243.83°
+Partial Harmonic Distortion: 6.232718%
+Total Harmonic Distortion:   7.142091%
+
+vout_rms: RMS(V(OUT_A,OUT_B))=5.74686916732 FROM 0.002 TO 0.004
+pout: AVG(V(OUT_A,OUT_B)*I(RLOAD))=8.25662630967 FROM 0.002 TO 0.004
+iload_rms: RMS(I(RLOAD))=1.43671729237 FROM 0.002 TO 0.004
+il_a_pp: PP(I(LA))=8.13001966476 FROM 0.002 TO 0.004
+il_a_max: MAX(I(LA))=4.0660161972 FROM 0.002 TO 0.004
+vout_pp: PP(V(OUT_A,OUT_B))=15.6583271027 FROM 0.002 TO 0.004

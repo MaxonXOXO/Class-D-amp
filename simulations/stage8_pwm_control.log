@@ -1,0 +1,89 @@
+LTspice 26.1.1 for Windows
+Circuit: D:\Class D amplifier\stage8_pwm_control.cir
+Start Time: Mon Oct  5 00:57:27 2026
+
+.step x=0.2
+solver = Normal
+Maximum thread count: 8
+tnom = 27
+temp = 27
+method = trap
+Direct Newton iteration succeeded in finding operating point.
+
+.step x=0.5
+Direct Newton iteration succeeded in finding operating point.
+
+.step x=0.8
+Direct Newton iteration succeeded in finding operating point.
+
+.step x=1
+Direct Newton iteration succeeded in finding operating point.
+Total elapsed time: 3.058 seconds.
+Total iterations: 208812
+
+Files loaded:
+D:\Class D amplifier\stage8_pwm_control.cir
+
+
+Measurement: carrierperiod
+  step	carrierperiod	FROM	TO
+     1	6.66666703985e-06	1.66666650671e-06	8.33333354656e-06
+     2	6.66666714381e-06	1.66666640276e-06	8.33333354656e-06
+     3	6.6666671104e-06	1.66666643616e-06	8.33333354656e-06
+     4	6.66666714381e-06	1.66666640276e-06	8.33333354656e-06
+
+Measurement: lcmpmin
+  step	MIN(V(aL))	FROM	TO
+     1	2.45541763306	0.0001	0.002
+     2	2.13650608063	0.0001	0.002
+     3	1.43222665787	0.0001	0.002
+     4	0.699060857296	0.0001	0.002
+
+Measurement: lcmpmax
+  step	MAX(V(aL))	FROM	TO
+     1	2.54452586174	0.0001	0.002
+     2	2.8630361557	0.0001	0.002
+     3	3.56643295288	0.0001	0.002
+     4	4.29865694046	0.0001	0.002
+
+Measurement: rcmpmin
+  step	MIN(V(aR))	FROM	TO
+     1	2.45542430878	0.0001	0.002
+     2	2.13656067848	0.0001	0.002
+     3	1.43238627911	0.0001	0.002
+     4	0.699332535267	0.0001	0.002
+
+Measurement: rcmpmax
+  step	MAX(V(aR))	FROM	TO
+     1	2.54453229904	0.0001	0.002
+     2	2.8630874157	0.0001	0.002
+     3	3.56658315659	0.0001	0.002
+     4	4.29891300201	0.0001	0.002
+
+Measurement: lpwmavg
+  step	AVG(V(pwmL))	FROM	TO
+     1	2.49863289205	0.0001	0.002
+     2	2.49230158722	0.0001	0.002
+     3	2.47865818313	0.0001	0.002
+     4	2.4624376385	0.0001	0.002
+
+Measurement: rpwmavg
+  step	AVG(V(pwmR))	FROM	TO
+     1	2.50484341837	0.0001	0.002
+     2	2.5436173767	0.0001	0.002
+     3	2.62850028839	0.0001	0.002
+     4	2.71580605955	0.0001	0.002
+
+Measurement: carriermin
+  step	MIN(V(tri))	FROM	TO
+     1	0.5	0.0001	0.002
+     2	0.5	0.0001	0.002
+     3	0.5	0.0001	0.002
+     4	0.5	0.0001	0.002
+
+Measurement: carriermax
+  step	MAX(V(tri))	FROM	TO
+     1	4.5	0.0001	0.002
+     2	4.5	0.0001	0.002
+     3	4.5	0.0001	0.002
+     4	4.5	0.0001	0.002

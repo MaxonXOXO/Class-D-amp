@@ -1,0 +1,26 @@
+LTspice 26.1.1 for Windows
+Circuit: D:\Class D amplifier\stage4_vol.cir
+Start Time: Sun Oct  4 16:15:06 2026
+
+.step x=0.2
+solver = Normal
+Maximum thread count: 8
+tnom = 27
+temp = 27
+method = trap
+Direct Newton iteration succeeded in finding operating point.
+
+.step x=0.5
+Direct Newton iteration succeeded in finding operating point.
+
+.step x=0.8
+Direct Newton iteration succeeded in finding operating point.
+
+.step x=1
+Direct Newton iteration succeeded in finding operating point.
+Total elapsed time: 0.192 seconds.
+Total iterations: 3
+
+Files loaded:
+D:\Class D amplifier\stage4_vol.cir
+

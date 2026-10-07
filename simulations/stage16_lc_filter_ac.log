@@ -1,0 +1,41 @@
+LTspice 26.1.1 for Windows
+Circuit: D:\Class D amplifier\stage16_lc_filter_ac.cir
+Start Time: Mon Oct  5 21:42:32 2026
+
+.step lf=2.2e-05
+solver = Normal
+Maximum thread count: 8
+tnom = 27
+temp = 27
+method = trap
+Direct Newton iteration succeeded in finding operating point.
+
+.step lf=5.6e-05
+Direct Newton iteration succeeded in finding operating point.
+
+.step lf=6.8e-05
+Direct Newton iteration succeeded in finding operating point.
+Total elapsed time: 0.106 seconds.
+Total iterations: 3
+
+Files loaded:
+D:\Class D amplifier\stage16_lc_filter_ac.cir
+
+
+Measurement: gain100
+  step	mag(V(out))	at
+     1	(-0.162396466515dB,0°)	100
+     2	(-0.162412119891dB,0°)	100
+     3	(-0.162431889619dB,0°)	100
+
+Measurement: gain150k
+  step	mag(V(out))	at
+     1	(-18.6768792496dB,0°)	150000
+     2	(-27.3585430629dB,0°)	150000
+     3	(-29.1076650169dB,0°)	150000
+
+Measurement: peakgain
+  step	MAX(mag(V(out)))	FROM	TO
+     1	(1.96494241614dB,0°)	1000	200000
+     2	(-0.142424322916dB,0°)	1000	200000
+     3	(-0.163801168992dB,0°)	1000	200000

@@ -1,0 +1,17 @@
+* Stage 22: 4-ohm 33uH/1uF output filter with 2200uF DC-blocking capacitor
+.param Lf=33u Cf=1u Cblockval=2200u Rloadval=4
+Vmid mid 0 12
+Vsrc src mid AC 1
+Rser src n1 0.15
+Lout n1 out {Lf}
+Cout out mid {Cf}
+Cblk out spk {Cblockval} Rser=0.08
+Rload spk mid {Rloadval}
+.step param Cblockval list 2200u 3300u 4700u 6800u
+.ac dec 300 1 1Meg
+.meas AC Gain1k FIND mag(V(spk)) AT 1k
+.meas AC F3Low WHEN mag(V(spk))=Gain1k/sqrt(2) CROSS=1
+.meas AC Gain20 FIND mag(V(spk)) AT 20
+.meas AC Gain150k FIND mag(V(spk)) AT 150k
+.meas AC PeakGain MAX mag(V(spk)) FROM=1k TO=200k
+.end

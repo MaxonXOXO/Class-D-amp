@@ -1,0 +1,65 @@
+LTspice 26.1.1 for Windows
+Circuit: D:\Class D amplifier\stage9_relaxation_osc.cir
+Start Time: Mon Oct  5 01:07:07 2026
+
+.step vtest=0.7
+solver = Normal
+Maximum thread count: 8
+tnom = 27
+temp = 27
+method = trap
+Per .tran options, skipping operating point for transient analysis.
+
+.step vtest=1.5
+
+.step vtest=2.5
+
+.step vtest=3.5
+
+.step vtest=4.3
+Total elapsed time: 1.508 seconds.
+Total iterations: 80154
+
+Files loaded:
+D:\Class D amplifier\stage9_relaxation_osc.cir
+
+
+Measurement: oscperiod
+  step	oscperiod	FROM	TO
+     1	6.69e-06	1.35140601571e-05	2.02040601571e-05
+     2	6.69e-06	1.35140601571e-05	2.02040601571e-05
+     3	6.69e-06	1.35140601571e-05	2.02040601571e-05
+     4	6.69e-06	1.35140601571e-05	2.02040601571e-05
+     5	6.69e-06	1.35140601571e-05	2.02040601571e-05
+
+Measurement: rampmin
+  step	MIN(V(ramp))	FROM	TO
+     1	0.503324747086	5e-05	0.0002
+     2	0.503324747086	5e-05	0.0002
+     3	0.503324747086	5e-05	0.0002
+     4	0.503324747086	5e-05	0.0002
+     5	0.503324747086	5e-05	0.0002
+
+Measurement: rampmax
+  step	MAX(V(ramp))	FROM	TO
+     1	4.4966750145	5e-05	0.0002
+     2	4.4966750145	5e-05	0.0002
+     3	4.4966750145	5e-05	0.0002
+     4	4.4966750145	5e-05	0.0002
+     5	4.4966750145	5e-05	0.0002
+
+Measurement: pwmavg
+  step	AVG(V(pwm))	FROM	TO
+     1	0.421666666667	5e-05	0.0002
+     2	1.53486488	5e-05	0.0002
+     3	2.50686488	5e-05	0.0002
+     4	3.46986487999	5e-05	0.0002
+     5	4.56569821332	5e-05	0.0002
+
+Measurement: duty
+  step	PwmAvg/5
+     1	0.0843333333333
+     2	0.306972976001
+     3	0.501372976
+     4	0.693972975999
+     5	0.913139642664

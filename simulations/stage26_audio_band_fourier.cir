@@ -1,0 +1,88 @@
+* Stage 25: THD comparison at x=0.5 and limited maximum volume
+* Integrator triangle, 470pF RC-diode deadtime, 33uH/1uF filter, 4-ohm load.
+* Simplified VDMOS and behavioral IR2110 timing model, not vendor macromodels.
+.param Pvol=10k x=0.5 r={x**2.3} deadcap=470p Fsig=1k Rs=2.7k dtCase=1 Rdt={if(dtCase,1k,1m)} Cdt={if(dtCase,470p,1f)}
+Vmid mid 0 6
+V5 v5 0 5
+Vbusraw braw 0 24
+Rbus braw bus 50m
+Vcc vcc 0 12
+VmidDrv midDrv 0 12
+Vin in mid SINE(0 4.5 {Fsig})
+Rinser in psrc {Rs}
+Rup psrc wip {Pvol*(1-r)+1}
+Rlo wip mid {Pvol*r+1}
+Cc wip c 1u
+Ratt c cmp 150k
+Rh v5 cmp 200k
+Rl cmp 0 200k
+Ccmp cmp 0 10p
+* Op-amp integrator with Schmitt feedback; 0.5-4.5V ramp near 150kHz.
+Rpull osc v5 1
+Bctrl ctrl 0 V=5-V(tri)
+Ssch osc 0 ctrl 0 SCHMITT
+.model SCHMITT SW(Ron=1m Roff=1G Vt=2.5 Vh=2)
+Rintegrator osc sum 10k
+Cintegrator tri sum 208.157p
+Bop tri 0 V=limit(1e6*(2.5-V(sum)),0,5)
+.ic V(tri)=4.5 V(sum)=2.4999955 V(osc)=5 V(out)=12 V(spk)=12
+* PWM comparator and inverter
+Bcmp pwm 0 V=if(V(cmp)>V(tri),5,0)
+Binv inv 0 V=if(delay(V(pwm),10n)>2.5,0,5)
+* RC-diode deadtime conditioning
+Rhin pwm hin {Rdt}
+Chin hin 0 {Cdt}
+Dhin hin pwm Dfast
+Rlin inv lin {Rdt}
+Clin lin 0 {Cdt}
+Dlin lin inv Dfast
+.model Dfast D(Is=2.52n Rs=0.568 N=1.9 Cjo=4p M=0.03 Tt=4n)
+* Behavioral IR2110 timing, typical 120ns turn-on / 94ns turn-off
+BdrvH drvH sw V=V(vb,sw)*if(V(hin)>2.5,if(delay(V(hin),120n)>2.5,1,0),if(delay(V(hin),94n)>2.5,1,0))
+BdrvL drvL 0 V=12*if(V(lin)>2.5,if(delay(V(lin),120n)>2.5,1,0),if(delay(V(lin),94n)>2.5,1,0))
+Rgh drvH gh 10
+Rgl drvL gl 10
+CextraH gh sw 3.5n
+CextraL gl 0 3.5n
+Dboot vcc vb Dfast
+Cboot vb sw 220n Rser=0.1
+Mhi bus gh sw IRFB7545Model
+Mlo sw gl 0 IRFB7545Model
+.model IRFB7545Model VDMOS(Vto=2.9 Kp=100 Rd=2m Rs=2m Rg=2.3 Cgs=6.3n Cgdmin=200p Cgdmax=1.8n Cjo=1n Is=1e-12 BV=60)
+* Proposed lower-cutoff output filter candidate (about 28kHz, Q about 0.66 at 8 ohms)
+Lout sw out 33u Rser=0.15
+Cout out midDrv 1u
+Cblock out spk 2200u Rser=0.08 IC=0
+Rload spk midDrv 4
+Bdiff diff 0 V=V(spk,midDrv)
+* Analysis-only 4-pole low-pass to exclude switching carrier from audio-band THD
+Rmeas1 diff m1 1k
+Cmeas1 m1 0 3.3n
+Bbuf1 b1 0 V=V(m1)
+Rmeas2 b1 m2 1k
+Cmeas2 m2 0 3.3n
+Bbuf2 b2 0 V=V(m2)
+Rmeas3 b2 m3 1k
+Cmeas3 m3 0 3.3n
+Bbuf3 b3 0 V=V(m3)
+Rmeas4 b3 m4 1k
+Cmeas4 m4 0 3.3n
+Boverlap21 overlap21 0 V=if(V(gh,sw)>2.1 & V(gl)>2.1,1,0)
+.step param x list 0.5 1.0
+.step param dtCase list 0 1
+.tran 0 6m 5m 10n
+.four 1k 10 1 V(m4)
+.meas TRAN CarrierPeriod TRIG V(osc)=2.5 RISE=1 TARG V(osc)=2.5 RISE=2
+.meas TRAN Overlap21Max MAX V(overlap21) FROM=5m TO=6m
+.meas TRAN VbootMin MIN V(vb,sw) FROM=5m TO=6m
+.meas TRAN MaxILout MAX I(Lout) FROM=5m TO=6m
+.meas TRAN MinILout MIN I(Lout) FROM=5m TO=6m
+.meas TRAN MaxIload MAX I(Rload) FROM=5m TO=6m
+.meas TRAN MinIload MIN I(Rload) FROM=5m TO=6m
+.meas TRAN LoadRMS RMS V(diff) FROM=5m TO=6m
+.save V(m4) V(osc) V(cmp) V(tri) V(pwm) V(hin) V(lin) V(gh,sw) V(gl) V(vb,sw) V(sw) V(diff) V(overlap21) I(Rbus) I(Rload) I(Lout)
+.end
+
+
+
+

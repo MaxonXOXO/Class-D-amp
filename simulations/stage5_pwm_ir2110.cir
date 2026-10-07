@@ -1,0 +1,64 @@
+* Stage 5: TLV350x PWM and IR2110 dead-time timing check
+.param Pvol=10k x=1 Fsw=150k Fsig=1k dead=200n Vbus=24 Vdrive=12 Qgate=58n
+.param r={x**2.3}
+Vm mid 0 6
+V5 v5 0 5
+Vbus1 bus 0 {Vbus}
+Vin in mid SINE(0 4.5 {Fsig})
+Rup in wip {Pvol*(1-r)+1}
+Rlo wip mid {Pvol*r+1}
+Cc wip c 1u
+Ratt c cmp 150k
+Rh v5 cmp 200k
+Rl cmp 0 200k
+Cl cmp 0 10p
+Vtri tri 0 PULSE(0.5 4.5 0 {1/(2*Fsw)} {1/(2*Fsw)} 0 {1/Fsw})
+Bpwm pwm 0 V=if(V(cmp)>V(tri),5,0)
+Bnpwm npwm 0 V=5-V(pwm)
+.param td={dead}
+BhinA hina 0 V=if(V(pwm)>2.5 & delay(V(pwm),{td})>2.5,5,0)
+BlinA lina 0 V=if(V(npwm)>2.5 & delay(V(npwm),{td})>2.5,5,0)
+BhinB hinb 0 V=if(V(npwm)>2.5 & delay(V(npwm),{td})>2.5,5,0)
+BlinB linb 0 V=if(V(pwm)>2.5 & delay(V(pwm),{td})>2.5,5,0)
+BoverA overA 0 V=if(V(gateha,swa)>4.5 & V(gatela)>4.5,1,0)
+BoverB overB 0 V=if(V(gatehb,swb)>4.5 & V(gatelb)>4.5,1,0)
+BdrvHA drvha swa V=12*if(V(hina)>2.5,if(delay(V(hina),120n)>2.5,1,0),if(delay(V(hina),94n)>2.5,1,0))
+BdrvLA drvla 0 V=12*if(V(lina)>2.5,if(delay(V(lina),120n)>2.5,1,0),if(delay(V(lina),94n)>2.5,1,0))
+BdrvHB drvhb swb V=12*if(V(hinb)>2.5,if(delay(V(hinb),120n)>2.5,1,0),if(delay(V(hinb),94n)>2.5,1,0))
+BdrvLB drvlb 0 V=12*if(V(linb)>2.5,if(delay(V(linb),120n)>2.5,1,0),if(delay(V(linb),94n)>2.5,1,0))
+Rgha drvha gateha 10
+RglA drvla gatela 10
+Rghb drvhb gatehb 10
+RglB drvlb gatelb 10
+Cgha gateha swa {Qgate/Vdrive}
+Cgla gatela 0 {Qgate/Vdrive}
+Cghb gatehb swb {Qgate/Vdrive}
+Cglb gatelb 0 {Qgate/Vdrive}
+SHiA bus swa gateha swa SWMOS
+SLoA swa 0 gatela 0 SWMOS
+SHiB bus swb gatehb swb SWMOS
+SLoB swb 0 gatelb 0 SWMOS
+.model SWMOS SW(Ron=30m Roff=1Meg Vt=4.5 Vh=0.1)
+.model DBODY D(Is=1e-12 Rs=30m Cjo=300p Tt=30n)
+DHiA swa bus DBODY
+DLoA 0 swa DBODY
+DHiB swb bus DBODY
+DLoB 0 swb DBODY
+LoutA swa outA 22u Rser=0.15
+LoutB swb outB 22u Rser=0.15
+CoutA outA 0 470n
+CoutB outB 0 470n
+Rload outA outB 8
+Bdiff outdiff 0 V=V(outA)-V(outB)
+Bmod mod 0 V=(V(cmp)-2.5)/2
+Boverlap overlap 0 V=max(V(overA),V(overB))
+.step param dead list 100n 200n 300n
+.tran 0 2m 0 20n
+.meas TRAN CmpMin MIN V(cmp) FROM=1m TO=2m
+.meas TRAN CmpMax MAX V(cmp) FROM=1m TO=2m
+.meas TRAN OutMin MIN V(outdiff) FROM=1m TO=2m
+.meas TRAN OutMax MAX V(outdiff) FROM=1m TO=2m
+.meas TRAN OutRMS RMS V(outdiff) FROM=1m TO=2m
+.meas TRAN OverlapMax MAX V(overlap) FROM=0 TO=2m
+.save V(cmp) V(tri) V(pwm) V(hina) V(lina) V(hinb) V(linb) V(gateha,swa) V(gatela) V(gatehb,swb) V(gatelb) V(swa) V(swb) V(outdiff) V(overlap)
+.end

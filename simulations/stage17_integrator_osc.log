@@ -1,0 +1,65 @@
+LTspice 26.1.1 for Windows
+Circuit: D:\Class D amplifier\stage17_integrator_osc.cir
+Start Time: Mon Oct  5 21:45:38 2026
+
+.step vlevel=0.7
+solver = Normal
+Maximum thread count: 8
+tnom = 27
+temp = 27
+method = trap
+Per .tran options, skipping operating point for transient analysis.
+
+.step vlevel=1.5
+
+.step vlevel=2.5
+
+.step vlevel=3.5
+
+.step vlevel=4.3
+Total elapsed time: 2.927 seconds.
+Total iterations: 200150
+
+Files loaded:
+D:\Class D amplifier\stage17_integrator_osc.cir
+
+
+Measurement: oscperiod
+  step	oscperiod	FROM	TO
+     1	6.67230539173e-06	1.334781197e-05	2.00201173617e-05
+     2	6.67230539173e-06	1.334781197e-05	2.00201173617e-05
+     3	6.67230539173e-06	1.334781197e-05	2.00201173617e-05
+     4	6.67530539139e-06	1.334781197e-05	2.00231173614e-05
+     5	6.67230539173e-06	1.334781197e-05	2.00201173617e-05
+
+Measurement: rampmin
+  step	MIN(V(ramp))	FROM	TO
+     1	0.499998867512	5e-05	0.0002
+     2	0.499998867512	5e-05	0.0002
+     3	0.499998867512	5e-05	0.0002
+     4	0.499998867512	5e-05	0.0002
+     5	0.499998867512	5e-05	0.0002
+
+Measurement: rampmax
+  step	MAX(V(ramp))	FROM	TO
+     1	4.5	5e-05	0.0002
+     2	4.5	5e-05	0.0002
+     3	4.5	5e-05	0.0002
+     4	4.5	5e-05	0.0002
+     5	4.5	5e-05	0.0002
+
+Measurement: pwmavg
+  step	AVG(V(pwm))	FROM	TO
+     1	0.251076659204	5e-05	0.0002
+     2	1.25228048743	5e-05	0.0002
+     3	2.50418329437	5e-05	0.0002
+     4	3.75528245546	5e-05	0.0002
+     5	4.75515591579	5e-05	0.0002
+
+Measurement: duty
+  step	PwmAvg/5
+     1	0.0502153318408
+     2	0.250456097486
+     3	0.500836658874
+     4	0.751056491091
+     5	0.951031183159

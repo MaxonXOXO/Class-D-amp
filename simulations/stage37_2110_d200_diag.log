@@ -1,0 +1,3 @@
+D:\Class D amplifier\stage37_2110_d200_diag.cir(104): This results in only one step.
+.step param td list 200n
+      ^^^^^^^^^^^^^^^^^^

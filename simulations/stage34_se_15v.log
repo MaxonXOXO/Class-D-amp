@@ -1,0 +1,257 @@
+LTspice 26.1.1 for Windows
+Circuit: D:\Class D amplifier\stage34_se_15v.cir
+Start Time: Tue Oct  6 10:27:34 2026
+Options:method=gear gmin=1e-10
+
+.step vin=0.3
+solver = Normal
+Maximum thread count: 8
+tnom = 27
+temp = 27
+method = Gear
+gmin = 1e-10
+Direct Newton iteration failed to find operating point.
+Starting Gmin stepping
+Gmin stepping succeeded in finding the operating point.
+
+
+.step vin=0.5
+Direct Newton iteration failed to find operating point.
+Starting Gmin stepping
+Gmin stepping succeeded in finding the operating point.
+
+
+.step vin=1
+Direct Newton iteration failed to find operating point.
+Starting Gmin stepping
+Gmin stepping succeeded in finding the operating point.
+
+
+.step vin=1.5
+Direct Newton iteration failed to find operating point.
+Starting Gmin stepping
+Gmin stepping succeeded in finding the operating point.
+
+
+.step vin=2
+Direct Newton iteration failed to find operating point.
+Starting Gmin stepping
+Gmin stepping succeeded in finding the operating point.
+
+Total elapsed time: 59.754 seconds.
+Total iterations: 1438254
+
+Files loaded:
+D:\Class D amplifier\stage34_se_15v.cir
+
+Fourier components of V(vspk)
+step 1
+N-Period=1
+DC component:0.121506
+
+Harmonic	Frequency	 Fourier 	Normalized	 Phase  	Normalized
+ Number 	  [Hz]   	Component	 Component	[degree]	Phase [deg]
+    1   	 1.000e+03	 1.720e+00	 1.000e+00	  -85.49°	    0.00°
+    2   	 2.000e+03	 4.746e-02	 2.760e-02	 -142.89°	  -57.39°
+    3   	 3.000e+03	 7.657e-02	 4.452e-02	  123.02°	  208.51°
+    4   	 4.000e+03	 7.501e-03	 4.362e-03	 -155.56°	  -70.06°
+    5   	 5.000e+03	 1.290e-02	 7.501e-03	  -77.84°	    7.66°
+    6   	 6.000e+03	 9.426e-03	 5.481e-03	   73.34°	  158.83°
+    7   	 7.000e+03	 2.126e-02	 1.236e-02	  -37.76°	   47.74°
+    8   	 8.000e+03	 8.792e-03	 5.113e-03	   37.15°	  122.64°
+    9   	 9.000e+03	 9.569e-03	 5.564e-03	 -117.35°	  -31.86°
+Partial Harmonic Distortion: 5.530991%
+Total Harmonic Distortion:   27.362400%
+
+step 2
+N-Period=1
+DC component:0.148327
+
+Harmonic	Frequency	 Fourier 	Normalized	 Phase  	Normalized
+ Number 	  [Hz]   	Component	 Component	[degree]	Phase [deg]
+    1   	 1.000e+03	 3.234e+00	 1.000e+00	  -85.15°	    0.00°
+    2   	 2.000e+03	 3.393e-02	 1.049e-02	 -143.88°	  -58.73°
+    3   	 3.000e+03	 1.541e-01	 4.763e-02	  120.08°	  205.22°
+    4   	 4.000e+03	 2.528e-02	 7.815e-03	 -106.67°	  -21.52°
+    5   	 5.000e+03	 4.928e-02	 1.523e-02	  140.07°	  225.22°
+    6   	 6.000e+03	 7.492e-03	 2.316e-03	 -146.87°	  -61.72°
+    7   	 7.000e+03	 3.423e-03	 1.058e-03	 -157.21°	  -72.06°
+    8   	 8.000e+03	 6.970e-03	 2.155e-03	 -132.82°	  -47.67°
+    9   	 9.000e+03	 8.441e-03	 2.610e-03	    2.37°	   87.51°
+Partial Harmonic Distortion: 5.186071%
+Total Harmonic Distortion:   14.721394%
+
+step 3
+N-Period=1
+DC component:0.185165
+
+Harmonic	Frequency	 Fourier 	Normalized	 Phase  	Normalized
+ Number 	  [Hz]   	Component	 Component	[degree]	Phase [deg]
+    1   	 1.000e+03	 7.141e+00	 1.000e+00	  -84.72°	    0.00°
+    2   	 2.000e+03	 2.187e-02	 3.062e-03	 -141.21°	  -56.49°
+    3   	 3.000e+03	 2.243e-01	 3.142e-02	  117.61°	  202.34°
+    4   	 4.000e+03	 2.036e-02	 2.851e-03	 -142.85°	  -58.13°
+    5   	 5.000e+03	 1.070e-01	 1.498e-02	  135.50°	  220.22°
+    6   	 6.000e+03	 1.114e-02	 1.560e-03	  -78.76°	    5.96°
+    7   	 7.000e+03	 6.205e-02	 8.689e-03	  155.04°	  239.76°
+    8   	 8.000e+03	 1.968e-02	 2.756e-03	 -121.92°	  -37.19°
+    9   	 9.000e+03	 2.413e-02	 3.379e-03	  178.08°	  262.81°
+Partial Harmonic Distortion: 3.641301%
+Total Harmonic Distortion:   6.346990%
+
+step 4
+N-Period=1
+DC component:0.22213
+
+Harmonic	Frequency	 Fourier 	Normalized	 Phase  	Normalized
+ Number 	  [Hz]   	Component	 Component	[degree]	Phase [deg]
+    1   	 1.000e+03	 9.844e+00	 1.000e+00	  -75.32°	    0.00°
+    2   	 2.000e+03	 3.150e-01	 3.200e-02	 -161.15°	  -85.83°
+    3   	 3.000e+03	 2.231e+00	 2.266e-01	  -51.16°	   24.16°
+    4   	 4.000e+03	 2.266e-01	 2.302e-02	 -155.27°	  -79.95°
+    5   	 5.000e+03	 6.929e-01	 7.038e-02	  -59.27°	   16.06°
+    6   	 6.000e+03	 1.966e-01	 1.997e-02	 -165.00°	  -89.68°
+    7   	 7.000e+03	 5.583e-01	 5.672e-02	  -84.99°	   -9.66°
+    8   	 8.000e+03	 2.005e-01	 2.037e-02	 -166.40°	  -91.08°
+    9   	 9.000e+03	 4.722e-01	 4.797e-02	  -77.70°	   -2.38°
+Partial Harmonic Distortion: 25.335772%
+Total Harmonic Distortion:   26.340611%
+
+step 5
+N-Period=1
+DC component:0.192333
+
+Harmonic	Frequency	 Fourier 	Normalized	 Phase  	Normalized
+ Number 	  [Hz]   	Component	 Component	[degree]	Phase [deg]
+    1   	 1.000e+03	 1.027e+01	 1.000e+00	  -59.35°	    0.00°
+    2   	 2.000e+03	 4.033e-01	 3.928e-02	 -119.19°	  -59.83°
+    3   	 3.000e+03	 3.287e+00	 3.201e-01	    2.73°	   62.09°
+    4   	 4.000e+03	 3.867e-01	 3.767e-02	  -57.95°	    1.40°
+    5   	 5.000e+03	 1.835e+00	 1.787e-01	   63.88°	  123.23°
+    6   	 6.000e+03	 3.565e-01	 3.473e-02	    1.38°	   60.74°
+    7   	 7.000e+03	 1.189e+00	 1.158e-01	  123.65°	  183.01°
+    8   	 8.000e+03	 3.305e-01	 3.219e-02	   61.15°	  120.50°
+    9   	 9.000e+03	 8.176e-01	 7.965e-02	 -177.87°	 -118.52°
+Partial Harmonic Distortion: 39.922816%
+Total Harmonic Distortion:   41.382171%
+
+
+Measurement: inputrms
+  step	RMS(V(src))	FROM	TO
+     1	0.29999999584	0.005	0.006
+     2	0.499999993079	0.005	0.006
+     3	0.999999983469	0.005	0.006
+     4	1.49999997207	0.005	0.006
+     5	1.99999996306	0.005	0.006
+
+Measurement: bufmax
+  step	MAX(V(bufout))	FROM	TO
+     1	7.92266559601	0.005	0.006
+     2	8.20449256897	0.005	0.006
+     3	8.90905952454	0.005	0.006
+     4	9.61362743378	0.005	0.006
+     5	10.3181943893	0.005	0.006
+
+Measurement: bufmin
+  step	MIN(V(bufout))	FROM	TO
+     1	7.0759510994	0.005	0.006
+     2	6.79330205917	0.005	0.006
+     3	6.08667945862	0.005	0.006
+     4	5.38005638123	0.005	0.006
+     5	4.67343378067	0.005	0.006
+
+Measurement: tonemax
+  step	MAX(V(toneout))	FROM	TO
+     1	7.87763500214	0.005	0.006
+     2	8.16027450562	0.005	0.006
+     3	8.86688041687	0.005	0.006
+     4	9.57348823547	0.005	0.006
+     5	10.2800960541	0.005	0.006
+
+Measurement: tonemin
+  step	MIN(V(toneout))	FROM	TO
+     1	7.02084493637	0.005	0.006
+     2	6.7390294075	0.005	0.006
+     3	6.03448057175	0.005	0.006
+     4	5.32992887497	0.005	0.006
+     5	4.62537622452	0.005	0.006
+
+Measurement: gainmax
+  step	MAX(V(gout))	FROM	TO
+     1	8.93045520782	0.005	0.006
+     2	9.97705745697	0.005	0.006
+     3	12.593495369	0.005	0.006
+     4	13.25	0.005	0.006
+     5	13.25	0.005	0.006
+
+Measurement: gainmin
+  step	MIN(V(gout))	FROM	TO
+     1	5.75996112823	0.005	0.006
+     2	4.71816539764	0.005	0.006
+     3	2.11354446411	0.005	0.006
+     4	1.75	0.005	0.006
+     5	1.75	0.005	0.006
+
+Measurement: gainrms
+  step	RMS(V(gout)-7.5)	FROM	TO
+     1	1.1352908774	0.005	0.006
+     2	1.86923405002	0.005	0.006
+     3	3.71179591883	0.005	0.006
+     4	5.1834146106	0.005	0.006
+     5	5.71981076549	0.005	0.006
+
+Measurement: cmpmax
+  step	MAX(V(cmp))	FROM	TO
+     1	2.89000058174	0.005	0.006
+     2	3.17130088806	0.005	0.006
+     3	3.87447190285	0.005	0.006
+     4	4.05169773102	0.005	0.006
+     5	4.05228376389	0.005	0.006
+
+Measurement: cmpmin
+  step	MIN(V(cmp))	FROM	TO
+     1	2.03814387321	0.005	0.006
+     2	1.75837683678	0.005	0.006
+     3	1.05886161327	0.005	0.006
+     4	0.960315644741	0.005	0.006
+     5	0.95988124609	0.005	0.006
+
+Measurement: modidx
+  step	(CmpMax-CmpMin)/4
+     1	0.212964177132
+     2	0.353231012821
+     3	0.703902572393
+     4	0.772845521569
+     5	0.773100629449
+
+Measurement: spkrms
+  step	RMS(V(vspk))	FROM	TO
+     1	1.26659632346	0.005	0.006
+     2	2.31654042491	0.005	0.006
+     3	5.06312024831	0.005	0.006
+     4	7.20169513699	0.005	0.006
+     5	7.85849649312	0.005	0.006
+
+Measurement: spkpower
+  step	SpkRMS*SpkRMS/4
+     1	0.40106656165
+     2	1.34158988506
+     3	6.40879666222
+     4	12.9661032115
+     5	15.4389917831
+
+Measurement: overlapmax
+  step	MAX(V(overlap))	FROM	TO
+     1	0	0.005	0.006
+     2	0	0.005	0.006
+     3	0	0.005	0.006
+     4	0	0.005	0.006
+     5	0	0.005	0.006
+
+Measurement: busvmin
+  step	MIN(V(bus))	FROM	TO
+     1	23.9301357269	0.005	0.006
+     2	23.9156017303	0.005	0.006
+     3	23.8755512238	0.005	0.006
+     4	23.8520298004	0.005	0.006
+     5	23.8495540619	0.005	0.006

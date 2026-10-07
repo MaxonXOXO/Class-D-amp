@@ -1,0 +1,31 @@
+LTspice 26.1.1 for Windows
+Circuit: D:\Class D amplifier\stage15_irfb7546_selected.cir
+Start Time: Mon Oct  5 21:38:29 2026
+solver = Normal
+Maximum thread count: 8
+tnom = 27
+temp = 27
+method = trap
+Direct Newton iteration failed to find operating point.
+Starting Gmin stepping
+Gmin stepping succeeded in finding the operating point.
+
+Total elapsed time: 1.864 seconds.
+Total iterations: 369527
+
+Files loaded:
+D:\Class D amplifier\stage15_irfb7546_selected.cir
+
+overlapmax: MAX(V(overlap))=0 FROM 0.0001 TO 0.0011
+overlap21max: MAX(V(overlap21))=0 FROM 0.0001 TO 0.0011
+vbootmin: MIN(V(vb,sw))=12.0000171661 FROM 0.0001 TO 0.0011
+gatehmax: MAX(V(gh,sw))=12.1259765625 FROM 0.0001 TO 0.0011
+gatelmax: MAX(V(gl))=12.0001354218 FROM 0.0001 TO 0.0011
+maxilout: MAX(abs(I(Lout)))=1.50629639626 FROM 0.0001 TO 0.0011
+maxirload: MAX(abs(I(Rload)))=1.2028131485 FROM 0.0001 TO 0.0011
+maxbusi: MAX(abs(I(Rbus)))=3.40093779564 FROM 0.0001 TO 0.0011
+maxihi: MAX(abs(Id(Mhi)))=3.40095019341 FROM 0.0001 TO 0.0011
+maxilo: MAX(abs(Id(Mlo)))=3.34377169609 FROM 0.0001 TO 0.0011
+vswmin: MIN(V(sw))=-0.737423956394 FROM 0.0001 TO 0.0011
+vswmax: MAX(V(sw))=24.8244380951 FROM 0.0001 TO 0.0011
+loadrms: RMS(V(diff))=6.14327086921 FROM 0.0001 TO 0.0011

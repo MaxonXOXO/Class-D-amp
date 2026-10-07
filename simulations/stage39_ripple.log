@@ -1,0 +1,16 @@
+LTspice 26.1.1 for Windows
+Circuit: D:\Class D amplifier\stage39_ripple.cir
+Start Time: Wed Oct  7 00:30:29 2026
+solver = Normal
+Maximum thread count: 8
+tnom = 27
+temp = 27
+method = trap
+Direct Newton iteration succeeded in finding operating point.
+Total elapsed time: 0.092 seconds.
+Total iterations: 5051
+
+Files loaded:
+D:\Class D amplifier\stage39_ripple.cir
+
+irippp: PP(I(L1))=13.9466984272 FROM 0.001 TO 0.002

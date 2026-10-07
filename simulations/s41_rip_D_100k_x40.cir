@@ -1,0 +1,38 @@
+* s41_rip_D_100k_x40  BTL ideal-switch Class D
+.param fs=100000 L=3.3E-05 Cf=1E-06 Rl=4 m=0 xdc=0.4 td=4.2E-07 Vb=24 fa=1k
+Vbus bus 0 {Vb}
+Vtri tri 0 PULSE(0 1 0 {0.5/fs-0.5e-9} {0.5/fs-0.5e-9} 1e-9 {1/fs})
+Bra refA 0 V=0.5+0.5*(m*sin(2*pi*fa*time)+xdc)
+Brb refB 0 V=0.5-0.5*(m*sin(2*pi*fa*time)+xdc)
+Bpa pwmA 0 V=if(V(refA)>V(tri),1,0)
+Bpb pwmB 0 V=if(V(refB)>V(tri),1,0)
+Bgha ghA 0 V=V(pwmA)*delay(V(pwmA),td,td)
+Bgla glA 0 V=(1-V(pwmA))*(1-delay(V(pwmA),td,td))
+Bghb ghB 0 V=V(pwmB)*delay(V(pwmB),td,td)
+Bglb glB 0 V=(1-V(pwmB))*(1-delay(V(pwmB),td,td))
+ShA bus swA ghA 0 SWM
+SlA swA 0 glA 0 SWM
+ShB bus swB ghB 0 SWM
+SlB swB 0 glB 0 SWM
+DhA swA bus DBODY
+DlA 0 swA DBODY
+DhB swB bus DBODY
+DlB 0 swB DBODY
+LA swA oA {L} Rser=0.01 ic=2.4
+LB swB oB {L} Rser=0.01 ic=-2.4
+CA oA 0 {Cf} Rser=0.03 ic=16.8
+CB oB 0 {Cf} Rser=0.03 ic=7.2
+Rload oA oB {Rl}
+.model SWM SW(Ron=0.006 Roff=10Meg Vt=0.5 Vh=0.1)
+.model DBODY D(Is=1e-10 Rs=0.008 N=1.2)
+.options plotwinsize=0
+.save V(oA) V(oB) I(LA) I(LB) I(Rload) I(Vbus) V(bus)
+.tran 0 0.0005 0 2E-08 uic
+.meas TRAN ila_pp  PP I(LA)  FROM=0.0004 TO=0.0005
+.meas TRAN ila_max MAX I(LA) FROM=0.0004 TO=0.0005
+.meas TRAN ila_min MIN I(LA) FROM=0.0004 TO=0.0005
+.meas TRAN ila_avg AVG I(LA) FROM=0.0004 TO=0.0005
+.meas TRAN vdiff_pp PP V(oA,oB) FROM=0.0004 TO=0.0005
+.meas TRAN vdiff_avg AVG V(oA,oB) FROM=0.0004 TO=0.0005
+.meas TRAN vleg_pp PP V(oA) FROM=0.0004 TO=0.0005
+.end

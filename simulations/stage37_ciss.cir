@@ -1,0 +1,17 @@
+* Stage 37 step 0b: Ciss / Qg of IRFB7545Model with and without the extra 3.5 nF gate cap
+.model IRFB7545Model VDMOS(Vto=2.9 Kp=100 Rd=2m Rs=2m Rg=2.3 Cgs=6.3n Cgdmin=200p Cgdmax=1.8n Cjo=1n Is=1e-12 BV=60)
+.param Cx=0
+Vdd dd 0 30
+Rdd dd d 0.5
+Ig 0 g PULSE(0 10m 0 1n 1n 1 1)
+Cextra g 0 {Cx}
+M1 d g 0 IRFB7545Model
+.step param Cx list 0 3.5n
+.tran 0 15u 0 5n
+.options method=gear
+.meas TRAN t1 WHEN V(g)=1.0 RISE=1
+.meas TRAN t2 WHEN V(g)=2.0 RISE=1
+.meas TRAN t10 WHEN V(g)=10 RISE=1
+.meas TRAN CissPF PARAM 10m*(t2-t1)/1.0*1e12
+.meas TRAN QgnC PARAM 10m*t10*1e9
+.end

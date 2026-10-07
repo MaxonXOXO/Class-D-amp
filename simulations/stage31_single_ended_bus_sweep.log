@@ -1,0 +1,24 @@
+LTspice 26.1.1 for Windows
+Circuit: D:\Class D amplifier\stage31_single_ended_bus_sweep.cir
+Start Time: Mon Oct  5 23:27:47 2026
+solver = Normal
+Maximum thread count: 8
+tnom = 27
+temp = 27
+method = trap
+Direct Newton iteration succeeded in finding operating point.
+Total elapsed time: 110.030 seconds.
+Total iterations: 26109861
+
+Files loaded:
+D:\Class D amplifier\stage31_single_ended_bus_sweep.cir
+
+loadrms: RMS(V(spk))=5.0896887772 FROM 0.149 TO 0.15
+loadpower: LoadRMS*LoadRMS/4=6.47623296218
+loadirms: RMS(I(Rload))=1.2724221943 FROM 0.149 TO 0.15
+loadipk: MAX(abs(I(Rload)))=1.91655957699 FROM 0.149 TO 0.15
+inductoripk: MAX(abs(I(Lout)))=2.18222641945 FROM 0.149 TO 0.15
+busvmin: MIN(V(bus))=23.8669891357 FROM 0.149 TO 0.15
+busvmax: MAX(V(bus))=24.0492725372 FROM 0.149 TO 0.15
+overlapmax: MAX(V(overlap21))=0 FROM 0.149 TO 0.15
+bootstrapmin: MIN(V(vb,sw))=12.3625659943 FROM 0.149 TO 0.15

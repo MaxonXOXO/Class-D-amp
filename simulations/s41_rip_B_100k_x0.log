@@ -1,0 +1,23 @@
+LTspice 26.1.1 for Windows
+Circuit: D:\Class D amplifier\s41_rip_B_100k_x0.cir
+Start Time: Wed Oct  7 13:34:20 2026
+Options:plotwinsize=0
+solver = Normal
+Maximum thread count: 8
+tnom = 27
+temp = 27
+method = trap
+Per .tran options, skipping operating point for transient analysis.
+Total elapsed time: 0.592 seconds.
+Total iterations: 100992
+
+Files loaded:
+D:\Class D amplifier\s41_rip_B_100k_x0.cir
+
+ila_pp: PP(I(LA))=3.91804385185 FROM 0.0004 TO 0.0005
+ila_max: MAX(I(LA))=1.95830178261 FROM 0.0004 TO 0.0005
+ila_min: MIN(I(LA))=-1.95974206924 FROM 0.0004 TO 0.0005
+ila_avg: AVG(I(LA))=-0.0161955031922 FROM 0.0004 TO 0.0005
+vdiff_pp: PP(V(oA,oB))=0 FROM 0.0004 TO 0.0005
+vdiff_avg: AVG(V(oA,oB))=0 FROM 0.0004 TO 0.0005
+vleg_pp: PP(V(oA))=3.02740764618 FROM 0.0004 TO 0.0005

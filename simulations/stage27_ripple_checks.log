@@ -1,0 +1,119 @@
+LTspice 26.1.1 for Windows
+Circuit: D:\Class D amplifier\stage27_ripple_checks.cir
+Start Time: Mon Oct  5 22:40:15 2026
+
+.step x=0.5
+solver = Normal
+Maximum thread count: 8
+tnom = 27
+temp = 27
+method = trap
+Direct Newton iteration succeeded in finding operating point.
+
+.step x=1
+Direct Newton iteration succeeded in finding operating point.
+Total elapsed time: 21.488 seconds.
+Total iterations: 1937090
+
+Files loaded:
+D:\Class D amplifier\stage27_ripple_checks.cir
+
+Fourier components of V(m4)
+step 1
+N-Period=1
+DC component:0.104496
+
+Harmonic	Frequency	 Fourier 	Normalized	 Phase  	Normalized
+ Number 	  [Hz]   	Component	 Component	[degree]	Phase [deg]
+    1   	 1.000e+03	 1.408e+00	 1.000e+00	   96.81°	    0.00°
+    2   	 2.000e+03	 1.059e-02	 7.519e-03	   20.86°	  -75.94°
+    3   	 3.000e+03	 2.313e-02	 1.643e-02	  108.87°	   12.06°
+    4   	 4.000e+03	 1.212e-03	 8.606e-04	  129.51°	   32.71°
+    5   	 5.000e+03	 2.729e-03	 1.938e-03	  -30.81°	 -127.61°
+    6   	 6.000e+03	 4.609e-04	 3.273e-04	 -151.88°	 -248.68°
+    7   	 7.000e+03	 9.277e-04	 6.588e-04	  -59.80°	 -156.60°
+    8   	 8.000e+03	 1.588e-03	 1.128e-03	   40.45°	  -56.36°
+    9   	 9.000e+03	 1.708e-03	 1.213e-03	  -57.75°	 -154.56°
+   10   	 1.000e+04	 9.205e-04	 6.537e-04	  -27.86°	 -124.67°
+Partial Harmonic Distortion: 1.829315%
+Total Harmonic Distortion:   1.903807%
+
+step 2
+N-Period=1
+DC component:0.06623
+
+Harmonic	Frequency	 Fourier 	Normalized	 Phase  	Normalized
+ Number 	  [Hz]   	Component	 Component	[degree]	Phase [deg]
+    1   	 1.000e+03	 6.794e+00	 1.000e+00	   96.95°	    0.00°
+    2   	 2.000e+03	 5.858e-03	 8.622e-04	  177.12°	   80.16°
+    3   	 3.000e+03	 1.859e-01	 2.737e-02	  -65.99°	 -162.94°
+    4   	 4.000e+03	 1.201e-02	 1.768e-03	 -154.75°	 -251.70°
+    5   	 5.000e+03	 4.027e-02	 5.927e-03	  -50.61°	 -147.56°
+    6   	 6.000e+03	 3.090e-03	 4.548e-04	 -141.07°	 -238.02°
+    7   	 7.000e+03	 1.572e-02	 2.314e-03	  137.13°	   40.17°
+    8   	 8.000e+03	 3.695e-03	 5.439e-04	  -98.73°	 -195.68°
+    9   	 9.000e+03	 4.219e-02	 6.210e-03	  160.18°	   63.22°
+   10   	 1.000e+04	 5.109e-03	 7.520e-04	   68.34°	  -28.61°
+Partial Harmonic Distortion: 2.886087%
+Total Harmonic Distortion:   2.993687%
+
+
+Measurement: carrierperiod
+  step	carrierperiod	FROM	TO
+     1	6.6645345316e-06	0.00500393288816	0.00501059742269
+     2	6.67002352156e-06	0.00500397500008	0.00501064502361
+
+Measurement: overlap21max
+  step	MAX(V(overlap21))	FROM	TO
+     1	0	0.005	0.006
+     2	0	0.005	0.006
+
+Measurement: vbootmin
+  step	MIN(V(vb,sw))	FROM	TO
+     1	12.1748790741	0.005	0.006
+     2	12.1980381012	0.005	0.006
+
+Measurement: maxilout
+  step	MAX(I(Lout))	FROM	TO
+     1	0.98110473156	0.005	0.006
+     2	2.12643527985	0.005	0.006
+
+Measurement: minilout
+  step	MIN(I(Lout))	FROM	TO
+     1	-0.932567358017	0.005	0.006
+     2	-2.10357475281	0.005	0.006
+
+Measurement: maxiload
+  step	MAX(I(Rload))	FROM	TO
+     1	0.498653233051	0.005	0.006
+     2	1.84126877785	0.005	0.006
+
+Measurement: miniload
+  step	MIN(I(Rload))	FROM	TO
+     1	-0.451282948256	0.005	0.006
+     2	-1.81668114662	0.005	0.006
+
+Measurement: loadrms
+  step	RMS(V(diff))	FROM	TO
+     1	1.06416020683	0.005	0.006
+     2	4.81983591539	0.005	0.006
+
+Measurement: coutrms
+  step	RMS(I(Cout))	FROM	TO
+     1	0.346817010965	0.005	0.006
+     2	0.291611920416	0.005	0.006
+
+Measurement: cblockrms
+  step	RMS(I(Cblock))	FROM	TO
+     1	0.266040051709	0.005	0.006
+     2	1.20495897885	0.005	0.006
+
+Measurement: coutpeak
+  step	MAX(I(Cout))	FROM	TO
+     1	0.601704120636	0.005	0.006
+     2	0.644071877003	0.005	0.006
+
+Measurement: cblockpeak
+  step	MAX(I(Cblock))	FROM	TO
+     1	0.498653233051	0.005	0.006
+     2	1.84126877785	0.005	0.006

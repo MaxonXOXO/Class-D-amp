@@ -1,0 +1,127 @@
+* Stage 37 (stage37_2110_d50_100_150): driver=IR2110 fsw=150000 net=delay td=100 crc=100p Snub=1  BTL, same front end as Stage 34 (Rf=23000 Rlimit=13000)
+.param Pvol=10k x=1 r={x**2.3} Ppot=100k bp=0.5 tp=0.5 Fsig=1k Rs=13000 Rf=23000 Vbus=24 Vin=1 Hd=1.75
+.param fsw=150000 td={100*1n} crc=100p Cx=0
+.param wcmp={25n*fsw}
+.param Vinpk={Vin*sqrt(2)}
+Vmid mid 0 0
+V5 v5 0 5
+Vcc opvcc 0 12
+Vee opvee 0 -12
+Vbusraw braw 0 {Vbus}
+Rbus braw bus 50m
+Cbus bus 0 4700u Rser=0.05 IC=24
+VccDrv vcc 0 12
+Vsrc src 0 SINE(0 {Vinpk} {Fsig})
+Rsource src s2 100
+Cin s2 inp 2.2u IC=-0
+Rb inp mid 47k
+XBUF inp bufout bufout opvcc opvee NE5532_CLAMP
+R1 bufout a 33k
+R2 b toneout 33k
+Rpa a w {Ppot*bp}
+Rpb w b {Ppot*(1-bp)}
+C1 a w 47n IC=0
+C2 b w 47n IC=0
+C3 bufout t1 3.3n
+C4 t2 toneout 3.3n
+Rta t1 tw {Ppot*tp}
+Rtb tw t2 {Ppot*(1-tp)}
+R5 tw w 8.2k
+XTON mid w toneout opvcc opvee NE5532_CLAMP
+Cg1 toneout gin 2.2u IC=0
+Rgb gin mid 100k
+XGAIN gin gfb gout opvcc opvee NE5532_CLAMP
+Rfb gout gfb {Rf}
+Rg gfb gx 10k
+Cgx gx mid 47u IC=0
+Rlimit gout psrc {Rs}
+Rup psrc wip {Pvol*(1-r)+1}
+Rlo wip mid {Pvol*r+1}
+Cc wip c 1u IC=-2.5
+Ratt c cmp 150k
+Rh v5 cmp 200k
+Rl cmp 0 200k
+Ccmp cmp 0 10p
+Rpull osc v5 1
+Bctrl ctrl 0 V=5-V(tri)
+Ssch osc 0 ctrl 0 SCHMITT
+.model SCHMITT SW(Ron=1m Roff=1G Vt=2.5 Vh=2)
+Rintegrator osc sum 10k
+Cintegrator tri sum {208.333p*150k/fsw}
+Bop tri 0 V=limit(1e6*(2.5-V(sum)),0,5)
+.model Dfast D(Is=2.52n Rs=0.568 N=1.9 Cjo=4p M=0.03 Tt=4n)
+.model IRFB7545Model VDMOS(Vto=2.9 Kp=100 Rd=2m Rs=2m Rg=2.3 Cgs=6.3n Cgdmin=200p Cgdmax=1.8n Cjo=1n Is=1e-12 BV=60)
+.subckt NE5532_CLAMP inp inn out vcc vee
+E1 n1 0 inp inn 100k
+R1 n1 n2 1k
+C1 n2 0 1.59u
+B1 out 0 V=min(max(V(n2),V(vee)+{Hd}),V(vcc)-{Hd})
+.ends NE5532_CLAMP
+.param tonH=120n toffH=95n tonL=125n toffL=100n
+* ---- half-bridge A ----
+BcmpA pwmA 0 V=2.5*(1+tanh((V(cmp)-V(tri))/wcmp))
+BinvA invA 0 V=5-V(pwmA)
+BhlA hlA 0 V=min(V(pwmA),delay(V(pwmA),td))
+BllA llA 0 V=min(V(invA),delay(V(invA),td))
+BdHA dHA 0 V=min(delay(V(hlA),tonH),delay(V(hlA),toffH))
+BdLA dLA 0 V=min(delay(V(llA),tonL),delay(V(llA),toffL))
+BdrvHA drvHA swA V=V(vbA,swA)*V(dHA)/5
+BdrvLA drvLA 0 V=12*V(dLA)/5
+RghA drvHA ghA 10
+RglA drvLA glA 10
+CxhA ghA swA {Cx}
+CxlA glA 0 {Cx}
+DbootA vcc vbA Dfast
+CbootA vbA swA 220n Rser=0.1 IC=11
+MhiA bus ghA swA IRFB7545Model
+MloA swA glA 0 IRFB7545Model
+
+LoutA swA outA 68u Rser=0.15
+CoutA outA 0 470n Rser=0.05
+* ---- half-bridge B ----
+BcmpB pwmB 0 V=2.5*(1+tanh(((5-V(cmp))-V(tri))/wcmp))
+BinvB invB 0 V=5-V(pwmB)
+BhlB hlB 0 V=min(V(pwmB),delay(V(pwmB),td))
+BllB llB 0 V=min(V(invB),delay(V(invB),td))
+BdHB dHB 0 V=min(delay(V(hlB),tonH),delay(V(hlB),toffH))
+BdLB dLB 0 V=min(delay(V(llB),tonL),delay(V(llB),toffL))
+BdrvHB drvHB swB V=V(vbB,swB)*V(dHB)/5
+BdrvLB drvLB 0 V=12*V(dLB)/5
+RghB drvHB ghB 10
+RglB drvLB glB 10
+CxhB ghB swB {Cx}
+CxlB glB 0 {Cx}
+DbootB vcc vbB Dfast
+CbootB vbB swB 220n Rser=0.1 IC=11
+MhiB bus ghB swB IRFB7545Model
+MloB swB glB 0 IRFB7545Model
+
+LoutB swB outB 68u Rser=0.15
+CoutB outB 0 470n Rser=0.05
+Rload outA outB 4
+Bspk vspk 0 V=V(outA,outB)
+.ic V(tri)=4.5 V(sum)=2.4999955 V(osc)=5 V(outA)=12 V(outB)=12 V(inp)=0 V(bufout)=0 V(toneout)=0 V(w)=0 V(gin)=0 V(gout)=0 V(gfb)=0 V(wip)=0 V(cmp)=2.5 V(bus)=24
+.step param td list 50n 100n 150n
+.tran 0 6m 5m 5n
+.options method=gear gmin=1e-10
+.four 1k 9 1 V(vspk)
+.meas TRAN InputRMS RMS V(src) FROM=5m TO=6m
+.meas TRAN GainMax MAX V(gout) FROM=5m TO=6m
+.meas TRAN GainMin MIN V(gout) FROM=5m TO=6m
+.meas TRAN CmpMax MAX V(cmp) FROM=5m TO=6m
+.meas TRAN CmpMin MIN V(cmp) FROM=5m TO=6m
+.meas TRAN ModIdx PARAM (CmpMax-CmpMin)/4
+.meas TRAN SpkRMS RMS V(vspk) FROM=5m TO=6m
+.meas TRAN SpkPower PARAM SpkRMS*SpkRMS/4
+.meas TRAN IbusPk MAX (Id(MhiA)+Id(MhiB)) FROM=5m TO=6m
+.meas TRAN IbusRMS RMS (Id(MhiA)+Id(MhiB)) FROM=5m TO=6m
+.meas TRAN StPk MAX max(min(abs(Id(MhiA)),abs(Id(MloA))),min(abs(Id(MhiB)),abs(Id(MloB)))) FROM=5m TO=6m
+.meas TRAN StRMS RMS max(min(abs(Id(MhiA)),abs(Id(MloA))),min(abs(Id(MhiB)),abs(Id(MloB)))) FROM=5m TO=6m
+.meas TRAN StFwdPk MAX (min(max(Id(MhiA),0),max(Id(MloA),0))+min(max(Id(MhiB),0),max(Id(MloB),0))) FROM=5m TO=6m
+.meas TRAN StFwdE INTEG (V(bus)*(min(max(Id(MhiA),0),max(Id(MloA),0))+min(max(Id(MhiB),0),max(Id(MloB),0)))) FROM=5m TO=6m
+.meas TRAN StFwdnJ PARAM StFwdE/(fsw*1m)*1e9
+.meas TRAN DeadFrac AVG (u(2.9-(V(ghA)-V(swA)))*u(2.9-V(glA))) FROM=5m TO=6m
+.meas TRAN DeadNs PARAM DeadFrac/(2*fsw)*1e9
+.meas TRAN BusVmin MIN V(bus) FROM=5m TO=6m
+.save V(src) V(gout) V(cmp) V(tri) V(vspk) V(bus) V(ghA) V(swA) V(glA) Id(MhiA) Id(MloA) Id(MhiB) Id(MloB)
+.end

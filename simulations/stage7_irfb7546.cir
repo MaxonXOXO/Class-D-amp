@@ -1,0 +1,49 @@
+* Stage 7: IRFB7546 gate-charge sensitivity with RC-diode IR2110 timing model
+* One half-bridge shown. Duplicate for other bridge legs.
+* Behavioral gate-charge sensitivity only; neither device is a vendor SPICE macromodel.
+.param Fsw=150k Fsig=1k deadcap=220p Vth=2.5 audio=1.8
+.param Vdrive=12 Qgate=58n Rgate=10
+Vmid mid 0 2.5
+V5 v5 0 5
+Vin in mid {audio}
+Vtri tri 0 PULSE(0.5 4.5 0 {1/(2*Fsw)} {1/(2*Fsw)} 0 {1/Fsw})
+Bcmp pwm 0 V=if(V(in)>V(tri),5,0)
+* Inverting logic path, with an illustrative 10 ns inverter delay
+Binv inv 0 V=if(delay(V(pwm),10n)>2.5,0,5)
+* Slow rising edges through R-C; diode gives rapid discharge on falling edges
+Rhin pwm hin 1k
+Chin hin 0 {deadcap}
+Dhin hin pwm Dfast
+Rlin inv lin 1k
+Clin lin 0 {deadcap}
+Dlin lin inv Dfast
+.model Dfast D(Is=2.52n Rs=0.568 N=1.9 Cjo=4p M=0.03 Tt=4n)
+* Approximate IR2110 propagation asymmetry: turn-on 120 ns, turn-off 94 ns
+BdrvH drvH 0 V=12*if(V(hin)>Vth,if(delay(V(hin),120n)>Vth,1,0),if(delay(V(hin),94n)>Vth,1,0))
+BdrvL drvL 0 V=12*if(V(lin)>Vth,if(delay(V(lin),120n)>Vth,1,0),if(delay(V(lin),94n)>Vth,1,0))
+Rgh drvH gateH 10
+Rgl drvL gateL 10
+Cgh gateH 0 {Qgate/Vdrive}
+Cgl gateL 0 {Qgate/Vdrive}
+Bov overlap 0 V=if(V(gateH)>4.5 & V(gateL)>4.5,1,0)
+BvgsH vgsH 0 V=V(gateH)
+BvgsL vgsL 0 V=V(gateL)
+.step param Qgate list 58n 87n
+.step param deadcap list 220p 330p 470p
+.step param Vth list 2.0 2.5 3.0 3.2
+.step param audio list -1.8 0 1.8
+.tran 0 40u 0 5n
+.meas TRAN OverlapMax MAX V(overlap) FROM=10u TO=40u
+.meas TRAN HgateAvg AVG V(vgsH) FROM=10u TO=40u
+.meas TRAN LgateAvg AVG V(vgsL) FROM=10u TO=40u
+.meas TRAN HtoL_gap TRIG V(vgsH) VAL=4.5 FALL=1 TD=10u TARG V(vgsL) VAL=4.5 RISE=1 TD=10u
+.meas TRAN LtoH_gap TRIG V(vgsL) VAL=4.5 FALL=1 TD=10u TARG V(vgsH) VAL=4.5 RISE=1 TD=10u
+.save V(pwm) V(inv) V(hin) V(lin) V(vgsH) V(vgsL) V(overlap)
+.end
+
+
+
+
+
+
+

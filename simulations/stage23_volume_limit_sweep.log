@@ -1,0 +1,95 @@
+LTspice 26.1.1 for Windows
+Circuit: D:\Class D amplifier\stage23_volume_limit_sweep.cir
+Start Time: Mon Oct  5 22:19:13 2026
+
+.step rs=0.001
+solver = Normal
+Maximum thread count: 8
+tnom = 27
+temp = 27
+method = trap
+Direct Newton iteration succeeded in finding operating point.
+
+.step rs=1000
+Direct Newton iteration succeeded in finding operating point.
+
+.step rs=2000
+Direct Newton iteration succeeded in finding operating point.
+
+.step rs=2700
+Direct Newton iteration succeeded in finding operating point.
+
+.step rs=3300
+Direct Newton iteration succeeded in finding operating point.
+
+.step rs=4700
+Direct Newton iteration succeeded in finding operating point.
+Total elapsed time: 12.248 seconds.
+Total iterations: 358108
+
+Files loaded:
+D:\Class D amplifier\stage23_volume_limit_sweep.cir
+
+
+Measurement: overlap21max
+  step	MAX(V(overlap21))	FROM	TO
+     1	0	0.0001	0.0011
+     2	0	0.0001	0.0011
+     3	0	0.0001	0.0011
+     4	0	0.0001	0.0011
+     5	0	0.0001	0.0011
+     6	0	0.0001	0.0011
+
+Measurement: vbootmin
+  step	MIN(V(vb,sw))	FROM	TO
+     1	12.0380429425	0.0001	0.0011
+     2	12.0356050581	0.0001	0.0011
+     3	12.0337657928	0.0001	0.0011
+     4	12.0324449539	0.0001	0.0011
+     5	12.0314235687	0.0001	0.0011
+     6	12.0293962895	0.0001	0.0011
+
+Measurement: maxilout
+  step	MAX(I(Lout))	FROM	TO
+     1	2.60026979446	0.0001	0.0011
+     2	2.43407940865	0.0001	0.0011
+     3	2.29345488548	0.0001	0.0011
+     4	2.20586037636	0.0001	0.0011
+     5	2.13763451576	0.0001	0.0011
+     6	1.99790227413	0.0001	0.0011
+
+Measurement: minilout
+  step	MIN(I(Lout))	FROM	TO
+     1	-2.62760329247	0.0001	0.0011
+     2	-2.45763897896	0.0001	0.0011
+     3	-2.31657958031	0.0001	0.0011
+     4	-2.22277331352	0.0001	0.0011
+     5	-2.15860199928	0.0001	0.0011
+     6	-2.01147556305	0.0001	0.0011
+
+Measurement: maxiload
+  step	MAX(I(Rload))	FROM	TO
+     1	2.47950005531	0.0001	0.0011
+     2	2.24868559837	0.0001	0.0011
+     3	2.05894565582	0.0001	0.0011
+     4	1.94278097153	0.0001	0.0011
+     5	1.85479569435	0.0001	0.0011
+     6	1.67699313164	0.0001	0.0011
+
+Measurement: miniload
+  step	MIN(I(Rload))	FROM	TO
+     1	-2.50720953941	0.0001	0.0011
+     2	-2.26992201805	0.0001	0.0011
+     3	-2.0802564621	0.0001	0.0011
+     4	-1.95649635792	0.0001	0.0011
+     5	-1.87179851532	0.0001	0.0011
+     6	-1.68807208538	0.0001	0.0011
+
+Measurement: loadrms
+  step	RMS(V(diff))	FROM	TO
+     1	6.78582323072	0.0001	0.0011
+     2	6.08401648073	0.0001	0.0011
+     3	5.51435762388	0.0001	0.0011
+     4	5.16684406139	0.0001	0.0011
+     5	4.90307659623	0.0001	0.0011
+     6	4.37755058558	0.0001	0.0011

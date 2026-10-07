@@ -1,0 +1,66 @@
+D:\Class D amplifier\stage40_D.cir(59): Expected node name here.
+s NE5532_CLAMP
+              ^
+D:\Class D amplifier\stage40_D.cir(59): Expected a sequence <directive or device instantiation end of line> here.
+s NE5532_CLAMP
+^^^^^^^^^^^^^^
+D:\Class D amplifier\stage40_D.cir(104): Expected a sequence <directive or device instantiation end of line> here.
+.step param Cboot list 100n 1u 4.7u
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+D:\Class D amplifier\stage40_D.cir(105): Expected a sequence <directive or device instantiation end of line> here.
+.step param Vin list 2.0 2.2 2.4
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+D:\Class D amplifier\stage40_D.cir(106): Expected a sequence <directive or device instantiation end of line> here.
+.tran 0 2m 0 50n
+^^^^^^^^^^^^^^^^
+D:\Class D amplifier\stage40_D.cir(107): Expected a sequence <directive or device instantiation end of line> here.
+.options method=gear gmin=1e-10
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+D:\Class D amplifier\stage40_D.cir(108): Expected a sequence <directive or device instantiation end of line> here.
+.four 1k 9 1 V(vspk)
+^^^^^^^^^^^^^^^^^^^^
+D:\Class D amplifier\stage40_D.cir(109): Expected a sequence <directive or device instantiation end of line> here.
+.meas TRAN InputRMS RMS V(src) FROM=5m TO=6m
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+D:\Class D amplifier\stage40_D.cir(110): Expected a sequence <directive or device instantiation end of line> here.
+.meas TRAN GainMax MAX V(gout) FROM=5m TO=6m
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+D:\Class D amplifier\stage40_D.cir(111): Expected a sequence <directive or device instantiation end of line> here.
+.meas TRAN GainMin MIN V(gout) FROM=5m TO=6m
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+D:\Class D amplifier\stage40_D.cir(112): Expected a sequence <directive or device instantiation end of line> here.
+.meas TRAN CmpMax MAX V(cmp) FROM=5m TO=6m
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+D:\Class D amplifier\stage40_D.cir(113): Expected a sequence <directive or device instantiation end of line> here.
+.meas TRAN CmpMin MIN V(cmp) FROM=5m TO=6m
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+D:\Class D amplifier\stage40_D.cir(114): Expected a sequence <directive or device instantiation end of line> here.
+.meas TRAN ModIdx PARAM (CmpMax-CmpMin)/4
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+D:\Class D amplifier\stage40_D.cir(115): Expected a sequence <directive or device instantiation end of line> here.
+.meas TRAN SpkRMS RMS V(vspk) FROM=5m TO=6m
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+D:\Class D amplifier\stage40_D.cir(116): Expected a sequence <directive or device instantiation end of line> here.
+.meas TRAN SpkPower PARAM SpkRMS*SpkRMS/4
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+D:\Class D amplifier\stage40_D.cir(117): Expected a sequence <directive or device instantiation end of line> here.
+.meas TRAN IbusPk MAX (Id(MhiA)+Id(MhiB)) FROM=5m TO=6m
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+D:\Class D amplifier\stage40_D.cir(118): Expected a sequence <directive or device instantiation end of line> here.
+.meas TRAN IbusRMS RMS (Id(MhiA)+Id(MhiB)) FROM=5m TO=6m
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+D:\Class D amplifier\stage40_D.cir(127): Expected a sequence <directive or device instantiation end of line> here.
+.meas TRAN DeadFrac AVG (u(2.9-(V(ghA)-V(swA)))*u(2.9-V(glA))) FROM=5m TO=6m
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+D:\Class D amplifier\stage40_D.cir(128): Expected a sequence <directive or device instantiation end of line> here.
+.meas TRAN DeadNs PARAM DeadFrac/(2*fsw)*1e9
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+D:\Class D amplifier\stage40_D.cir(129): Expected a sequence <directive or device instantiation end of line> here.
+.meas TRAN BusVmin MIN V(bus) FROM=5m TO=6m
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+D:\Class D amplifier\stage40_D.cir(130): Expected a sequence <directive or device instantiation end of line> here.
+.save V(src) V(gout) V(cmp) V(tri) V(vspk) V(bus) V(ghA) V(swA) V(glA) Id(MhiA) Id(MloA) Id(MhiB) Id(MloB)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+D:\Class D amplifier\stage40_D.cir(133): Expected a sequence <directive or device instantiation end of line> here.
+.meas TRAN vbvs_min MIN V(vbA,swA) FROM=1m TO=2m
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

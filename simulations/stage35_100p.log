@@ -1,0 +1,16 @@
+LTspice 26.1.1 for Windows
+Circuit: D:\Class D amplifier\stage35_100p.cir
+Start Time: Tue Oct  6 13:48:17 2026
+Options:method=gear gmin=1e-10
+
+.step vin=0.25
+solver = Normal
+Maximum thread count: 8
+tnom = 27
+temp = 27
+method = Gear
+gmin = 1e-10
+Direct Newton iteration failed to find operating point.
+Starting Gmin stepping
+Gmin stepping succeeded in finding the operating point.
+

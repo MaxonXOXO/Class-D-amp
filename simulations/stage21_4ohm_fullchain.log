@@ -1,0 +1,135 @@
+LTspice 26.1.1 for Windows
+Circuit: D:\Class D amplifier\stage21_4ohm_fullchain.cir
+Start Time: Mon Oct  5 22:17:40 2026
+
+.step x=0.1
+solver = Normal
+Maximum thread count: 8
+tnom = 27
+temp = 27
+method = trap
+Direct Newton iteration succeeded in finding operating point.
+
+.step x=0.2
+Direct Newton iteration succeeded in finding operating point.
+
+.step x=0.3
+Direct Newton iteration succeeded in finding operating point.
+
+.step x=0.4
+Direct Newton iteration succeeded in finding operating point.
+
+.step x=0.5
+Direct Newton iteration succeeded in finding operating point.
+
+.step x=0.6
+Direct Newton iteration succeeded in finding operating point.
+
+.step x=0.7
+Direct Newton iteration succeeded in finding operating point.
+
+.step x=0.8
+Direct Newton iteration succeeded in finding operating point.
+
+.step x=0.9
+Direct Newton iteration succeeded in finding operating point.
+
+.step x=1
+Direct Newton iteration succeeded in finding operating point.
+Total elapsed time: 21.869 seconds.
+Total iterations: 351709
+
+Files loaded:
+D:\Class D amplifier\stage21_4ohm_fullchain.cir
+
+
+Measurement: overlap21max
+  step	MAX(V(overlap21))	FROM	TO
+     1	0	0.0001	0.0011
+     2	0	0.0001	0.0011
+     3	0	0.0001	0.0011
+     4	0	0.0001	0.0011
+     5	0	0.0001	0.0011
+     6	0	0.0001	0.0011
+     7	0	0.0001	0.0011
+     8	0	0.0001	0.0011
+     9	0	0.0001	0.0011
+    10	0	0.0001	0.0011
+
+Measurement: vbootmin
+  step	MIN(V(vb,sw))	FROM	TO
+     1	12.0166301727	0.0001	0.0011
+     2	12.0168635249	0.0001	0.0011
+     3	12.0179576874	0.0001	0.0011
+     4	12.0188733935	0.0001	0.0011
+     5	12.0207099915	0.0001	0.0011
+     6	12.0219747424	0.0001	0.0011
+     7	12.0231695175	0.0001	0.0011
+     8	12.0270624161	0.0001	0.0011
+     9	12.0326070786	0.0001	0.0011
+    10	12.0379067026	0.0001	0.0011
+
+Measurement: maxilout
+  step	MAX(I(Lout))	FROM	TO
+     1	0.625602006912	0.0001	0.0011
+     2	0.671617090702	0.0001	0.0011
+     3	0.761070728302	0.0001	0.0011
+     4	0.894082546234	0.0001	0.0011
+     5	1.03389763832	0.0001	0.0011
+     6	1.22022461891	0.0001	0.0011
+     7	1.51437973976	0.0001	0.0011
+     8	1.84229242802	0.0001	0.0011
+     9	2.20083856583	0.0001	0.0011
+    10	2.60185003281	0.0001	0.0011
+
+Measurement: minilout
+  step	MIN(I(Lout))	FROM	TO
+     1	-0.644378423691	0.0001	0.0011
+     2	-0.691764712334	0.0001	0.0011
+     3	-0.783341109753	0.0001	0.0011
+     4	-0.90819978714	0.0001	0.0011
+     5	-1.0408039093	0.0001	0.0011
+     6	-1.22214245796	0.0001	0.0011
+     7	-1.52109408379	0.0001	0.0011
+     8	-1.85195112228	0.0001	0.0011
+     9	-2.22043728828	0.0001	0.0011
+    10	-2.62625408173	0.0001	0.0011
+
+Measurement: maxiload
+  step	MAX(I(Rload))	FROM	TO
+     1	0.132175326347	0.0001	0.0011
+     2	0.179703131318	0.0001	0.0011
+     3	0.272149652243	0.0001	0.0011
+     4	0.410262972116	0.0001	0.0011
+     5	0.559884011745	0.0001	0.0011
+     6	0.762901604176	0.0001	0.0011
+     7	1.09374761581	0.0001	0.0011
+     8	1.48448896408	0.0001	0.0011
+     9	1.93632769585	0.0001	0.0011
+    10	2.48231840134	0.0001	0.0011
+
+Measurement: miniload
+  step	MIN(I(Rload))	FROM	TO
+     1	-0.151087626815	0.0001	0.0011
+     2	-0.199647307396	0.0001	0.0011
+     3	-0.294452548027	0.0001	0.0011
+     4	-0.424577534199	0.0001	0.0011
+     5	-0.566212117672	0.0001	0.0011
+     6	-0.761994659901	0.0001	0.0011
+     7	-1.09775996208	0.0001	0.0011
+     8	-1.49150919914	0.0001	0.0011
+     9	-1.95469880104	0.0001	0.0011
+    10	-2.50509595871	0.0001	0.0011
+
+Measurement: loadrms
+  step	RMS(V(diff))	FROM	TO
+     1	0.371568872677	0.0001	0.0011
+     2	0.407770200416	0.0001	0.0011
+     3	0.570013249201	0.0001	0.0011
+     4	0.899958584969	0.0001	0.0011
+     5	1.32715845577	0.0001	0.0011
+     6	1.83818441445	0.0001	0.0011
+     7	2.69997243405	0.0001	0.0011
+     8	3.80791345784	0.0001	0.0011
+     9	5.1553281879	0.0001	0.0011
+    10	6.78612490372	0.0001	0.0011

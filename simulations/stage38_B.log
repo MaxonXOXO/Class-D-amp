@@ -1,0 +1,7 @@
+LTspice 26.1.1 for Windows
+Circuit: D:\Class D amplifier\stage38_B.cir
+Start Time: Wed Oct  7 00:18:00 2026
+Options:method=gear gmin=1e-10
+D:\Class D amplifier\stage38_B.cir(3): A parameter with this name is already defined elsewhere.
+.param fsw=150000 Lfilt=10u Cfilt=1.5u td={530*1n} crc=100p Cx=0 Vin=1
+                                                                 ^^^
