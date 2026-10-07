@@ -1,0 +1,13 @@
+# LTspice / SPICE temporary files and waveform caches
+*.raw
+*.op.raw
+*.db
+*.sqlite
+*.tmp
+*.log.raw
+
+# OS and Editor files
+.DS_Store
+Thumbs.db
+*.swp
+*~
