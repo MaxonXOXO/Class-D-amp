@@ -1,0 +1,50 @@
+LTspice 26.1.1 for Windows
+Circuit: D:\ltspice_corrected_models\full_amp_10W.net
+Start Time: Sun Oct 11 00:35:27 2026
+Options:method=gear gmin=1e-9 abstol=1e-9 reltol=0.003 trtol=7
+solver = Normal
+Maximum thread count: 8
+tnom = 27
+temp = 27
+method = Gear
+gmin = 1e-09
+abstol = 1e-09
+reltol = 0.003
+trtol = 7
+Direct Newton iteration succeeded in finding operating point.
+Changing Tseed to 2e-12
+Changing Tseed to 2e-14
+Changing Tseed to 2e-11
+Changing Tseed to 2e-15
+Changing Tseed to 2e-10
+Changing Tseed to 2e-16
+Total elapsed time: 117.146 seconds.
+Total iterations: 3701578
+
+Files loaded:
+D:\ltspice_corrected_models\full_amp_10W.net
+C:\Users\gauth\AppData\Local\LTspice\lib\cmp\standard.dio
+D:\ltspice_corrected_models\NE5532.lib
+D:\ltspice_corrected_models\IR2104_LTspice_beh.lib
+D:\ltspice_corrected_models\irfb7545pbf.spi
+D:\ltspice_corrected_models\tlv3501.lib
+
+Fourier components of V(OUT_DIFF)
+N-Period=1
+DC component:0.0428881
+
+Harmonic	Frequency	 Fourier 	Normalized	 Phase  	Normalized
+ Number 	  [Hz]   	Component	 Component	[degree]	Phase [deg]
+    1   	 1.000e+03	 8.730e+00	 1.000e+00	  -87.74°	    0.00°
+    2   	 2.000e+03	 8.870e-03	 1.016e-03	  172.95°	  260.69°
+    3   	 3.000e+03	 3.063e-02	 3.509e-03	  167.61°	  255.35°
+    4   	 4.000e+03	 9.509e-03	 1.089e-03	   26.99°	  114.73°
+    5   	 5.000e+03	 2.655e-01	 3.041e-02	  118.66°	  206.40°
+    6   	 6.000e+03	 1.497e-02	 1.714e-03	 -160.82°	  -73.08°
+    7   	 7.000e+03	 2.788e-01	 3.194e-02	  127.97°	  215.71°
+    8   	 8.000e+03	 4.422e-03	 5.066e-04	 -116.92°	  -29.17°
+    9   	 9.000e+03	 5.824e-02	 6.671e-03	  -41.25°	   46.50°
+Partial Harmonic Distortion: 4.480124%
+Total Harmonic Distortion:   7.935452%
+
+i_avg: AVG(I(V6))=-0.468383324913 FROM 0.001 TO 0.003
