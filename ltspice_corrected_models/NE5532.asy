@@ -1,0 +1,29 @@
+Version 4
+SymbolType CELL
+LINE Normal -80 -64 80 0
+LINE Normal -80 64 80 0
+LINE Normal 80 0 96 0
+WINDOW 0 0 -176 Center 2
+WINDOW 3 0 -208 Center 2
+TEXT -240 -48 Left 2 IN+
+TEXT -240 16 Left 2 IN-
+TEXT 16 -144 Left 2 V+
+TEXT 16 136 Left 2 V-
+TEXT 136 -16 Left 2 OUT
+PIN -128 -32 R 0
+PINATTR PinName IN+
+PINATTR SpiceOrder 1
+PIN -128 32 R 0
+PINATTR PinName IN-
+PINATTR SpiceOrder 2
+PIN 0 -128 U 0
+PINATTR PinName V+
+PINATTR SpiceOrder 3
+PIN 0 128 D 0
+PINATTR PinName V-
+PINATTR SpiceOrder 4
+PIN 128 0 L 0
+PINATTR PinName OUT
+PINATTR SpiceOrder 5
+SYMATTR Prefix X
+SYMATTR Value NE5532

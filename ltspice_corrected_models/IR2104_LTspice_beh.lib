@@ -1,0 +1,67 @@
+******************************************************************************
+* IR2104 BEHAVIORAL SUBSTITUTE MODEL FOR LTspice
+* NOT the official Infineon model. Built from IR2104 datasheet typical values.
+*
+* Pin order matches the Infineon model:  LO HO COM IN VCC VB VS NSD
+*   LO  low-side gate drive out        HO  high-side gate drive out
+*   COM low-side return                IN  logic input (HO in phase, LO inverted)
+*   VCC low-side + logic supply        VB  high-side floating supply
+*   VS  high-side floating return      NSD shutdown input, ACTIVE LOW
+*                                          (NSD low or floating = both outputs off)
+*
+* What it models (datasheet typicals):
+*   ton 680 ns, toff/tsd 150 ns (the 520 ns dead time falls out of ton - toff)
+*   Io+ 130 mA, Io- 270 mA, rise ~100 ns / fall ~50 ns into 1 nF
+*   Input thresholds 0.8 V (low) to 3.0 V (high); NSD uses the same thresholds
+*   VCC and VB-VS undervoltage lockout (8.2 V off ... 8.9 V on)
+*   Quiescent currents 150 uA (VCC) and 50 uA (VB-VS)
+* What it does NOT model: temperature, dV/dt, VS below COM, input hysteresis,
+*   UVLO hysteresis (the lockout is a smooth ramp between the two thresholds),
+*   minimum pulse width, bootstrap diode (external, as on the real part).
+*
+* No latches or feedback loops, so it should converge easily. Delays use
+* lossless transmission lines. Use a max timestep of ~10-20 ns in .tran.
+******************************************************************************
+
+* ideal delay: out = in delayed by TD (matched T-line, unity gain)
+.subckt IR2104_BEH_DLY in out params: td=100n
+R_S in a 50
+T_L a 0 b 0 Z0=50 Td={td}
+R_T b 0 50
+B_O out 0 V=2*V(b)
+.ends IR2104_BEH_DLY
+
+.subckt IR2104_BEH LO HO COM IN VCC VB VS NSD params: TON=680n TOFF=150n VUVP=8.9 VUVN=8.2 RUP=45 IUP=130m RDN=22 IDN=270m IQCC=150u IQBS=50u
+
+* ---- input stage (thresholds relative to COM) ----
+R_IN  IN  COM 1.667Meg
+R_NSD NSD COM 1.667Meg
+B_INH inh 0 V=min(max((V(IN,COM)-0.8)/2.2,0),1)
+B_SDN sdn 0 V=min(max((V(NSD,COM)-0.8)/2.2,0),1)
+B_HIN hin 0 V=V(inh)*V(sdn)
+B_LIN lin 0 V=(1-V(inh))*V(sdn)
+
+* ---- delays: output turns on after TON, off after TOFF ----
+X_H1 hin hon IR2104_BEH_DLY td={TON}
+X_H2 hin hof IR2104_BEH_DLY td={TOFF}
+X_L1 lin lon IR2104_BEH_DLY td={TON}
+X_L2 lin lof IR2104_BEH_DLY td={TOFF}
+
+* ---- undervoltage lockout ----
+B_UVCC uvcc 0 V=min(max((V(VCC,COM)-{VUVN})/({VUVP}-{VUVN}),0),1)
+B_UVB  uvb  0 V=min(max((V(VB,VS)-{VUVN})/({VUVP}-{VUVN}),0),1)
+
+* ---- gate commands (0..1) ----
+B_HCMD hcmd 0 V=V(hon)*V(hof)*V(uvcc)*V(uvb)
+B_LCMD lcmd 0 V=V(lon)*V(lof)*V(uvcc)
+
+* ---- output stages: current-limited resistive pull-up / pull-down ----
+B_LOUP VCC LO I=V(lcmd)*min(V(VCC,LO)/{RUP},{IUP})
+B_LODN LO COM I=(1-V(lcmd))*min(V(LO,COM)/{RDN},{IDN})
+B_HOUP VB  HO I=V(hcmd)*min(V(VB,HO)/{RUP},{IUP})
+B_HODN HO  VS I=(1-V(hcmd))*min(V(HO,VS)/{RDN},{IDN})
+
+* ---- supply current ----
+B_QCC VCC COM I=min(max(V(VCC,COM),0),10)/10*{IQCC}
+B_QBS VB  VS  I=min(max(V(VB,VS),0),10)/10*{IQBS}
+.ends IR2104_BEH

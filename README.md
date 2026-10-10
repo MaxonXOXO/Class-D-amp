@@ -84,3 +84,4 @@ Mobile Phone AUX (1 Vrms)
   * `final_ir2104_test.cir`: Final validated BTL test netlist with IR2104 timing.
   * `classd_stage41.ps1`: Automated parametric sweeper for power, THD, and filter ripple.
   * `stage40_*.cir`: Full-chain simulation netlists including audio front-end and level shifter.
+* `ltspice_corrected_models/`: Complete graphical schematic (`full amp.asc`), component symbols (`.asy`), and corrected SPICE simulation models (`.lib`, `.spi`) for the full Class-D amplifier.

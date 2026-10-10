@@ -1,0 +1,40 @@
+Version 4
+SymbolType CELL
+RECTANGLE Normal -96 -96 96 96
+WINDOW 0 0 -176 Center 2
+WINDOW 3 0 -208 Center 2
+TEXT -200 40 Left 2 LO
+TEXT -200 -88 Left 2 HO
+TEXT 136 40 Left 2 COM
+TEXT 136 -88 Left 2 IN
+TEXT 16 -144 Left 2 VCC
+TEXT 80 -144 Left 2 VB
+TEXT 16 136 Left 2 VS
+TEXT 136 -16 Left 2 NSD
+PIN -128 64 R 0
+PINATTR PinName LO
+PINATTR SpiceOrder 1
+PIN -128 -64 R 0
+PINATTR PinName HO
+PINATTR SpiceOrder 2
+PIN 128 64 L 0
+PINATTR PinName COM
+PINATTR SpiceOrder 3
+PIN 128 -64 L 0
+PINATTR PinName IN
+PINATTR SpiceOrder 4
+PIN 0 -128 D 0
+PINATTR PinName VCC
+PINATTR SpiceOrder 5
+PIN 64 -128 D 0
+PINATTR PinName VB
+PINATTR SpiceOrder 6
+PIN 0 128 U 0
+PINATTR PinName VS
+PINATTR SpiceOrder 7
+PIN 128 0 L 0
+PINATTR PinName NSD
+PINATTR SpiceOrder 8
+SYMATTR Prefix X
+SYMATTR Value IR2104_BEH
+SYMATTR Description LTspice behavioral IR2104 substitute, not the official Infineon macromodel

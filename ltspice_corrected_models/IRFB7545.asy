@@ -1,0 +1,19 @@
+Version 4
+SymbolType CELL
+RECTANGLE Normal -64 -80 64 80
+WINDOW 0 0 -160 Center 2
+WINDOW 3 0 -192 Center 2
+TEXT -176 -12 Left 2 D
+TEXT 16 -144 Left 2 G
+TEXT 136 -12 Left 2 S
+PIN -128 0 R 0
+PINATTR PinName D
+PINATTR SpiceOrder 1
+PIN 0 -128 U 0
+PINATTR PinName G
+PINATTR SpiceOrder 2
+PIN 128 0 L 0
+PINATTR PinName S
+PINATTR SpiceOrder 3
+SYMATTR Prefix X
+SYMATTR Value irfb7545pbf

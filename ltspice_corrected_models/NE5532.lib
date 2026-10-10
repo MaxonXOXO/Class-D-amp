@@ -1,0 +1,58 @@
+******************************************************************************
+* NE5532 SIMPLIFIED BEHAVIORAL OP-AMP FOR LTspice (substitute model)
+* Drop-in replacement: same subckt name and pin order as the old NE5532.lib
+*   1=IN+  2=IN-  3=V+  4=V-  5=OUT
+*
+* Why: the TI/community macromodel clamps its internal gain node with diodes and
+* a POLY/H-source limiter between fixed-voltage nodes. That structure gives a
+* singular matrix at startup and tiny timesteps in clipping in LTspice.
+* This model has no diode clamps, no POLY and no voltage-source loops. Every
+* nonlinearity is smooth (tanh / softplus).
+*
+* Datasheet-typical values: open-loop gain 100 dB, GBW 10 MHz, slew 9 V/us,
+* output swing about 1.5 V inside the rails, short-circuit current ~38 mA,
+* supply current about 4 mA per amplifier (7.757k between V+ and V-, as before).
+* Not modeled: input bias current, offset (VOS param available), CMRR/PSRR,
+* noise, temperature, input-referred clamp. Use it for system-level simulation
+* (modulators, integrators, class D loops), not noise or precision analysis.
+******************************************************************************
+.subckt NE5532 1 2 3 4 5 params: A0=100k GBW=10Meg SR=9Meg HR=1.5 ILIM=38m ROUT=30 VOS=0
+.param RX=1Meg
+.param GCL=10
+.param GM={A0/RX}
+.param CX={GM/(6.283185*GBW)}
+.param IMAX={SR*CX}
+
+* supply midpoint (internal reference) and supply load
+B_MID  mid 0 V=0.5*V(3)+0.5*V(4)
+RP 3 4 7.757K
+
+* input stage: differential resistance, DC paths to midpoint, small input caps
+RIN 1 2 300K
+RCM1 1 mid 1G
+RCM2 2 mid 1G
+CIN1 1 mid 2p
+CIN2 2 mid 2p
+
+* gain stage: slew-limited transconductance into the dominant pole RX || CX
+B_G  x mid I=-{IMAX}*tanh({GM}*(V(1,2)+{VOS})/{IMAX})
+RX   x mid {RX}
+CX   x mid {CX}
+
+* smooth rail clamp on the gain node (softplus, no diodes)
+B_CL x mid I={GCL}*(0.5*(V(x,mid)-V(vc)+sqrt((V(x,mid)-V(vc))*(V(x,mid)-V(vc))+1u))-0.5*(-V(x,mid)-V(vc)+sqrt((-V(x,mid)-V(vc))*(-V(x,mid)-V(vc))+1u)))
+B_VC vc 0 V=max(0.5*(V(3)-V(4))-{HR},1)
+
+* buffer, second pole (~30 MHz), then current-limited output resistance
+B_Y  y 0 V=V(x)
+RP2  y y2 1k
+CP2  y2 0 5.3p
+B_Y3 y3 0 V=V(y2)
+B_O  y3 5 I={ILIM}*tanh(V(y3,5)/({ROUT}*{ILIM}))
+R_OL 5 mid 1G
+
+* output protection to rails
+DC 5 3 DX
+DE 4 5 DX
+.model DX D(IS=800e-18)
+.ends NE5532
