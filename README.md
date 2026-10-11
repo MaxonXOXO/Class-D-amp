@@ -1,10 +1,10 @@
-﻿# 24V / 4Ω / 10W BTL Class-D Audio Amplifier
+﻿# High-Efficiency 10W Discrete BTL Class-D Audio Power Amplifier
 
 [![Design Status](https://img.shields.io/badge/Design%20Status-Verified%20%26%20Frozen-success.svg)](#simulation-results-summary)
 [![Topology](https://img.shields.io/badge/Topology-BTL%20Full%20H--Bridge-blue.svg)](#architecture-overview)
 [![Output Power](https://img.shields.io/badge/Output%20Power-10W%20continuous%20%40%204%CE%A9-orange.svg)](#design-specifications)
 [![Supply Voltage](https://img.shields.io/badge/Supply-24V%20Single%20DC%20Bus-yellow.svg)](#design-specifications)
-[![Carrier Frequency](https://img.shields.io/badge/Carrier%20Frequency-75%20kHz%20Linear%20Triangle-purple.svg)](#carrier-frequency-optimization)
+[![Carrier Frequency](https://img.shields.io/badge/Carrier%20Frequency-~65%20kHz%20Linear%20Triangle-purple.svg)](#carrier-frequency-optimization)
 [![Simulation Tool](https://img.shields.io/badge/Simulator-LTspice%20XVII%20%2F%2026.x-red.svg)](#ltspice-simulation-guide)
 
 An end-to-end discrete **Class-D audio power amplifier** engineered from first principles, featuring discrete power MOSFETs, dedicated half-bridge gate drivers, active analog front-end signal conditioning, and an optimized LC reconstruction filter. 
@@ -35,6 +35,7 @@ The amplifier utilizes a fully differential **Bridge-Tied Load (BTL)** topology 
            |                 Volume Control & Biasing Subsystem                  |
            |  * Logarithmic Volume Potentiometer (10 kΩ)                         |
            |  * Passive Attenuator & DC Level Shifter (Biased at +2.5V mid-rail) |
+           |  * R32 Bias Stabilization (100kΩ to VREF2V5; DC offset: -5.6 mV)    |
            +---------------------------------------------------------------------+
                                               |
                      +------------------------+------------------------+
@@ -43,7 +44,7 @@ The amplifier utilizes a fully differential **Bridge-Tied Load (BTL)** topology 
    +------------------------------------+            +------------------------------------+
    |   TLV3501 PWM Comparator (Leg A)   |            |   TLV3501 PWM Comparator (Leg B)   |
    | Input: Audio_Biased (+2.5V DC ref) |            | Input: Audio_Inverted (+2.5V ref)  |
-   | Carrier: 75 kHz Triangle (0.5-4.5V)|            | Carrier: 75 kHz Triangle (shared)  |
+   | Carrier: ~65 kHz Triangle (0.5-4.5V|            | Carrier: ~65 kHz Triangle (shared) |
    +------------------------------------+            +------------------------------------+
                      | (PWM_A)                                         | (PWM_B)
                      v                                                 v
@@ -51,7 +52,7 @@ The amplifier utilizes a fully differential **Bridge-Tied Load (BTL)** topology 
    |   IR2104 Half-Bridge Gate Driver   |            |   IR2104 Half-Bridge Gate Driver   |
    |  * Fixed Dead-Time: ~520 ns        |            |  * Fixed Dead-Time: ~520 ns        |
    |  * Bootstrap Supply: 1 µF + 1N4148 |            |  * Bootstrap Supply: 1 µF + 1N4148 |
-   |  * Gate Dampening: 10 Ω + Diode    |            |  * Gate Dampening: 10 Ω + Diode    |
+   |  * Gate Dampening: 10 Ω            |            |  * Gate Dampening: 10 Ω            |
    +------------------------------------+            +------------------------------------+
           | (HO1)              | (LO1)                      | (HO2)              | (LO2)
           v                    v                            v                    v
@@ -81,9 +82,9 @@ The amplifier utilizes a fully differential **Bridge-Tied Load (BTL)** topology 
 | :--- | :--- | :--- |
 | **Output Topology** | **Bridge-Tied Load (BTL)** | 4-quadrant full H-bridge; eliminates large DC-blocking capacitors; quadruples available power for given bus voltage ($P_{BTL} = 4 \times P_{SE}$). |
 | **Nominal Supply ($V_{BUS}$)** | **+24.0 V DC** | Standard commercial 24V (3A - 5A) SMPS brick or battery supply. |
-| **Target Power Output** | **10.0 W continuous** | Scaled across $4\ \Omega$ load with modulation index $m \approx 0.37 - 0.41$. |
+| **Target Power Output** | **10.0 W continuous** | Measured 9.80 W continuous sine across $4\ \Omega$ load with modulation index $m \approx 0.37 - 0.41$. |
 | **Load Impedance ($R_L$)** | **4.0 $\Omega$** | Standard automotive/marine/bookshelf speaker impedance. |
-| **Carrier Frequency ($f_{SW}$)** | **75.0 kHz** | **Frozen parameter.** Selected to optimize the dead-time penalty of the stock IR2104 driver ($520\text{ ns}$). |
+| **Carrier Frequency ($f_{SW}$)** | **~65.0 kHz** | **Chosen & Frozen.** Measured ~65 kHz ($R_{18}=15\text{ k}\Omega$, $C_8=278\text{ pF}$) to minimize the dead-time volt-second distortion penalty of the stock IR2104 driver ($520\text{ ns}$). |
 | **Gate Driver ICs** | **2x IR2104(S)** | Robust high-voltage half-bridge drivers with internal cross-conduction shoot-through lock and level translation. |
 | **Power MOSFETs** | **4x IRFB7545PbF** | N-channel HEXFET, $V_{DSS} = 60\text{ V}$, ultra-low $R_{DS(on)} = 5.9\text{ m}\Omega$, TO-220 package for minimal conduction losses. |
 | **Output Filter** | **Dual 18 $\mu$H + 2.2 $\mu$F** | 2nd-order Butterworth LC reconstruction low-pass filter ($f_c \approx 25.2\text{ kHz}$) with parallel damping resistors. |
@@ -100,24 +101,24 @@ The amplifier utilizes a fully differential **Bridge-Tied Load (BTL)** topology 
 * **Baxandall Active Tone Stack:** Provides independent Bass ($100\text{ Hz}$) and Treble ($10\text{ kHz}$) boost and cut of $\pm 10\text{ dB}$, utilizing linear pots with feedback/feedforward RC networks.
 * **Gain Stage:** Non-inverting gain stage set to $A_v = 3.3\times$ ($+10.37\text{ dB}$), elevating typical consumer line-level signals ($1\text{ V}_{rms}$) to the optimum modulation window.
 
-### 2. Level Shifting & Biasing
-* The audio signal is AC-coupled via a $1\ \mu\text{F}$ capacitor into a high-impedance resistive divider network ($200\text{ k}\Omega / 200\text{ k}\Omega$) tied to the $+5\text{ V}$ logic rail.
-* This establishes an ultra-stable $+2.5\text{ V}$ DC virtual ground, centering the audio waveform precisely within the 0.5 V to 4.5 V triangle carrier window to prevent duty-cycle clipping.
+### 2. Level Shifting, Biasing & DC Offset Stabilization
+* The audio signal is AC-coupled via a $1\ \mu\text{F}$ capacitor into a resistive divider network tied to the $+5\text{ V}$ logic rail, establishing a $+2.5\text{ V}$ DC virtual ground (`VREF2V5`).
+* **R32 (100kΩ, new):** Bias stabilization resistor from `SCALE_IN` to `VREF2V5`. This critical refinement reduced the differential output DC offset from $42.5\text{ mV}$ down to $-5.6\text{ mV}$ with negligible THD penalty.
 
 ### 3. Precision Carrier Generator
 * A **TLV3501** high-speed comparator serves as a bistable Schmitt trigger with hysteresis set by $12.5\text{ k}\Omega / 15\text{ k}\Omega$ precision resistors.
-* The output feeds an **NE5532** constant-current integrator ($10\text{ k}\Omega$, $278\text{ pF}$, $10\text{ M}\Omega$ DC stabilization feedback).
-* The resulting triangle wave swings linearly between $+0.5\text{ V}$ and $+4.5\text{ V}$ at **75.0 kHz**, exhibiting symmetrical slopes and negligible crest jitter.
+* The output feeds an **NE5532** constant-current integrator ($R_{18}=15\text{ k}\Omega$, $C_8=278\text{ pF}$, $10\text{ M}\Omega$ DC stabilization feedback).
+* The resulting triangle wave swings linearly between $+0.5\text{ V}$ and $+4.5\text{ V}$ at **~65.0 kHz**, exhibiting symmetrical slopes and negligible crest jitter.
 
 ### 4. Differential PWM Modulation
 * An inverting op-amp stage generates the antiphasic audio signal $V_{audio,B} = 5.0\text{ V} - V_{audio,A}$.
-* Two TLV3501 comparators compare the direct and inverted signals against the shared 75 kHz triangle wave, generating complementary PWM signals `PWM_A` and `PWM_B` with 4.5 ns edge transitions.
+* Two TLV3501 comparators compare the direct and inverted signals against the shared ~65 kHz triangle wave, generating complementary PWM signals `PWM_A` and `PWM_B` with 4.5 ns edge transitions.
 
 ### 5. Gate Driver & Dead-Time Protection (IR2104)
-* The IR2104 gate driver accepts the 0–5V PWM logic input and drives both high-side and low-side N-channel MOSFET gates.
+* The IR2104 gate driver accepts the 0-5V PWM logic input and drives both high-side and low-side N-channel MOSFET gates.
 * **Internal Dead-Time:** Fixed internal dead time ($t_d \approx 520\text{ ns}$ nominal, $400\text{ ns} - 750\text{ ns}$ spread) prevents hazardous H-bridge shoot-through cross-conduction.
 * **Bootstrap Circuit:** High-side floating well powered by a fast 1N4148 diode and $1\ \mu\text{F}$ low-ESR ceramic bootstrap capacitor from the $+12\text{ V}$ gate rail.
-* **Gate Drive Network:** $10\ \Omega$ gate drive resistor paired with an anti-parallel 1N4148 diode for accelerated turn-off.
+* **Gate Drive Network:** $10\ \Omega$ gate drive resistor (anti-parallel 1N4148 diodes optional; simulation confirmed external gate diodes cannot shorten internal IR2104 dead time).
 
 ### 6. Power Stage (IRFB7545) & LC Reconstruction Filter
 * Four discrete IRFB7545 MOSFETs in full H-bridge configuration switch the 24V bus directly into the output filters.
@@ -125,45 +126,50 @@ The amplifier utilizes a fully differential **Bridge-Tied Load (BTL)** topology 
 * The output low-pass filter on each leg employs an $18\ \mu\text{H}$ high-current toroidal inductor with $10\text{ m}\Omega$ DCR and $5\text{ k}\Omega$ parallel damping, followed by a $2.2\ \mu\text{F}$ metallized film capacitor to GND.
 * The differential cutoff frequency is:
   $$f_c = \frac{1}{2\pi \sqrt{L \cdot 2C}} \approx \frac{1}{2\pi \sqrt{18\mu\text{H} \times 4.4\mu\text{F}}} \approx 17.8\text{ kHz}$$
-  This effectively attenuates the 75 kHz carrier while preserving full audio band response ($20\text{ Hz} - 20\text{ kHz}$) with less than $0.76\text{ V}_{pk-pk}$ carrier residual.
+  This effectively attenuates the ~65 kHz carrier while preserving full audio band response ($20\text{ Hz} - 20\text{ kHz}$) with low carrier residual.
 
 ---
 
-## Carrier Frequency Optimization (75 kHz vs 100 kHz)
+## Carrier Frequency Optimization & Dead-Time Analysis
 
-A major milestone of this design was resolving the dead-time volt-second distortion penalty of the stock IR2104 driver:
+A major milestone of this design was resolving the dead-time volt-second distortion penalty of the stock IR2104 driver ($520\text{ ns}$ fixed internal dead time):
 
-| Parameter | 100 kHz Switching | 75 kHz Switching (**Chosen & Frozen**) | Engineering Benefit |
-| :--- | :---: | :---: | :--- |
-| **Switching Period ($T_{SW}$)** | $10.0\ \mu\text{s}$ | **$13.33\ \mu\text{s}$** | Longer switching period dilutes fixed dead-time |
-| **Dead-Time Fraction ($2 t_d / T_{SW}$)** | **10.6% - 15.0%** | **7.9% - 11.2%** | **33% reduction** in dead-time distortion window |
-| **Volt-Second Compression** | Severe | Minimal | Restores duty cycle transfer curve linearity |
-| **Output Power ($m = 0.37$)** | 5.27 W | **8.26 W** (Scales to 10 W at $m=0.41$) | **+56.7% Power Recovery** |
-| **Total Harmonic Distortion (THD)** | 13.58% | **7.14%** (6.02% at min $t_d$) | **~50% Distortion Reduction** |
-| **Switching Losses ($P_{SW}$)** | Higher | **25% Lower** | MOSFETs run cool without forced heatsinking |
+| Parameter | 150 kHz (tested) | 200 kHz (tested) | 300 kHz (tested) | ~65 kHz (chosen) |
+| :--- | :---: | :---: | :---: | :---: |
+| **Partial THD at 10W** | 0.19% (at 1W) | 2.47% | 15.0% | **4.71%** |
+| **Total THD** | 1.06% (at 1W) | 2.53% | 15.0% | **7.98%** |
+| **Dead-time fraction** | 8% | 10.6% | 16% | **~3.5%** |
+
+*Note: The carrier oscillator stage ($R_{18}=15\text{ k}\Omega, C_8=278\text{ pF}$) produces the chosen $\sim 65\text{ kHz}$ triangle carrier. This keeps the dead-time fraction low ($\sim 3.5\%$) while significantly mitigating volt-second compression and keeping MOSFET switching losses minimal without requiring active heatsinking.*
 
 ---
 
-## Verified Simulation Results (`full_amp_10W.asc`)
+## Verified Simulation Results (`full_amp_10W_final.asc`)
 
 The complete circuit was validated under transient analysis with a 1 kHz sine wave into a $4\ \Omega$ load across 10 ms duration:
+
+![Differential Output Waveform V(OUT_DIFF)](img/v_outdiff.png)
 
 ```text
 Fourier components of V(OUT_DIFF)
 Frequency: 1.000 kHz | Period: 10 ms | Solver: Gear (reltol=0.003)
 
-Harmonic    Frequency       Fourier Component    Normalized Component    Phase
-  1         1.000 kHz           8.730 V               1.000000          -87.7°
-  2         2.000 kHz           8.870 mV              0.001016          173.0°
-  3         3.000 kHz           3.063 mV              0.003509          167.6°
-  4         4.000 kHz           9.509 mV              0.001089           27.0°
-  5         5.000 kHz           2.655 mV              0.030410          118.7°
-  ...
-Total Harmonic Distortion (THD): 7.935%
-Fundamental Output Amplitude:    8.730 V peak  -->  6.173 Vrms
-Continuous Sine Power Output:    P = Vrms² / R = (6.173)² / 4 = 9.53 W (~10 W)
-Average DC Bus Supply Current:   I_avg = 0.468 A  -->  P_in = 24V * 0.468A = 11.24 W
-Power Stage Overall Efficiency:  η = 9.53 W / 11.24 W ≈ 84.8%
+Harmonic    Frequency       Fourier Component    Normalized Component
+  1         1.000 kHz           8.823 V               1.000000
+  2         2.000 kHz           0.141 V               0.016000
+  3         3.000 kHz           0.061 V               0.006963
+  4         4.000 kHz           0.047 V               0.005302
+  5         5.000 kHz           0.254 V               0.028780
+  7         7.000 kHz           0.283 V               0.032090
+
+Partial Harmonic Distortion: 4.71%   (audio band)
+Total Harmonic Distortion:   7.98%   (includes carrier ripple)
+DC offset:                  -5.6 mV
+
+Fundamental Output Amplitude:    8.823 V peak  →  6.238 Vrms
+Continuous Sine Power Output:    P = Vrms² / R = 9.80 W into 4Ω
+Average DC Bus Current:          I_avg = 0.482 A  →  Pin = 11.57 W
+Power Stage Overall Efficiency:  η = 9.80 / 11.57 = 84.7%
 ```
 
 ---
@@ -179,11 +185,12 @@ Keep the schematics and simulation models in the same directory (`ltspice_correc
 
 ```text
 ltspice_corrected_models/
-├── full_amp_10W.asc         # Complete 10W validated Class-D schematic
+├── full_amp_10W_final.asc   # Final locked 10W validated Class-D schematic
+├── full_amp_10W_final.net   # Extracted SPICE netlist
+├── full_amp_10W_final.log   # Simulation log with .four & .meas metrics
+├── full_amp_10W_final.plt   # Waveform viewer plot setting configuration
+├── full_amp_10W.asc         # Intermediate 10W validated schematic
 ├── full amp.asc             # Parametric development schematic
-├── full_amp_10W.net         # Extracted SPICE netlist
-├── full_amp_10W.log         # Simulation log with .four & .meas metrics
-├── full amp.plt             # Waveform viewer plot setting configuration
 ├── IR2104_BEH.asy           # Behavioral symbol for IR2104 driver
 ├── IR2104_LTspice_beh.lib   # Custom behavioral subcircuit (dead-time + UVLO)
 ├── IRFB7545.asy             # Symbol for IRFB7545 N-MOSFET
@@ -197,7 +204,7 @@ ltspice_corrected_models/
 
 ### Simulation Instructions
 1. Open LTspice.
-2. Open [`ltspice_corrected_models/full_amp_10W.asc`](ltspice_corrected_models/full_amp_10W.asc).
+2. Open [`ltspice_corrected_models/full_amp_10W_final.asc`](ltspice_corrected_models/full_amp_10W_final.asc).
 3. Click **Simulate -> Run** (or press the Running Man icon).
 4. The simulation runs transient analysis for `10 ms` with Gear integration.
 5. Once complete, view the differential output by probing `V(OUT_DIFF) = V(OUT_A) - V(OUT_B)`.
@@ -207,7 +214,8 @@ ltspice_corrected_models/
 
 ## Repository File Map
 
-* [`ltspice_corrected_models/`](ltspice_corrected_models/): Complete graphical schematics (`full_amp_10W.asc`), custom component symbols (`.asy`), and corrected SPICE models (`.lib`, `.spi`).
+* [`img/`](img/): Waveform plots and simulation graph captures ([`v_outdiff.png`](img/v_outdiff.png)).
+* [`ltspice_corrected_models/`](ltspice_corrected_models/): Complete graphical schematics (`full_amp_10W_final.asc`), custom component symbols (`.asy`), and corrected SPICE models (`.lib`, `.spi`).
 * [`simulations/`](simulations/): Over 300 parametric netlists (`.cir`), automated PowerShell sweep scripts (`.ps1`), logs (`.log`), and raw measurement datasets covering screening stages 1 through 41.
   * [`final_ir2104_test.cir`](simulations/final_ir2104_test.cir): Final validated standalone BTL test netlist.
   * [`classd_stage41.ps1`](simulations/classd_stage41.ps1): Automated parametric sweeper for power, THD, and filter ripple.
@@ -228,7 +236,9 @@ ltspice_corrected_models/
 | **L1, L2** | **18 $\mu$H / 10A** | High-Current Toroidal Inductor ($R_{DCR} \le 15\text{ m}\Omega$) | Output reconstruction low-pass filter inductor |
 | **C11, C12** | **2.2 $\mu$F / 63V** | Metallized Polypropylene Film Capacitor (MKP/MKT) | Output reconstruction filter shunt capacitor |
 | **C9, C10** | **1.0 $\mu$F / 25V** | Ceramic X7R / Film (1206 / Radial) | High-side gate driver bootstrap capacitor |
-| **D1, D2, D3, D4, D5, D6**| **1N4148 / 1N5819**| Fast recovery / Schottky diode | Bootstrap charging & accelerated gate discharge |
+| **D1, D2** | **1N4148 / 1N5819** | Fast recovery / Schottky diode | High-side gate driver bootstrap charge pump diodes |
+| **D3, D4, D5, D6** | **1N4148 (Optional)** | Fast recovery diode | Anti-parallel gate diodes. Tested in simulation; found not to reduce THD, as the IR2104's 530 ns dead time is internal and cannot be shortened by external gate circuitry. Retained in BOM as optional; omit for cost and simplicity. |
+| **R32** | **100 k$\Omega$** | Precision Resistor (0.1% or 1%) | Bias stabilization resistor from `SCALE_IN` to `VREF2V5`. Reduced output DC offset from 42.5 mV to 5.6 mV with negligible THD penalty. |
 | **Cbulk** | **4700 $\mu$F / 35V**| Low-ESR Aluminum Electrolytic | 24V bus bulk decoupling and ripple reservoir |
 
 ---
@@ -236,4 +246,4 @@ ltspice_corrected_models/
 ## License & Attribution
 
 Designed and engineered by [MaxonXOXO](https://github.com/MaxonXOXO).  
-Open-source under the [MIT License](LICENSE) — free for educational, DIY, and commercial adaptation with appropriate attribution.
+Open-source under the [MIT License](LICENSE) - free for educational, DIY, and commercial adaptation with appropriate attribution.
