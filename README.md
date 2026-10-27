@@ -1,6 +1,8 @@
 ﻿# High-Efficiency 10W Discrete BTL Class-D Audio Power Amplifier
 
 [![Design Status](https://img.shields.io/badge/Design%20Status-Verified%20%26%20Frozen-success.svg)](#simulation-results-summary)
+[![Hardware](https://img.shields.io/badge/Hardware-Modular%202--Board%20PCB-success.svg)](#hardware--pcb-implementation-schematics--gerber-files)
+[![Gerbers](https://img.shields.io/badge/Gerbers-Fabrication%20Ready-brightgreen.svg)](Schematics%20&%20PCB/)
 [![Topology](https://img.shields.io/badge/Topology-BTL%20Full%20H--Bridge-blue.svg)](#architecture-overview)
 [![Output Power](https://img.shields.io/badge/Output%20Power-10W%20continuous%20%40%204%CE%A9-orange.svg)](#design-specifications)
 [![Supply Voltage](https://img.shields.io/badge/Supply-24V%20Single%20DC%20Bus-yellow.svg)](#design-specifications)
@@ -9,7 +11,7 @@
 
 An end-to-end discrete **Class-D audio power amplifier** engineered from first principles, featuring discrete power MOSFETs, dedicated half-bridge gate drivers, active analog front-end signal conditioning, and an optimized LC reconstruction filter. 
 
-This repository contains the complete graphical LTspice schematics, verified component SPICE models, automated parametric sweep scripts, Fourier harmonic analyses, and exhaustive engineering validation reports.
+This repository contains the complete graphical LTspice schematics, verified component SPICE models, automated parametric sweep scripts, Fourier harmonic analyses, and exhaustive engineering validation reports, and manufacturing-ready PCB fabrication Gerber packages.
 
 ---
 
@@ -212,8 +214,23 @@ ltspice_corrected_models/
 
 ---
 
+## Hardware & PCB Implementation (Schematics & Gerber Files)
+
+The amplifier hardware is implemented in a **modular two-board topology** to isolate sensitive low-level analog signal processing and modulation circuitry from high-current power switching noise:
+
+| Subsystem Board | Dimensions | Gerber Archive | Key Circuit Blocks |
+| :--- | :--- | :--- | :--- |
+| **Input Signal & PWM Generator** | ~101 × 67 mm | [`Amp input.zip`](Schematics%20&%20PCB/Amp%20input.zip) | NE5532 input buffer, active Baxandall bass/treble tone stack (±10 dB), gain stage (Av = 3.3x), volume attenuator, +2.5V reference with R32 offset stabilization, ~65 kHz TLV3501+NE5532 triangle oscillator, and dual TLV3501 PWM comparators. |
+| **Power Output & LC Filter** | 100 × 80 mm | [`Amp Output.zip`](Schematics%20&%20PCB/Amp%20Output.zip) | Dual IR2104 half-bridge gate drivers with bootstrap networks and internal 520 ns dead-time protection, 4x IRFB7545PbF (5.9 mΩ) MOSFET H-bridge, 24V DC bus bulk decoupling, and dual 18 µH + 2.2 µF Butterworth LC filter. |
+
+* Complete layer previews, manufacturing specifications (1.6 mm FR-4, 1-2 oz copper), drill definitions, and ordering instructions are documented in [`Schematics & PCB/README.md`](Schematics%20&%20PCB/README.md).
+* Previews of PCB copper routing and silkscreen: [`PCB 1.png`](Schematics%20&%20PCB/PCB%201.png), [`PCB 2.png`](Schematics%20&%20PCB/PCB%202.png), [`PCB-1.png`](Schematics%20&%20PCB/PCB-1.png), [`PCB-2.png`](Schematics%20&%20PCB/PCB-2.png).
+
+---
+
 ## Repository File Map
 
+* [`Schematics & PCB/`](Schematics%20&%20PCB/): Production PCB Gerber archives ([`Amp input.zip`](Schematics%20&%20PCB/Amp%20input.zip), [`Amp Output.zip`](Schematics%20&%20PCB/Amp%20Output.zip)), [hardware documentation](Schematics%20&%20PCB/README.md), and high-resolution layout preview images.
 * [`img/`](img/): Waveform plots and simulation graph captures ([`v_outdiff.png`](img/v_outdiff.png)).
 * [`ltspice_corrected_models/`](ltspice_corrected_models/): Complete graphical schematics (`full_amp_10W_final.asc`), custom component symbols (`.asy`), and corrected SPICE models (`.lib`, `.spi`).
 * [`simulations/`](simulations/): Over 300 parametric netlists (`.cir`), automated PowerShell sweep scripts (`.ps1`), logs (`.log`), and raw measurement datasets covering screening stages 1 through 41.
